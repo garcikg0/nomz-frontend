@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Styles.scss';
 // import { Button } from './Button';
 
-const Navbar = ( {isLoginOpen, setIsLoginOpen, isSignupOpen, setIsSignupOpen} ) => {
+const Navbar = ( { setIsLoginOpen, setIsSignupOpen } ) => {
 
     const [click, setClick] = useState(false)
 
