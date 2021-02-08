@@ -3,14 +3,20 @@ import { Route, Switch, Redirect, withRouter, useHistory } from 'react-router-do
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import bvideo from './components/backgroundVideo.mp4';
+import LoginModal from './components/LoginModal/LoginModal';
+import SignupModal from './components/SignupModal/SignupModal';
 
 const App = () => {
+
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
+
 
   return (
     <>
     <div className="homeContainer">
       <div className="App">
-        <Navbar />
+        <Navbar isLoginOpen={isLoginOpen} setIsLoginOpen={setIsLoginOpen} setIsSignupOpen={setIsSignupOpen} />
       </div>
       <div className="jumbotron">
         <div className="jumbotron-video">
@@ -29,7 +35,7 @@ const App = () => {
         <div className="home-card-deck"> 
         {/* Card component start */}
           <div className="home-card">
-            <img className="card-img-top" src="https://static.thenounproject.com/png/2174492-200.png"></img>        
+            <img className="card-img-top" src="https://static.thenounproject.com/png/2174492-200.png" alt=""></img>        
             <div className="card-body">
               <div className="card-title">Your Kitchen and Grocery List</div>
                 <hr></hr>
@@ -45,7 +51,7 @@ const App = () => {
           {/* Card Component end */}
           {/* Card component start */}
           <div className="home-card">
-            <img className="card-img-top" src="https://static.thenounproject.com/png/1001683-200.png"></img>        
+            <img className="card-img-top" src="https://static.thenounproject.com/png/1001683-200.png" alt=""></img>        
             <div className="card-body">
               <div className="card-title">Recipe Search</div>
                 <hr></hr>
@@ -61,7 +67,7 @@ const App = () => {
           {/* Card Component end */}
           {/* Card component start */}
             <div className="home-card">
-            <img className="card-img-top" src="https://static.thenounproject.com/png/1132473-200.png"></img>        
+            <img className="card-img-top" src="https://static.thenounproject.com/png/1132473-200.png" alt=""></img>        
             <div className="card-body">
               <div className="card-title">Your Recipe Library</div>
                 <hr></hr>
@@ -78,6 +84,8 @@ const App = () => {
         </div>
       </div> 
     </div>
+    <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+    <SignupModal open={isSignupOpen} onClose={() => setIsSignupOpen(false)} /> 
     </>
   );
 }

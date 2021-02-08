@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Styles.scss';
-import { MenuItems } from './MenuItems';
 // import { Button } from './Button';
 
-const Navbar = () => {
+const Navbar = ( {isLoginOpen, setIsLoginOpen, isSignupOpen, setIsSignupOpen} ) => {
 
     const [click, setClick] = useState(false)
 
@@ -19,15 +18,12 @@ const Navbar = () => {
                 <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                {MenuItems.map((item, index) => {
-                    return (
-                        <li key={index}>
-                            <a className={item.cName} href={item.url}>
-                            {item.title}
-                            </a>
-                        </li>
-                    )
-                })}    
+                <li>
+                    <button class="nav-links" onClick={ () => setIsLoginOpen(true) } >Login</button>
+                </li>
+                <li>
+                    <button class="nav-links" onClick={ () => setIsSignupOpen(true) }>Sign Up</button>
+                </li>
             </ul>
         </nav>
     )
