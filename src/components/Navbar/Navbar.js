@@ -21,13 +21,13 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} )
                 {currentUser ? (
                     <>
                     <li>
-                        <button class="nav-links" to='/kitchen'>My Kitchen</button>
+                        <button class="nav-links" to='#kitchen'>My Kitchen</button>
                     </li>
                     <li>
-                        <button class="nav-links" to='/recipesearch'>Recipe Search</button>
+                        <button class="nav-links" to='#recipesearch'>Recipe Search</button>
                     </li>
                     <li>
-                        <button class="nav-links" to='/recipelibrary'>My Recipe Library</button>
+                        <button class="nav-links" to='#recipelibrary'>My Recipe Library</button>
                     </li>
                     <li>
                         <button class="nav-links" onClick={handleLogout}>Logout</button>

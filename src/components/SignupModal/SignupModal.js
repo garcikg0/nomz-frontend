@@ -28,7 +28,7 @@ const SignupModal = ( {open, onClose, signupData, setSignupData, handleSignup} )
                         <input className="signup-input" type="email" name="email" placeholder="Email Address" onChange={handleChange}></input>
                         <input className="signup-input" type="text" name="username" placeholder="Username" onChange={handleChange}></input>
                         <input className="signup-input" type="password" name="password" placeholder="Password" onChange={handleChange}></input>
-                        <button className="signup-button" type="submit" value="Sign Up"></button>
+                        <input className="signup-button" type="submit" value="Sign Up"></input>
                     </form>
                 </div>
                 <button className="signup-button" onClick={onClose}>Close Modal</button>

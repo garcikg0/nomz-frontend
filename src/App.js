@@ -5,12 +5,15 @@ import Navbar from './components/Navbar/Navbar';
 import bvideo from './components/backgroundVideo.mp4';
 import LoginModal from './components/LoginModal/LoginModal';
 import SignupModal from './components/SignupModal/SignupModal';
+import HomeMenu from './components/HomeMenu/HomeMenu';
+import RecipeSearch from './components/RecipeSearch/RecipeSearch';
 
 const App = () => {
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  
   const [signupData, setSignupData] = useState({
     first_name: "",
     last_name: "",
@@ -18,6 +21,7 @@ const App = () => {
     username: "",
     password: ""
   });
+  
   const [loginData, setLoginData] = useState({
     username: "",
     password: ""
@@ -34,16 +38,17 @@ const App = () => {
       })
       .then(r => r.json())
       .then(data => {
+        debugger
         if (!data.error){
           handleLogin(data)
+          debugger
         }
       })
-    }
+    debugger}
   }, []);
 
   const handleSignup = e => {
     e.preventDefault()
-    debugger
     fetch("http://localhost:3000/users", {
         method: "POST",
         headers: {
@@ -54,7 +59,7 @@ const App = () => {
     .then(r => r.json())
     .then(data => {
         const { user, token } = data
-        handleLogin( {user} )
+        handleLogin(user)
         localStorage.token = token
     })  
   };
@@ -64,22 +69,25 @@ const App = () => {
     fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
-            "Content-Type": "applicatoin/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(loginData)
     })
     .then(r => r.json())
     .then(data => {
         const { user, token } = data
-        handleLogin( {user} )
+        handleLogin(user)
         localStorage.token = token
     })
   };
 
-  const handleLogin = ( user ) => {
-    setCurrentUser( user )
-    history.push('/home')
+  const handleLogin = user => {
     setIsLoginOpen(false)
+    debugger
+    setCurrentUser(user)
+    history.push('/home')
+    console.log(currentUser)
+    debugger
   };
 
   const handleLogout = () => {
@@ -166,15 +174,13 @@ const App = () => {
       </Route>
       <Route path="/home" exact>
         {currentUser ? (
-          <div className="homeContainer">
-            <h1>Home Page Test</h1>
-          </div>
+          <HomeMenu />
         ) : <Redirect to='/' />}
       </Route>
       <Route path="/kitchen" exact>
-        <div className="homeContainer">
-          <h1>Kitchen Page Test</h1>
-        </div>
+        {currentUser ? (
+          <RecipeSearch />
+        ) : <Redirect to='/' />}
       </Route>
       <Route path="/recipesearch" exact>
         <div className="homeContainer">
