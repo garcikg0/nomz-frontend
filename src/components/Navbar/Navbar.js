@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Styles.scss';
 // import { Button } from './Button';
 
-const Navbar = ( { setIsLoginOpen, setIsSignupOpen } ) => {
+const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser } ) => {
 
     const [click, setClick] = useState(false)
 
@@ -18,12 +18,28 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen } ) => {
                 <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                <li>
-                    <button class="nav-links" onClick={ () => setIsLoginOpen(true) } >Login</button>
-                </li>
-                <li>
-                    <button class="nav-links" onClick={ () => setIsSignupOpen(true) }>Sign Up</button>
-                </li>
+                {currentUser ? (
+                    <>
+                    <li>
+                        <button class="nav-links" to='/kitchen'>My Kitchen</button>
+                    </li>
+                    <li>
+                        <button class="nav-links" to='/recipesearch'>Recipe Search</button>
+                    </li>
+                    <li>
+                        <button class="nav-links" to='/recipelibrary'>My Recipe Library</button>
+                    </li>   
+                </>
+                ) : (
+                    <>
+                    <li>
+                        <button class="nav-links" onClick={ () => setIsLoginOpen(true) } >Login</button>
+                    </li>
+                    <li>
+                        <button class="nav-links" onClick={ () => setIsSignupOpen(true) }>Sign Up</button>
+                    </li>
+                    </>
+                )}
             </ul>
         </nav>
     )

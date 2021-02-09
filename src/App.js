@@ -11,7 +11,33 @@ const App = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [signupData, setSignupData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    username: "",
+    password: ""
+  });
+
   let history = useHistory()
+
+  // const handleSignup = e => {
+  //   e.preventDefault()
+  //   debugger
+  //   fetch("http://localhost:3000/users", {
+  //       method: "POST",
+  //       headers: {
+  //           "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(signupData)
+  //   })
+  //   .then(r => r.json())
+  //   .then(data => {
+  //       const { user, token } = data
+  //       handleLogin( {user} )
+  //       localStorage.token = token
+  //   })  
+  // };
 
   useEffect(() => {
     if (localStorage.token) {
@@ -27,7 +53,7 @@ const App = () => {
         }
       })
     }
-  }, []);
+  }, [currentUser]);
 
   const handleLogin = ( user ) => {
     setCurrentUser( user )
@@ -40,6 +66,7 @@ const App = () => {
     history.push('/')
   };
 
+  
 
   return (
     <>
@@ -113,25 +140,27 @@ const App = () => {
           </div>
         </div> 
       </div>
-      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} handleLogin={handleLogin} />
-      <SignupModal open={isSignupOpen} onClose={() => setIsSignupOpen(false)} />
+      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} handleLogin={handleLogin}/>
+      <SignupModal open={isSignupOpen} onClose={() => setIsSignupOpen(false)} signupData={signupData} setSignupData={setSignupData}/>
       </Route>
-      <Route path="/home">
-        <div className="homeContainer">
-          <h1>Home Page Test</h1>
-        </div>
+      <Route path="/home" exact>
+        {currentUser ? (
+          <div className="homeContainer">
+            <h1>Home Page Test</h1>
+          </div>
+        ) : <Redirect to='/' />}
       </Route>
-      <Route path="/kitchen" >
+      <Route path="/kitchen" exact>
         <div className="homeContainer">
           <h1>Kitchen Page Test</h1>
         </div>
       </Route>
-      <Route path="/recipesearch">
+      <Route path="/recipesearch" exact>
         <div className="homeContainer">
           <h1>Recipe Search Page Test</h1>
         </div>
       </Route>
-      <Route path="/recipelibrary">
+      <Route path="/recipelibrary" exact>
         <div className="homeContainer">
           <h1>Recipe Library Test</h1>
         </div>
