@@ -18,26 +18,12 @@ const App = () => {
     username: "",
     password: ""
   });
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: ""
+  })
 
   let history = useHistory()
-
-  // const handleSignup = e => {
-  //   e.preventDefault()
-  //   debugger
-  //   fetch("http://localhost:3000/users", {
-  //       method: "POST",
-  //       headers: {
-  //           "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify(signupData)
-  //   })
-  //   .then(r => r.json())
-  //   .then(data => {
-  //       const { user, token } = data
-  //       handleLogin( {user} )
-  //       localStorage.token = token
-  //   })  
-  // };
 
   useEffect(() => {
     if (localStorage.token) {
@@ -53,20 +39,55 @@ const App = () => {
         }
       })
     }
-  }, [currentUser]);
+  }, []);
+
+  const handleSignup = e => {
+    e.preventDefault()
+    debugger
+    fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(signupData)
+    })
+    .then(r => r.json())
+    .then(data => {
+        const { user, token } = data
+        handleLogin( {user} )
+        localStorage.token = token
+    })  
+  };
+
+  const handleLoginSubmit = e => {
+    e.preventDefault();
+    fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "applicatoin/json"
+        },
+        body: JSON.stringify(loginData)
+    })
+    .then(r => r.json())
+    .then(data => {
+        const { user, token } = data
+        handleLogin( {user} )
+        localStorage.token = token
+    })
+  };
 
   const handleLogin = ( user ) => {
     setCurrentUser( user )
     history.push('/home')
+    setIsLoginOpen(false)
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token")
     setCurrentUser(null)
     history.push('/')
+    setIsSignupOpen(false)
   };
-
-  
 
   return (
     <>
@@ -140,8 +161,8 @@ const App = () => {
           </div>
         </div> 
       </div>
-      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} handleLogin={handleLogin}/>
-      <SignupModal open={isSignupOpen} onClose={() => setIsSignupOpen(false)} signupData={signupData} setSignupData={setSignupData}/>
+      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} loginData={loginData} setLoginData={setLoginData} handleLoginSubmit={handleLoginSubmit}/>
+      <SignupModal open={isSignupOpen} onClose={() => setIsSignupOpen(false)} signupData={signupData} setSignupData={setSignupData} handleSignup={handleSignup}/>
       </Route>
       <Route path="/home" exact>
         {currentUser ? (

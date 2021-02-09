@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Styles.scss';
 // import { Button } from './Button';
 
-const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser } ) => {
+const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} ) => {
 
     const [click, setClick] = useState(false)
 
@@ -28,7 +28,10 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser } ) => {
                     </li>
                     <li>
                         <button class="nav-links" to='/recipelibrary'>My Recipe Library</button>
-                    </li>   
+                    </li>
+                    <li>
+                        <button class="nav-links" onClick={handleLogout}>Logout</button>
+                    </li>    
                 </>
                 ) : (
                     <>

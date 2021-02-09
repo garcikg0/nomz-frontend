@@ -3,7 +3,7 @@ import './Styles.scss';
 import ReactDom from 'react-dom'
 
 
-const SignupModal = ( {open, onClose, signupData, setSignupData, handleLogin} ) => {
+const SignupModal = ( {open, onClose, signupData, setSignupData, handleSignup} ) => {
     if (!open) return null;
 
     const handleChange = e => {
@@ -14,42 +14,21 @@ const SignupModal = ( {open, onClose, signupData, setSignupData, handleLogin} ) 
             ...signupData,
             [name]: value
         })
-        console.log(signupData)
     };
-
-    const handleSignup = e => {
-        e.preventDefault()
-        debugger
-        fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(signupData)
-        })
-        .then(r => r.json())
-        .then(data => {
-            debugger
-            const { user, token } = data
-            handleLogin( {user} )
-            localStorage.token = token
-        })  
-    };
-
 
     return ReactDom.createPortal(
         <>
         <div className="modal-overlay">
             <div className="modal">
                 <div className="formBox">
-                    <form className="signup-form">
+                    <form className="signup-form" onSubmit={handleSignup}>
                         <h2>Create an Account</h2>
                         <input className="signup-input" type="text" name="first_name" placeholder="First Name" onChange={handleChange}></input>
                         <input className="signup-input" type="text" name="last_name" placeholder="Last Name" onChange={handleChange}></input>
                         <input className="signup-input" type="email" name="email" placeholder="Email Address" onChange={handleChange}></input>
                         <input className="signup-input" type="text" name="username" placeholder="Username" onChange={handleChange}></input>
                         <input className="signup-input" type="password" name="password" placeholder="Password" onChange={handleChange}></input>
-                        <button className="signup-button" type="submit" value="Sign Up" onSubmit={handleSignup}></button>
+                        <button className="signup-button" type="submit" value="Sign Up"></button>
                     </form>
                 </div>
                 <button className="signup-button" onClick={onClose}>Close Modal</button>
