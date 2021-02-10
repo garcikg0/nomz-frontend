@@ -21,7 +21,9 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} )
                 {currentUser ? (
                     <>
                     <li>
-                        <button class="nav-links" to='#kitchen'>My Kitchen</button>
+                        <a href='kitchen'>
+                            <button class="nav-links" to='#kitchen'>My Kitchen</button>
+                        </a>
                     </li>
                     <li>
                         <button class="nav-links" to='#recipesearch'>Recipe Search</button>
