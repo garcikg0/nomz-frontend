@@ -37,7 +37,7 @@ const App = () => {
         // debugger
         if (!data.error){
           handleLogin(data)
-          debugger
+          // debugger
         }
       })
       // debugger
@@ -80,10 +80,9 @@ const App = () => {
 
   const handleLogin = user => {
     setIsLoginOpen(false)
-    debugger
+    // debugger
       setCurrentUser(user)
-      // history.push('/home') 
-    debugger
+    // debugger
   };
 
   const handleLogout = () => {
