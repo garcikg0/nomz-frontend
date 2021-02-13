@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Styles.scss';
-// import { Button } from './Button';
 
 const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} ) => {
 
@@ -13,7 +13,9 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} )
 
     return (
         <nav className="NavbarItems">
+            <Link to='/'>
             <h1 className="navbar-logo">Nomz</h1>
+            </Link>
             <div className="menu-icon" onClick={handleClick}>
                 <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
@@ -21,15 +23,19 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} )
                 {currentUser ? (
                     <>
                     <li>
-                        <a href='kitchen'>
+                        <Link to='/kitchen'>
                             <button class="nav-links" to='#kitchen'>My Kitchen</button>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <button class="nav-links" to='#recipesearch'>Recipe Search</button>
+                        <Link to='recipesearch'>
+                            <button class="nav-links" to='#recipesearch'>Recipe Search</button>
+                        </Link>
                     </li>
                     <li>
-                        <button class="nav-links" to='#recipelibrary'>My Recipe Library</button>
+                        <Link to='recipelibrary'>
+                            <button class="nav-links" to='#recipelibrary'>My Recipe Library</button>
+                        </Link>
                     </li>
                     <li>
                         <button class="nav-links" onClick={handleLogout}>Logout</button>

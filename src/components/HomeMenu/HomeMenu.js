@@ -4,9 +4,11 @@ import './Styles.scss';
 const HomeMenu = () => {
 
     return(
-        <div className="homeContainer">
-            <h1>Home Page Test</h1>
-          </div>
+        <div className="container">
+            <div className="card-deck-container">
+                <h1>Home Page Test</h1>
+            </div>
+        </div>
     )
 };
 

@@ -1,13 +1,14 @@
 .navbar-logo {
+    text-decoration: none;
     text-align: center;
     font-weight: bold;
     font-family: 'Caveat', cursive;
     color: black;
-    justify-self: start;
+    justify-self: left;
     margin-left: 0;
     cursor: pointer;
     font-size: 30px;
-    width: 10rem;
+    width: 10rem;  
 };
 
 .NavbarItems {
@@ -17,11 +18,12 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2 rem;
+    text-decoration: none;
 };
 
 .nav-menu{
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(4, auto);
     grid-gap: 1rem;
     list-style: none;
     text-align: center;
@@ -42,6 +44,7 @@
     border-radius: 4px;
     transition: all 0.2s ease-out;
     cursor: pointer;
+    text-decoration: none;
 };
 
 .fa-bars {

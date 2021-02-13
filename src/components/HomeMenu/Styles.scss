@@ -1,0 +1,19 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.card-deck-container {
+    width: 100%;
+    padding: 11rem;
+    display: flex;
+    justify-content: center;
+}
+
+.card-deck {
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}

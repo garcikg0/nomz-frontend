@@ -97,11 +97,15 @@ const App = () => {
     <Navbar setIsLoginOpen={setIsLoginOpen} setIsSignupOpen={setIsSignupOpen} currentUser={currentUser} handleLogout={handleLogout} />
     <Switch>
       <Route path="/home" exact>
-        <HomeMenu />
+        { currentUser ? 
+        <HomeMenu /> : 
+        <Redirect to='/' />
+        }
+        
       </Route>
       <Route path="/kitchen" exact>
         <div className="homeContainer">
-          <h1>Recipe Library Test</h1>
+          <h1>Kitchen Test</h1>
         </div>
       </Route>
       <Route path="/recipesearch" exact>
