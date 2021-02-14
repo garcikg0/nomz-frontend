@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import HomeMenu from './components/HomeMenu/HomeMenu';
 import RecipeSearch from './components/RecipeSearch/RecipeSearch';
 import LandingPage from './components/LandingPage/LandingPage';
+import KitchenPage from './components/KitchenPage/KitchenPage';
 
 const App = () => {
 
@@ -104,9 +105,7 @@ const App = () => {
         
       </Route>
       <Route path="/kitchen" exact>
-        <div className="homeContainer">
-          <h1>Kitchen Test</h1>
-        </div>
+        <KitchenPage />
       </Route>
       <Route path="/recipesearch" exact>
         <RecipeSearch />
