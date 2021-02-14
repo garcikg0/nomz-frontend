@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
 .container {
     width: 100vw;
     height: 100vh;
@@ -6,14 +8,63 @@
 
 .card-deck-container {
     width: 100%;
-    padding: 11rem;
+    padding: 10rem;
     display: flex;
     justify-content: center;
 }
 
 .card-deck {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 1rem;
     margin-right: -15px;
     margin-left: -15px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-clip: border-box;
+    margin: 0.5rem;
+}
+
+.card {
+    &-img{
+        height: 100%;
+        width: 100%; 
+        flex-shrink: 0;
+        vertical-align: middle;
+        border-style: none;
+        border-top-left-radius: calc(.25rem - 1px);
+        border-top-right-radius: calc(.25rem - 1px);
+        object-fit: fill;
+    }
+
+    &-overlay{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        height:100%;
+        background: rgba(0,0,0,0.6);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.25s;
+    }
+
+    &-overlay:hover{
+        opacity: 1;
+    }
+
+    &-image-title{
+        background-color: rgba(0,0,0,0.0);
+        font-size: 3rem;
+        font-weight: bold;
+        font-family: 'Caveat', cursive;
+    }
 }
