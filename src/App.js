@@ -73,7 +73,9 @@ const App = () => {
     })
     .then(r => r.json())
     .then(data => {
+      //  debugger
         const { user, token } = data
+        // debugger
         handleLogin(user)
         localStorage.token = token
     })
@@ -81,7 +83,7 @@ const App = () => {
 
   const handleLogin = user => {
     setIsLoginOpen(false)
-    // debugger
+    debugger
       setCurrentUser(user)
     // debugger
   };
@@ -102,18 +104,26 @@ const App = () => {
         <HomeMenu /> : 
         <Redirect to='/' />
         }
-        
       </Route>
       <Route path="/kitchen" exact>
-        <KitchenPage />
+        { currentUser ? 
+        <KitchenPage /> :
+        <Redirect to='/' /> 
+        }
       </Route>
       <Route path="/recipesearch" exact>
-        <RecipeSearch />
+        { currentUser ? 
+        <RecipeSearch /> :
+        <Redirect to='/' />
+        }
       </Route>
       <Route path="/recipelibrary" exact>
+        { currentUser ? 
         <div className="homeContainer">
-          <h1>Recipe Library Test</h1>
-        </div>
+        <h1>Recipe Library Test</h1>
+        </div> :
+        <Redirect to='/' />
+        }
       </Route>
       <Route path="/" exact> 
       { currentUser ? 
@@ -137,10 +147,3 @@ const App = () => {
 }
 
 export default withRouter(App);
-
-
-// {currentUser ? <Redirect to=“/home” /> : <Component />}
-
-      {/* {currentUser ? <Redirect to=“/home” /> : (
-
-      ) />} */}
