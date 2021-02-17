@@ -1,8 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import KitchenCard from '../KitchenCard/KitchenCard';
 import './Styles.scss';
 
-const HomeMenu = () => {
+const HomeMenu = ({ userKitchens }) => {
+
+
+    let kitchensArr = userKitchens.map((kitchen) => {
+        return(
+            <KitchenCard
+            key={kitchen.id}
+            kitchen={kitchen}
+            />
+        )
+    })
 
     return(
         <div className="container">
@@ -34,6 +45,14 @@ const HomeMenu = () => {
                     </div>
                 </div>
             </div>
+            <div className="kitchen-list-container">
+            <button>Add Kitchen</button>
+                <h5>Kitchens :</h5>
+                <div className="kitchen-list-card-deck">
+                    {kitchensArr}
+                </div>
+            </div>
+
         </div>
     )
 };

@@ -10,6 +10,7 @@ import KitchenPage from './components/KitchenPage/KitchenPage';
 const App = () => {
 
   const [currentUser, setCurrentUser] = useState(null);
+  const [userKitchens, setUserKitchens] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [signupData, setSignupData] = useState({
@@ -34,14 +35,11 @@ const App = () => {
         }
       })
       .then(r => r.json())
-      .then(data => {
-        // debugger
+      .then(data => { // data is User with Kitchens, and their Kitchens with Recipes and Ingredients
         if (!data.error){
           handleLogin(data)
-          // debugger
         }
       })
-      // debugger
     }
   }, []);
 
@@ -83,14 +81,16 @@ const App = () => {
 
   const handleLogin = user => {
     setIsLoginOpen(false)
-    debugger
-      setCurrentUser(user)
+    // debugger
+    setUserKitchens(user.kitchens)
+    setCurrentUser(user)
     // debugger
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token")
     setCurrentUser(null)
+    setUserKitchens(null)
     history.push('/')
     setIsSignupOpen(false)
   };
@@ -101,13 +101,13 @@ const App = () => {
     <Switch>
       <Route path="/home" exact>
         { currentUser ? 
-        <HomeMenu /> : 
+        <HomeMenu currentUser={currentUser} userKitchens={userKitchens}/> : 
         <Redirect to='/' />
         }
       </Route>
       <Route path="/kitchen" exact>
         { currentUser ? 
-        <KitchenPage /> :
+        <KitchenPage currentUser={currentUser} /> :
         <Redirect to='/' /> 
         }
       </Route>

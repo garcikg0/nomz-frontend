@@ -31,7 +31,7 @@ const SignupModal = ( {open, onClose, signupData, setSignupData, handleSignup} )
                         <input className="signup-button" type="submit" value="Sign Up"></input>
                     </form>
                 </div>
-                <button className="signup-button" onClick={onClose}>Close Modal</button>
+                <button className="signup-button" onClick={onClose}>Close</button>
             </div> 
         </div>
         </>,

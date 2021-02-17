@@ -14,7 +14,6 @@ const LoginModal = ( {open, onClose, loginData, setLoginData, handleLoginSubmit}
             ...loginData,
             [name]: value
         })
-        console.log(loginData)
     };
 
     return ReactDom.createPortal(
