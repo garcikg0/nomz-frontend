@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddKitchenModal from '../AddKitchenModal/AddKitchenModal';
 import EditKitchenModal from '../EditKitchenModal/EditKitchenModal';
@@ -10,6 +10,7 @@ const HomeMenu = ({ userKitchens, setUserKitchens, currentUser }) => {
     const [isKitchenAddOpen, setIsKitchenAddOpen] = useState(false)
     const [isKitchenEditOpen, setIsKitchenEditOpen] = useState(false);
     const [kitchenData, setKitchenData] = useState(null);
+    const [kitchenUser, setKitchenUser] = useState(null)
 
     // Deleting a Kitchen
     const updatedKitchens = (kitchen) => {
@@ -92,6 +93,8 @@ const HomeMenu = ({ userKitchens, setUserKitchens, currentUser }) => {
         setKitchenData={setKitchenData}
         userKitchens={userKitchens}
         currentUser={currentUser}
+        setKitchenUser={setKitchenUser}
+        kitchenUser={kitchenUser}
         />
         </>
     )

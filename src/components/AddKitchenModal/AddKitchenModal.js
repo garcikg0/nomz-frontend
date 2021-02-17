@@ -3,32 +3,26 @@ import './Styles.scss';
 import ReactDom from 'react-dom'
 
 
-const AddKitchenModal = ( {open, onClose, kitchenData, userKitchens, currentUser} ) => {
+const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser } ) => {
 
     if (!open) return null;
 
-    const handleSubmit = (evt) => {
+    if (localStorage) {
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/kitchenstest`, {
+        fetch(`http://localhost:3000/kitchenuser`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         })
         .then(r => r.json())
-        .then( data => console.log(data))
+        .then( data => {
+            setKitchenUser(data)
+        })
+    }
+
+    const handleSubmit = (evt) => {
         evt.preventDefault()
-        // console.log(kitchenData)
-        // console.log(userKitchens)
-        // console.log(currentUser)
-        // console.log(localStorage)
-        // fetch(`http://localhost:3000/kitchens/${kitchenData.id}`, {
-        //     method: "PATCH",
-        //     headers: {
-        //         "content-type": "application/json"
-        //     },
-        //     body: JSON.stringify(kitchenData)
-        // })
-        // editedKitchens(kitchenData)
+        console.log(kitchenUser) //user.id
         // onClose()
     }
 
