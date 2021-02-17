@@ -12,13 +12,19 @@ const HomeMenu = ({ userKitchens, setUserKitchens, currentUser }) => {
     const [kitchenData, setKitchenData] = useState(null);
     const [kitchenUser, setKitchenUser] = useState(null)
 
+    // Adding a Kitchen
+    const addKitchen = (newKitchen) => {
+        let newArr = [...userKitchens, newKitchen]
+        setUserKitchens(newArr)
+    }
+    
     // Deleting a Kitchen
     const updatedKitchens = (kitchen) => {
         let updatedUserKitchens = userKitchens.filter(obj => obj.id !== kitchen.id)
         setUserKitchens(updatedUserKitchens)
     }
 
-// Editing a Kitchen
+    // Editing a Kitchen
     const editedKitchens = (editedKitchen) => {
         const elementsIndex = userKitchens.findIndex(element => element.id === editedKitchen.id)
         let newArr = [...userKitchens]
@@ -89,12 +95,10 @@ const HomeMenu = ({ userKitchens, setUserKitchens, currentUser }) => {
         <AddKitchenModal 
         open={isKitchenAddOpen}
         onClose={() => setIsKitchenAddOpen(false)}
-        kitchenData={kitchenData}
-        setKitchenData={setKitchenData}
         userKitchens={userKitchens}
-        currentUser={currentUser}
         setKitchenUser={setKitchenUser}
         kitchenUser={kitchenUser}
+        addKitchen={addKitchen}
         />
         </>
     )

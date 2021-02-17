@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState }from 'react';
 import './Styles.scss';
 import ReactDom from 'react-dom'
 
 
-const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser } ) => {
+const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser, addKitchen } ) => {
+
+    const [newKitchenData, setNewKitchenData] = useState(null)
 
     if (!open) return null;
 
@@ -22,18 +24,31 @@ const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser } ) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        console.log(kitchenUser) //user.id
-        // onClose()
+        // console.log(kitchenUser) //user.id
+        let newKitchenToBackend = newKitchenData 
+        // console.log(newKitchen)
+        fetch(`http://localhost:3000/kitchens`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newKitchenToBackend)
+        })
+        .then(r => r.json())
+        .then((newKitchen) => {
+            addKitchen(newKitchen)
+        })
+        onClose()
     }
 
     const handleChange = e => {
         const value = e.target.value;
         const name = e.target.name;
 
-        // setKitchenData({
-        //     ...kitchenData,
-        //     [name]: value
-        // })
+        setNewKitchenData({
+            [name]: value,
+            user_id: kitchenUser
+        })
     };
 
     return ReactDom.createPortal(
