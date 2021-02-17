@@ -101,7 +101,10 @@ const App = () => {
     <Switch>
       <Route path="/home" exact>
         { currentUser ? 
-        <HomeMenu currentUser={currentUser} userKitchens={userKitchens}/> : 
+        <HomeMenu 
+        currentUser={currentUser} 
+        userKitchens={userKitchens}
+        setUserKitchens={setUserKitchens}/> : 
         <Redirect to='/' />
         }
       </Route>

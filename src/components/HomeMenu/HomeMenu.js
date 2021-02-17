@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import EditKitchenModal from '../EditKitchenModal/EditKitchenModal';
 import KitchenCard from '../KitchenCard/KitchenCard';
 import './Styles.scss';
 
-const HomeMenu = ({ userKitchens }) => {
+const HomeMenu = ({ userKitchens, setUserKitchens }) => {
 
+    const [isKitchenEditOpen, setIsKitchenEditOpen] = useState(false);
+    const [kitchenData, setKitchenData] = useState(null);
+
+    // Deleting a Kitchen
+    const updatedKitchens = (kitchen) => {
+        let updatedUserKitchens = userKitchens.filter(obj => obj.id !== kitchen.id)
+        setUserKitchens(updatedUserKitchens)
+    }
+
+// Editing a Kitchen
+    const editedKitchens = (editedKitchen) => {
+        const elementsIndex = userKitchens.findIndex(element => element.id === editedKitchen.id)
+        let newArr = [...userKitchens]
+        newArr[elementsIndex] = {...newArr[elementsIndex], name: editedKitchen.name}
+        setUserKitchens(newArr)
+        setKitchenData(null)
+    }
 
     let kitchensArr = userKitchens.map((kitchen) => {
         return(
             <KitchenCard
             key={kitchen.id}
             kitchen={kitchen}
+            updatedKitchens={updatedKitchens}
+            setUserKitchens={setIsKitchenEditOpen}
+            setIsKitchenEditOpen={setIsKitchenEditOpen}
+            kitchenData={kitchenData}
+            setKitchenData={setKitchenData}
             />
         )
     })
 
     return(
+        <>
         <div className="container">
             <div className="card-deck-container">
                 <div className="card-deck">
@@ -47,13 +71,19 @@ const HomeMenu = ({ userKitchens }) => {
             </div>
             <div className="kitchen-list-container">
             <button>Add Kitchen</button>
-                <h5>Kitchens :</h5>
                 <div className="kitchen-list-card-deck">
                     {kitchensArr}
                 </div>
             </div>
-
         </div>
+        <EditKitchenModal 
+        open={isKitchenEditOpen}
+        onClose={() => setIsKitchenEditOpen(false) }
+        kitchenData={kitchenData}
+        setKitchenData={setKitchenData}
+        editedKitchens={editedKitchens}
+        />
+        </>
     )
 };
 
