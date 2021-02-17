@@ -104,7 +104,9 @@ const App = () => {
         <HomeMenu 
         currentUser={currentUser} 
         userKitchens={userKitchens}
-        setUserKitchens={setUserKitchens}/> : 
+        setUserKitchens={setUserKitchens}
+        currentUser={currentUser} 
+        /> : 
         <Redirect to='/' />
         }
       </Route>

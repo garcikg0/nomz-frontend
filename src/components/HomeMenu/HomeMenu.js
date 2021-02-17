@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AddKitchenModal from '../AddKitchenModal/AddKitchenModal';
 import EditKitchenModal from '../EditKitchenModal/EditKitchenModal';
 import KitchenCard from '../KitchenCard/KitchenCard';
 import './Styles.scss';
 
-const HomeMenu = ({ userKitchens, setUserKitchens }) => {
+const HomeMenu = ({ userKitchens, setUserKitchens, currentUser }) => {
 
+    const [isKitchenAddOpen, setIsKitchenAddOpen] = useState(false)
     const [isKitchenEditOpen, setIsKitchenEditOpen] = useState(false);
     const [kitchenData, setKitchenData] = useState(null);
 
@@ -70,7 +72,7 @@ const HomeMenu = ({ userKitchens, setUserKitchens }) => {
                 </div>
             </div>
             <div className="kitchen-list-container">
-            <button>Add Kitchen</button>
+            <button onClick={() => setIsKitchenAddOpen(true)}>Add Kitchen</button>
                 <div className="kitchen-list-card-deck">
                     {kitchensArr}
                 </div>
@@ -82,6 +84,14 @@ const HomeMenu = ({ userKitchens, setUserKitchens }) => {
         kitchenData={kitchenData}
         setKitchenData={setKitchenData}
         editedKitchens={editedKitchens}
+        />
+        <AddKitchenModal 
+        open={isKitchenAddOpen}
+        onClose={() => setIsKitchenAddOpen(false)}
+        kitchenData={kitchenData}
+        setKitchenData={setKitchenData}
+        userKitchens={userKitchens}
+        currentUser={currentUser}
         />
         </>
     )
