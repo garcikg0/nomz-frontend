@@ -24,9 +24,7 @@ const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser, addKitche
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        // console.log(kitchenUser) //user.id
         let newKitchenToBackend = newKitchenData 
-        // console.log(newKitchen)
         fetch(`http://localhost:3000/kitchens`, {
             method: "POST",
             headers: {
