@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import KitchenNavbar from '../KithenNavbar/KitchenNavbar';
 import './Styles.scss';
 
-const KitchenPage = () => {
+const KitchenPage = ( {userKitchens} ) => {
 
+    const [kitchenRendered, setKitchenRendered] = useState(null)
+
+    const renderKitchen = (kitchens) => {
+        let kitchenToRender = kitchens[0]
+        setKitchenRendered(kitchenToRender) 
+    }
+
+    const handleClick = e => {
+        e.preventDefault()
+        renderKitchen(userKitchens)
+        console.log(kitchenRendered)
+        // debugger
+    }
     return(
         <div className='kitchen-container'>
+            <KitchenNavbar />
             <div className='kitchen-card-deck-container'>
                 <div className='kitchen-card-deck'>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/2942672-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/2942672-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Dairy</h5>
                             <p>Status: </p>
@@ -19,7 +34,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1422989-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1422989-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Fruit</h5>
                             <p>Status: </p>
@@ -30,7 +45,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1422989-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1422989-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Fruit</h5>
                             <p>Status: </p>
@@ -41,7 +56,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1317943-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1317943-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Spices</h5>
                             <p>Status: </p>
@@ -52,7 +67,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1015530-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1015530-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Flour</h5>
                             <p>Status: </p>
@@ -63,7 +78,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1434570-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1434570-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Vegetables</h5>
                             <p>Status: </p>
@@ -74,7 +89,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/3478937-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/3478937-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Seafood</h5>
                             <p>Status: </p>
@@ -85,7 +100,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1317946-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1317946-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Condiments</h5>
                             <p>Status: </p>
@@ -96,7 +111,7 @@ const KitchenPage = () => {
                         </div>
                     </div>
                     <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/2327576-200.png' />
+                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/2327576-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Poultry</h5>
                             <p>Status: </p>

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddKitchenModal from '../AddKitchenModal/AddKitchenModal';
 import EditKitchenModal from '../EditKitchenModal/EditKitchenModal';
 import KitchenCard from '../KitchenCard/KitchenCard';
 import './Styles.scss';
 
-const HomeMenu = ({ userKitchens, setUserKitchens, currentUser }) => {
+const HomeMenu = ({ userKitchens, setUserKitchens }) => {
 
     const [isKitchenAddOpen, setIsKitchenAddOpen] = useState(false)
     const [isKitchenEditOpen, setIsKitchenEditOpen] = useState(false);

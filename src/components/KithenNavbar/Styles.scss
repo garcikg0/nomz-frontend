@@ -1,0 +1,24 @@
+.kitchen-navbar-logo {
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Caveat', cursive;
+    color: black;
+    justify-self: right;
+    margin-left: 0;
+    cursor: pointer;
+    font-size: 30px;
+    width: 10rem;
+};
+
+.KitchenNavbarItems {
+    background-color: rgb(253, 251, 247);
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2 rem;
+    text-decoration: none;
+    padding: 1rem 10rem;
+};
+

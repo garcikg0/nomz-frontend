@@ -9,11 +9,11 @@ import KitchenPage from './components/KitchenPage/KitchenPage';
 
 const App = () => {
 
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userKitchens, setUserKitchens] = useState(null);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignupOpen, setIsSignupOpen] = useState(false);
-  const [signupData, setSignupData] = useState({
+  const [currentUser, setCurrentUser] = useState(null); //user logged in 
+  const [userKitchens, setUserKitchens] = useState(null); // current user's kitchens only state 
+  const [isLoginOpen, setIsLoginOpen] = useState(false);//LogInModal state for rendering
+  const [isSignupOpen, setIsSignupOpen] = useState(false); //SignUpModal state for rendering
+  const [signupData, setSignupData] = useState({ //create new user state 
     first_name: "",
     last_name: "",
     email: "",
@@ -21,13 +21,13 @@ const App = () => {
     password: ""
   });
   
-  const [loginData, setLoginData] = useState({
+  const [loginData, setLoginData] = useState({ //login state
     username: "",
     password: ""
   })
   let history = useHistory()
 
-  useEffect(() => {
+  useEffect(() => { //componentDidMount User record with it's respective Kitchens, Ingredients, and Recipes 
     if (localStorage.token) {
       fetch(`http://localhost:3000/autologin`, {
         headers: {
@@ -43,7 +43,7 @@ const App = () => {
     }
   }, []);
 
-  const handleSignup = e => {
+  const handleSignup = e => { //Creating new User with SignUp Modal
     e.preventDefault()
     fetch("http://localhost:3000/users", {
         method: "POST",
@@ -60,7 +60,7 @@ const App = () => {
     })  
   };
 
-  const handleLoginSubmit = e => {
+  const handleLoginSubmit = e => { //User logging in if no token
     e.preventDefault();
     fetch("http://localhost:3000/login", {
         method: "POST",
@@ -79,7 +79,7 @@ const App = () => {
     })
   };
 
-  const handleLogin = user => {
+  const handleLogin = user => { //login helper to set states
     setIsLoginOpen(false)
     // debugger
     setUserKitchens(user.kitchens)
@@ -87,7 +87,7 @@ const App = () => {
     // debugger
   };
 
-  const handleLogout = () => {
+  const handleLogout = () => { //logout with token removal and states to null
     localStorage.removeItem("token")
     setCurrentUser(null)
     setUserKitchens(null)
@@ -102,7 +102,6 @@ const App = () => {
       <Route path="/home" exact>
         { currentUser ? 
         <HomeMenu 
-        currentUser={currentUser} 
         userKitchens={userKitchens}
         setUserKitchens={setUserKitchens}
         currentUser={currentUser} 
@@ -112,7 +111,10 @@ const App = () => {
       </Route>
       <Route path="/kitchen" exact>
         { currentUser ? 
-        <KitchenPage currentUser={currentUser} /> :
+        <KitchenPage 
+        currentUser={currentUser} 
+        userKitchens={userKitchens}
+        /> :
         <Redirect to='/' /> 
         }
       </Route>
