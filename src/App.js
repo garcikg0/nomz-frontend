@@ -27,6 +27,8 @@ const App = () => {
   })
   let history = useHistory()
 
+  const [kitchenRendered, setKitchenRendered] = useState(null)
+
   useEffect(() => { //componentDidMount User record with it's respective Kitchens, Ingredients, and Recipes 
     if (localStorage.token) {
       fetch(`http://localhost:3000/autologin`, {
@@ -105,6 +107,8 @@ const App = () => {
         userKitchens={userKitchens}
         setUserKitchens={setUserKitchens}
         currentUser={currentUser} 
+        kitchenRendered={kitchenRendered}
+        setKitchenRendered={setKitchenRendered}
         /> : 
         <Redirect to='/' />
         }
@@ -114,6 +118,8 @@ const App = () => {
         <KitchenPage 
         currentUser={currentUser} 
         userKitchens={userKitchens}
+        kitchenRendered={kitchenRendered}
+        setKitchenRendered={setKitchenRendered}
         /> :
         <Redirect to='/' /> 
         }

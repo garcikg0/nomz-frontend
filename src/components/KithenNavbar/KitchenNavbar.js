@@ -2,18 +2,53 @@ import React, { useState } from 'react';
 // import { Link } from 'react-router-dom';
 import './Styles.scss';
 
-const KitchenNavbar = (  ) => {
+const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) => {
 
-    const [click, setClick] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const handleClick = () => {
-        let currentClick = click
-        setClick( !currentClick)
+    const handleLogoClick = e => {
+        setDropdownOpen(!dropdownOpen)
+        console.log(kitchenRendered)
+        let renderIngredients = kitchenRendered.ingredients
     };
+
+    const handleKitchenNameClick = e => {
+        let id = e.target.value
+        let newKitchenRendered = null
+        for(let i = 0; i< userKitchens.length; i++){
+            if(userKitchens[i].id === id){
+                newKitchenRendered = userKitchens[i]
+            }
+        }
+        setKitchenRendered(newKitchenRendered)
+        setDropdownOpen(false)
+    }
+
+    let index = 1;
+    let kitchenNames = userKitchens.map((kitchen) => {
+        if (kitchen.name !== kitchenRendered.name){
+            const itemStyle = {
+                "top": `${index* 3}rem`,
+            }
+            index = index + 1
+            return(
+                <li className="m-item"
+                    value={kitchen.id}
+                    style={dropdownOpen ? itemStyle : null}
+                    onClick={handleKitchenNameClick}
+                >{kitchen.name}</li>
+            )
+        }
+    })
+        
 
     return (
     <nav className="KitchenNavbarItems">
-            <span className="kitchen-navbar-logo">Kitchen Name</span>
+            <div className="kitchen-navbar-logo" 
+                onClick={handleLogoClick}>
+                    {kitchenRendered.name}
+            </div>
+            {dropdownOpen ? kitchenNames : null }
     </nav>
     )
 };

@@ -3,22 +3,54 @@
     text-align: center;
     font-weight: bold;
     font-family: 'Caveat', cursive;
-    color: black;
-    justify-self: right;
+    color: rgb(56, 85, 114);
+    justify-self: center;
     margin-left: 0;
     cursor: pointer;
     font-size: 30px;
-    width: 10rem;
+    width: 100%;
+    z-index: 1;
 };
 
 .KitchenNavbarItems {
     background-color: rgb(253, 251, 247);
-    height: 80px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2 rem;
     text-decoration: none;
-    padding: 1rem 10rem;
+    padding: 0.1rem 10rem;
+    position: relative;
 };
 
+.m-item{
+    position: absolute;
+    top: 0;
+    
+    width: 50rem;
+    background-color: rgb(253, 251, 247);
+    box-shadow: 1rem 2rem 2rem rgb(56, 85, 114);
+
+    padding: 0.1rem 10rem;
+    border: 2rem solid rgb(56, 85, 114)k;
+    border-radius: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Caveat', cursive;
+    font-size: 30px;
+    color: rgb(56, 85, 114);
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    z-index: 1;
+}
+
+.m-item:hover{
+    background-color: rgb(56, 85, 114);
+    color: white;
+}

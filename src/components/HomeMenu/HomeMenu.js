@@ -5,12 +5,13 @@ import EditKitchenModal from '../EditKitchenModal/EditKitchenModal';
 import KitchenCard from '../KitchenCard/KitchenCard';
 import './Styles.scss';
 
-const HomeMenu = ({ userKitchens, setUserKitchens }) => {
+const HomeMenu = ({ userKitchens, setUserKitchens, kitchenRendered, setKitchenRendered}) => {
 
     const [isKitchenAddOpen, setIsKitchenAddOpen] = useState(false)
     const [isKitchenEditOpen, setIsKitchenEditOpen] = useState(false);
     const [kitchenData, setKitchenData] = useState(null);
     const [kitchenUser, setKitchenUser] = useState(null)
+    
 
     // Adding a Kitchen
     const addKitchen = (newKitchen) => {
@@ -47,12 +48,19 @@ const HomeMenu = ({ userKitchens, setUserKitchens }) => {
         )
     })
 
+    const handleKitchenClick = e => {
+        if (kitchenRendered === null){
+            let kitchenToRender = userKitchens[0]
+            setKitchenRendered(kitchenToRender)
+        }
+    }
+
     return(
         <>
         <div className="container">
             <div className="card-deck-container">
                 <div className="card-deck">
-                    <div className="card">
+                    <div className="card" onClick={handleKitchenClick}>
                         <Link to ="/kitchen">
                         <img className="card-img" src="https://images.pexels.com/photos/3952043/pexels-photo-3952043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="kitchen"></img>
                         <div className="card-overlay">

@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
+import IngredientCard from '../IngredientCard/IngredientCard';
 import KitchenNavbar from '../KithenNavbar/KitchenNavbar';
 import './Styles.scss';
 
-const KitchenPage = ( {userKitchens} ) => {
+const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
 
-    const [kitchenRendered, setKitchenRendered] = useState(null)
+    let renderIngredients = kitchenRendered.ingredients.map((ingredient) => {
+        return(
+            <IngredientCard 
+            ingredient={ingredient}
+            kitchen_id={kitchenRendered.id}
+            />
+        )
+    })
 
-    const renderKitchen = (kitchens) => {
-        let kitchenToRender = kitchens[0]
-        setKitchenRendered(kitchenToRender) 
-    }
-
-    const handleClick = e => {
-        e.preventDefault()
-        renderKitchen(userKitchens)
-        console.log(kitchenRendered)
-        // debugger
-    }
     return(
         <div className='kitchen-container'>
-            <KitchenNavbar />
+            <KitchenNavbar 
+            userKitchens={userKitchens}
+            kitchenRendered={kitchenRendered}
+            setKitchenRendered={setKitchenRendered}
+            />
             <div className='kitchen-card-deck-container'>
                 <div className='kitchen-card-deck'>
+                    {renderIngredients}
                     <div className='kitchen-card'>
                         <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/2942672-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
