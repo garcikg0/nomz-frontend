@@ -8,8 +8,6 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) =>
 
     const handleLogoClick = e => {
         setDropdownOpen(!dropdownOpen)
-        console.log(kitchenRendered)
-        let renderIngredients = kitchenRendered.ingredients
     };
 
     const handleKitchenNameClick = e => {
@@ -22,7 +20,7 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) =>
         }
         setKitchenRendered(newKitchenRendered)
         setDropdownOpen(false)
-    }
+    };
 
     let index = 1;
     let kitchenNames = userKitchens.map((kitchen) => {
@@ -38,10 +36,9 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) =>
                     onClick={handleKitchenNameClick}
                 >{kitchen.name}</li>
             )
-        }
-    })
-        
-
+        };
+    });
+    
     return (
     <nav className="KitchenNavbarItems">
             <div className="kitchen-navbar-logo" 

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import AddIngredientModal from '../AddIngredientModal/AddIngredientModal';
 import IngredientCard from '../IngredientCard/IngredientCard';
 import KitchenNavbar from '../KithenNavbar/KitchenNavbar';
 import './Styles.scss';
 
 const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
+
+    const [kitchenUser, setKitchenUser] = useState(null)
+    const [isAddIngredientOpen, setIsAddIngredientOpen] = useState(false);
 
     let renderIngredients = kitchenRendered.ingredients.map((ingredient) => {
         return(
@@ -15,6 +19,7 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
     })
 
     return(
+        <>
         <div className='kitchen-container'>
             <KitchenNavbar 
             userKitchens={userKitchens}
@@ -125,7 +130,15 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
                     </div>
                 </div>
             </div>
+            <div className="add-ingredient" onClick={()=> {setIsAddIngredientOpen(true)}}>Add Ingredient</div>
         </div>
+        <AddIngredientModal 
+        open={isAddIngredientOpen}
+        onClose={()=> {setIsAddIngredientOpen(false)}}
+        kitchenUser={kitchenUser}
+        setKitchenUser={setKitchenUser}
+        />
+        </>
     )
 }
 
