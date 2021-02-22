@@ -5,7 +5,7 @@ import EditKitchenModal from '../EditKitchenModal/EditKitchenModal';
 import KitchenCard from '../KitchenCard/KitchenCard';
 import './Styles.scss';
 
-const HomeMenu = ({ userKitchens, setUserKitchens, kitchenRendered, setKitchenRendered}) => {
+const HomeMenu = ({ userKitchens, setUserKitchens, kitchenRendered, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered}) => {
 
     const [isKitchenAddOpen, setIsKitchenAddOpen] = useState(false)
     const [isKitchenEditOpen, setIsKitchenEditOpen] = useState(false);
@@ -52,6 +52,7 @@ const HomeMenu = ({ userKitchens, setUserKitchens, kitchenRendered, setKitchenRe
         if (kitchenRendered === null){
             let kitchenToRender = userKitchens[0]
             setKitchenRendered(kitchenToRender)
+            setIngredientsOfKitchenRendered(kitchenToRender.ingredients)
         }
     }
 

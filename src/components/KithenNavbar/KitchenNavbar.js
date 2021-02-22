@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { Link } from 'react-router-dom';
 import './Styles.scss';
 
-const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) => {
+const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, setIngredientsOfKitchenRendered} ) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -19,6 +19,7 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) =>
             }
         }
         setKitchenRendered(newKitchenRendered)
+        setIngredientsOfKitchenRendered(newKitchenRendered.ingredients)
         setDropdownOpen(false)
     };
 
@@ -31,6 +32,7 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered} ) =>
             index = index + 1
             return(
                 <li className="m-item"
+                    key={kitchen.id}
                     value={kitchen.id}
                     style={dropdownOpen ? itemStyle : null}
                     onClick={handleKitchenNameClick}

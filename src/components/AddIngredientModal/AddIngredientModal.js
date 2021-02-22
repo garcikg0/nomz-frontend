@@ -3,51 +3,36 @@ import './Styles.scss';
 import ReactDom from 'react-dom'
 
 
-const AddIngredientModal = ( { open, onClose, kitchenUser, setKitchenUser } ) => {
+const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } ) => {
 
     const [newIngredientData, setNewIngredientData] = useState(null)
 
     if (!open) return null;
 
-    if (localStorage) {
-        const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/kitchenuser`, {
+    const handleSubmit = (evt) => {
+        evt.preventDefault()
+        debugger
+        fetch(`http://localhost:3000/ingredients`, {
+            method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`
-            }
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newIngredientData)
         })
-        .then(r => r.json())
-        .then( data => {
-            setKitchenUser(data)
-        })
-        console.log(kitchenUser)
+        addIngredient(newIngredientData)
+        onClose()
+        setNewIngredientData(null)
     }
-
-    // const handleSubmit = (evt) => {
-    //     evt.preventDefault()
-    //     let newKitchenToBackend = newKitchenData 
-    //     fetch(`http://localhost:3000/kitchens`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(newKitchenToBackend)
-    //     })
-    //     .then(r => r.json())
-    //     .then((newKitchen) => {
-    //         addKitchen(newKitchen)
-    //     })
-    //     onClose()
-    // }
 
     const handleChange = e => {
         const value = e.target.value;
         const name = e.target.name;
 
-        // setNewKitchenData({
-        //     [name]: value,
-        //     user_id: kitchenUser
-        // })
+        setNewIngredientData({
+            ...newIngredientData,
+            [name]: value,
+            kitchen_id: kitchenRendered.id
+        })
     };
 
     return ReactDom.createPortal(
@@ -55,7 +40,7 @@ const AddIngredientModal = ( { open, onClose, kitchenUser, setKitchenUser } ) =>
         <div className="add-ingredient-modal-overlay">
             <div className="add-ingredient-modal">
                 <div className="add-ingredient-form-wrapper">
-                    <form className="add-ingredient-form">
+                    <form className="add-ingredient-form" onSubmit={handleSubmit}>
                         <h2 className="form-title">Add an Ingredient</h2>
                         <ul className="wrapper">
                         <li className="form-row">
@@ -76,7 +61,7 @@ const AddIngredientModal = ( { open, onClose, kitchenUser, setKitchenUser } ) =>
                             </li>
                             <li className="form-row">
                                 <label>Notes:</label>
-                                <input type="text-area" name="storage" onChange={handleChange}></input>
+                                <input type="text" name="notes" onChange={handleChange}></input>
                             </li>
                             <li className="form-row">
                                 <button className="add-ingredient-button" type="submit">Save</button>
@@ -93,33 +78,3 @@ const AddIngredientModal = ( { open, onClose, kitchenUser, setKitchenUser } ) =>
 };
 
 export default AddIngredientModal;
-
-{/* <>
-        <div className="add-ingredient-modal-overlay">
-            <div className="add-ingredient-modal">
-                <div className="add-ingredient-form-wrapper">
-                    <form className="add-ingredient-login-form">
-                        <h2>Add An Ingredient</h2>
-                        <label className="add-ingredient-login-label">Ingredient Name:</label>
-                        <span>
-                            <input className="add-ingredient-login-input" type="text" name="name" placeholder="Name of Ingredient" onChange={handleChange}></input>
-                        </span>
-                        <label className="add-ingredient-login-label">Ingredient Status:
-                            <input className="add-ingredient-login-input" type="text" name="status" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
-                        </label>
-                        <label className="add-ingredient-login-label">Stored in the:
-                            <input className="add-ingredient-login-input" type="text" name="storage" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
-                        </label>
-                        <label className="add-ingredient-login-label">Icon:
-                            <input className="add-ingredient-login-input" type="text" name="icon" placeholder="future dropdown" onChange={handleChange}></input>
-                        </label>
-                        <label className="add-ingredient-login-label">Notes:
-                            <input className="add-ingredient-login-input" type="text" name="notes" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
-                        </label>
-                        <input className="add-ingredient-button" type="submit" value="Save"></input>
-                    </form>
-                </div>
-                <button className="login-button" onClick={onClose}>Close Modal</button>
-            </div> 
-        </div>
-        </>, */}

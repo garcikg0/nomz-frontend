@@ -4,12 +4,21 @@ import IngredientCard from '../IngredientCard/IngredientCard';
 import KitchenNavbar from '../KithenNavbar/KitchenNavbar';
 import './Styles.scss';
 
-const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
+const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {
 
-    const [kitchenUser, setKitchenUser] = useState(null)
     const [isAddIngredientOpen, setIsAddIngredientOpen] = useState(false);
 
-    let renderIngredients = kitchenRendered.ingredients.map((ingredient) => {
+    // Adding an Ingredient
+    const addIngredient = (newIngredient) => {
+        let newArr = [...ingredientsOfKitchenRendered, newIngredient]
+        setIngredientsOfKitchenRendered(newArr)
+    }
+
+    // Deleting an Ingredient
+
+    // Editing an Ingredient
+
+    let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {
         return(
             <IngredientCard 
             ingredient={ingredient}
@@ -18,6 +27,10 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
         )
     })
 
+    let handleAddIngredientButton = e => {
+        setIsAddIngredientOpen(true)
+    }
+
     return(
         <>
         <div className='kitchen-container'>
@@ -25,6 +38,7 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
             userKitchens={userKitchens}
             kitchenRendered={kitchenRendered}
             setKitchenRendered={setKitchenRendered}
+            setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
             />
             <div className='kitchen-card-deck-container'>
                 <div className='kitchen-card-deck'>
@@ -46,17 +60,6 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
                             <h5>Fruit</h5>
                             <p>Status: </p>
                             <p>Stored in the Pantry</p>
-                            <button>Edit</button>
-                            <button>Running Low</button>
-                            <button>Remove</button>
-                        </div>
-                    </div>
-                    <div className='kitchen-card'>
-                        <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/1422989-200.png' alt="example"/>
-                        <div className='kitchen-card-body'>
-                            <h5>Fruit</h5>
-                            <p>Status: </p>
-                            <p>Stored in the Freezer</p>
                             <button>Edit</button>
                             <button>Running Low</button>
                             <button>Remove</button>
@@ -130,13 +133,13 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered} ) => {
                     </div>
                 </div>
             </div>
-            <div className="add-ingredient" onClick={()=> {setIsAddIngredientOpen(true)}}>Add Ingredient</div>
+            <div className="add-ingredient" onClick={handleAddIngredientButton}>Add Ingredient</div>
         </div>
         <AddIngredientModal 
         open={isAddIngredientOpen}
         onClose={()=> {setIsAddIngredientOpen(false)}}
-        kitchenUser={kitchenUser}
-        setKitchenUser={setKitchenUser}
+        kitchenRendered={kitchenRendered}
+        addIngredient={addIngredient}
         />
         </>
     )

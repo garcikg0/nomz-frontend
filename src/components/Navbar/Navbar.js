@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Styles.scss';
 
-const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout, kitchenRendered, setKitchenRendered, userKitchens} ) => {
+const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout, kitchenRendered, setKitchenRendered, userKitchens ,setIngredientsOfKitchenRendered} ) => {
 
     const [click, setClick] = useState(false)
 
@@ -15,6 +15,7 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout, k
         if (kitchenRendered === null){
             let kitchenToRender = userKitchens[0]
             setKitchenRendered(kitchenToRender)
+            setIngredientsOfKitchenRendered(kitchenToRender.ingredients)
         }
     }
 

@@ -10,9 +10,13 @@ import KitchenPage from './components/KitchenPage/KitchenPage';
 const App = () => {
 
   const [currentUser, setCurrentUser] = useState(null); //user logged in 
-  const [userKitchens, setUserKitchens] = useState(null); // current user's kitchens only state 
+  const [userKitchens, setUserKitchens] = useState(null); // current user's kitchens state 
+  const [kitchenRendered, setKitchenRendered] = useState(null) // kitchen rendering
+  const [ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered] = useState(null);
+  
   const [isLoginOpen, setIsLoginOpen] = useState(false);//LogInModal state for rendering
   const [isSignupOpen, setIsSignupOpen] = useState(false); //SignUpModal state for rendering
+  
   const [signupData, setSignupData] = useState({ //create new user state 
     first_name: "",
     last_name: "",
@@ -20,14 +24,11 @@ const App = () => {
     username: "",
     password: ""
   });
-  
   const [loginData, setLoginData] = useState({ //login state
     username: "",
     password: ""
   })
   let history = useHistory()
-
-  const [kitchenRendered, setKitchenRendered] = useState(null)
 
   useEffect(() => { //componentDidMount User record with it's respective Kitchens, Ingredients, and Recipes 
     if (localStorage.token) {
@@ -73,9 +74,7 @@ const App = () => {
     })
     .then(r => r.json())
     .then(data => {
-      //  debugger
         const { user, token } = data
-        // debugger
         handleLogin(user)
         localStorage.token = token
     })
@@ -83,10 +82,8 @@ const App = () => {
 
   const handleLogin = user => { //login helper to set states
     setIsLoginOpen(false)
-    // debugger
     setUserKitchens(user.kitchens)
     setCurrentUser(user)
-    // debugger
   };
 
   const handleLogout = () => { //logout with token removal and states to null
@@ -96,6 +93,8 @@ const App = () => {
     history.push('/')
     setIsSignupOpen(false)
   };
+
+
 
   return (
     <>
@@ -107,6 +106,7 @@ const App = () => {
     userKitchens={userKitchens}
     kitchenRendered={kitchenRendered}
     setKitchenRendered={setKitchenRendered}
+    setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
     />
     <Switch>
       <Route path="/home" exact>
@@ -117,6 +117,7 @@ const App = () => {
         currentUser={currentUser} 
         kitchenRendered={kitchenRendered}
         setKitchenRendered={setKitchenRendered}
+        setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
         /> : 
         <Redirect to='/' />
         }
@@ -128,6 +129,8 @@ const App = () => {
         userKitchens={userKitchens}
         kitchenRendered={kitchenRendered}
         setKitchenRendered={setKitchenRendered}
+        ingredientsOfKitchenRendered={ingredientsOfKitchenRendered}
+        setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
         /> :
         <Redirect to='/' /> 
         }
