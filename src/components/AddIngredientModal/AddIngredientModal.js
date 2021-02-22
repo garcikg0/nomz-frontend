@@ -31,7 +31,6 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
         .then(newIngredient => {
             addIngredient(newIngredient)
         })
-        // addIngredient(newIngredientData)
         onClose()
     }
 

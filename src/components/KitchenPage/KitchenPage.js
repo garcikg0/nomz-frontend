@@ -21,6 +21,7 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingred
     let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {
         return(
             <IngredientCard 
+            key={ingredient.id}
             ingredient={ingredient}
             kitchen_id={kitchenRendered.id}
             />
@@ -45,7 +46,7 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingred
             <div className='kitchen-card-deck-container'>
                 <div className='kitchen-card-deck'>
                     {renderIngredients}
-                    <div className='kitchen-card'>
+                    {/* <div className='kitchen-card'>
                         <img className='kitchen-card-img-top' src='https://static.thenounproject.com/png/2942672-200.png' alt="example"/>
                         <div className='kitchen-card-body'>
                             <h5>Dairy</h5>
@@ -132,7 +133,7 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingred
                             <button>Running Low</button>
                             <button>Remove</button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="add-ingredient" onClick={handleAddIngredientButton}>Add Ingredient</div>
