@@ -5,23 +5,34 @@ import ReactDom from 'react-dom'
 
 const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } ) => {
 
-    const [newIngredientData, setNewIngredientData] = useState(null)
+    const [newIngredientData, setNewIngredientData] = useState({
+        name: "",
+        storage: "",
+        icon: "",
+        status: "",
+        notes: "",
+        kitchen_id: ""
+    })
 
     if (!open) return null;
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
         debugger
+        let newIngredientToBackend = newIngredientData
         fetch(`http://localhost:3000/ingredients`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(newIngredientData)
+            body: JSON.stringify(newIngredientToBackend)
         })
-        addIngredient(newIngredientData)
+        .then(r => r.json())
+        .then(newIngredient => {
+            addIngredient(newIngredient)
+        })
+        // addIngredient(newIngredientData)
         onClose()
-        setNewIngredientData(null)
     }
 
     const handleChange = e => {

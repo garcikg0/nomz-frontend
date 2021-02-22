@@ -28,6 +28,8 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingred
     })
 
     let handleAddIngredientButton = e => {
+        // console.log(ingredientsOfKitchenRendered)
+        // console.log(kitchenRendered)
         setIsAddIngredientOpen(true)
     }
 

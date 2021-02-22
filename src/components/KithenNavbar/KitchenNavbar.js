@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
 import './Styles.scss';
 
-const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, setIngredientsOfKitchenRendered} ) => {
+const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -13,7 +12,7 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, setI
     const handleKitchenNameClick = e => {
         let id = e.target.value
         let newKitchenRendered = null
-        for(let i = 0; i< userKitchens.length; i++){
+        for(let i = 0; i < userKitchens.length; i++){
             if(userKitchens[i].id === id){
                 newKitchenRendered = userKitchens[i]
             }
@@ -21,6 +20,7 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, setI
         setKitchenRendered(newKitchenRendered)
         setIngredientsOfKitchenRendered(newKitchenRendered.ingredients)
         setDropdownOpen(false)
+        console.log(ingredientsOfKitchenRendered)
     };
 
     let index = 1;
