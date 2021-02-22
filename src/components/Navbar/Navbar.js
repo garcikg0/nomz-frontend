@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Styles.scss';
 
-const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} ) => {
+const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout, kitchenRendered, setKitchenRendered, userKitchens} ) => {
 
     const [click, setClick] = useState(false)
 
@@ -10,6 +10,13 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} )
         let currentClick = click
         setClick( !currentClick)
     };
+
+    const handleKitchenClick = e => {
+        if (kitchenRendered === null){
+            let kitchenToRender = userKitchens[0]
+            setKitchenRendered(kitchenToRender)
+        }
+    }
 
     return (
         <nav className="NavbarItems">
@@ -24,7 +31,8 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout} )
                     <>
                     <li>
                         <Link to='/kitchen'>
-                            <button class="nav-links" to='#kitchen'>My Kitchen</button>
+                            <button class="nav-links" to='#kitchen'
+                            onClick={handleKitchenClick}>My Kitchen</button>
                         </Link>
                     </li>
                     <li>

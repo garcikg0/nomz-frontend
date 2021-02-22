@@ -99,7 +99,15 @@ const App = () => {
 
   return (
     <>
-    <Navbar setIsLoginOpen={setIsLoginOpen} setIsSignupOpen={setIsSignupOpen} currentUser={currentUser} handleLogout={handleLogout} />
+    <Navbar 
+    setIsLoginOpen={setIsLoginOpen} 
+    setIsSignupOpen={setIsSignupOpen} 
+    currentUser={currentUser} 
+    handleLogout={handleLogout}
+    userKitchens={userKitchens}
+    kitchenRendered={kitchenRendered}
+    setKitchenRendered={setKitchenRendered}
+    />
     <Switch>
       <Route path="/home" exact>
         { currentUser ? 
