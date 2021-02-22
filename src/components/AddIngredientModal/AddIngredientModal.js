@@ -54,23 +54,37 @@ const AddIngredientModal = ( { open, onClose, kitchenUser, setKitchenUser } ) =>
         <>
         <div className="add-ingredient-modal-overlay">
             <div className="add-ingredient-modal">
-                <div className="add-ingredient-formBox">
-                    <form className="add-ingredient-login-form">
-                        <h2>Add An Ingredient</h2>
-                        <label className="add-ingredient-login-input">Ingredient Name:</label>
-                        <input className="add-ingredient-login-input" type="text" name="name" placeholder="Name of Ingredient" onChange={handleChange}></input>
-                        <label className="add-ingredient-login-input">Ingredient Status:</label>
-                        <input className="add-ingredient-login-input" type="text" name="status" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
-                        <label className="add-ingredient-login-input">Stored in the:</label>
-                        <input className="add-ingredient-login-input" type="text" name="storage" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
-                        <label className="add-ingredient-login-input">Icon:</label>
-                        <input className="add-ingredient-login-input" type="text" name="icon" placeholder="future dropdown" onChange={handleChange}></input>
-                        <label className="add-ingredient-login-input">Notes:</label>
-                        <input className="add-ingredient-login-input" type="text" name="notes" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
-                        <input className="add-ingredient-button" type="submit" value="Save"></input>
+                <div className="add-ingredient-form-wrapper">
+                    <form className="add-ingredient-form">
+                        <h2 className="form-title">Add an Ingredient</h2>
+                        <ul className="wrapper">
+                        <li className="form-row">
+                                <label>Icon:</label>
+                                <input type="text" name="icon" onChange={handleChange}></input>
+                            </li>
+                            <li className="form-row">
+                                <label>Name of Ingredient:</label>
+                                <input type="text" name="name" onChange={handleChange}></input>
+                            </li>
+                            <li className="form-row">
+                                <label>Status:</label>
+                                <input type="text" name="status" onChange={handleChange}></input>
+                            </li>
+                            <li className="form-row">
+                                <label>Stored in the</label>
+                                <input type="text" name="storage" onChange={handleChange}></input>
+                            </li>
+                            <li className="form-row">
+                                <label>Notes:</label>
+                                <input type="text-area" name="storage" onChange={handleChange}></input>
+                            </li>
+                            <li className="form-row">
+                                <button className="add-ingredient-button" type="submit">Save</button>
+                            </li>
+                        </ul>
                     </form>
                 </div>
-                <button className="login-button" onClick={onClose}>Close Modal</button>
+                <button className="login-button" onClick={onClose}>Close</button>
             </div> 
         </div>
         </>,
@@ -79,3 +93,33 @@ const AddIngredientModal = ( { open, onClose, kitchenUser, setKitchenUser } ) =>
 };
 
 export default AddIngredientModal;
+
+{/* <>
+        <div className="add-ingredient-modal-overlay">
+            <div className="add-ingredient-modal">
+                <div className="add-ingredient-form-wrapper">
+                    <form className="add-ingredient-login-form">
+                        <h2>Add An Ingredient</h2>
+                        <label className="add-ingredient-login-label">Ingredient Name:</label>
+                        <span>
+                            <input className="add-ingredient-login-input" type="text" name="name" placeholder="Name of Ingredient" onChange={handleChange}></input>
+                        </span>
+                        <label className="add-ingredient-login-label">Ingredient Status:
+                            <input className="add-ingredient-login-input" type="text" name="status" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
+                        </label>
+                        <label className="add-ingredient-login-label">Stored in the:
+                            <input className="add-ingredient-login-input" type="text" name="storage" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
+                        </label>
+                        <label className="add-ingredient-login-label">Icon:
+                            <input className="add-ingredient-login-input" type="text" name="icon" placeholder="future dropdown" onChange={handleChange}></input>
+                        </label>
+                        <label className="add-ingredient-login-label">Notes:
+                            <input className="add-ingredient-login-input" type="text" name="notes" placeholder="Available, Running Low, Out" onChange={handleChange}></input>
+                        </label>
+                        <input className="add-ingredient-button" type="submit" value="Save"></input>
+                    </form>
+                </div>
+                <button className="login-button" onClick={onClose}>Close Modal</button>
+            </div> 
+        </div>
+        </>, */}
