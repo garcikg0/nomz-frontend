@@ -44,7 +44,7 @@ const App = () => {
         }
       })
     }
-  }, []);
+  }, [kitchenRendered, ingredientsOfKitchenRendered]);
 
   const handleSignup = e => { //Creating new User with SignUp Modal
     e.preventDefault()

@@ -15,8 +15,18 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingred
     }
 
     // Deleting an Ingredient
+    const updatedIngredients = (ingredient) => {
+        let updatedIngredients = ingredientsOfKitchenRendered.filter(obj => obj.id !== ingredient.id)
+        setIngredientsOfKitchenRendered(updatedIngredients)
+    }
 
     // Editing an Ingredient
+    const editedIngredients = (editedIngredient) => {
+        const elementsIndex = ingredientsOfKitchenRendered.findIndex(element => element.id === editedIngredient.id)
+        let newArr = [...ingredientsOfKitchenRendered]
+        newArr[elementsIndex] = {...newArr[elementsIndex], name: editedIngredient.name, storage: editedIngredient.storage, status: editedIngredient.status, icon: editedIngredient.icon, notes: editedIngredient.notes}
+        setIngredientsOfKitchenRendered(newArr)
+    }
 
     let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {
         return(
@@ -24,6 +34,8 @@ const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingred
             key={ingredient.id}
             ingredient={ingredient}
             kitchen_id={kitchenRendered.id}
+            updatedIngredients={updatedIngredients}
+            editedIngredients={editedIngredients}
             />
         )
     })

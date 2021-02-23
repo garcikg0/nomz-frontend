@@ -20,7 +20,6 @@ const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, ingr
         setKitchenRendered(newKitchenRendered)
         setIngredientsOfKitchenRendered(newKitchenRendered.ingredients)
         setDropdownOpen(false)
-        console.log(ingredientsOfKitchenRendered)
     };
 
     let index = 1;

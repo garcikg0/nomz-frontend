@@ -18,7 +18,6 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        debugger
         let newIngredientToBackend = newIngredientData
         fetch(`http://localhost:3000/ingredients`, {
             method: "POST",
@@ -53,7 +52,7 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
                     <form className="add-ingredient-form" onSubmit={handleSubmit}>
                         <h2 className="form-title">Add an Ingredient</h2>
                         <ul className="wrapper">
-                        <li className="form-row">
+                            <li className="form-row">
                                 <label>Icon:</label>
                                 <input type="text" name="icon" onChange={handleChange}></input>
                             </li>
@@ -63,11 +62,25 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
                             </li>
                             <li className="form-row">
                                 <label>Status:</label>
-                                <input type="text" name="status" onChange={handleChange}></input>
+                                <div class="select">
+                                        <select id="standard-select" name="status" onChange={handleChange}>
+                                            <option value="Available">Available</option>
+                                            <option value="Low">Low</option>
+                                            <option value="Out">Out</option>
+                                        </select>
+                                        <span class="focus"></span>
+                                    </div>
                             </li>
                             <li className="form-row">
                                 <label>Stored in the</label>
-                                <input type="text" name="storage" onChange={handleChange}></input>
+                                <div class="select" >
+                                        <select id="standard-select" name="storage" onChange={handleChange}>
+                                            <option value="Fridge">Fridge</option>
+                                            <option value="Freezer">Freezer</option>
+                                            <option value="Pantry">Pantry</option>
+                                        </select>
+                                        <span class="focus"></span>
+                                    </div>
                             </li>
                             <li className="form-row">
                                 <label>Notes:</label>

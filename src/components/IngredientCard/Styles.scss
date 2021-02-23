@@ -45,3 +45,24 @@ p{
     justify-self: stretch;
     align-self: center;
 }
+
+.edit-button:hover{
+    background-color: rgb(160, 228, 255);
+    transition: 0.2s;
+    color: black;
+    font-weight: bold;
+}
+
+.low-button:hover{
+    background-color: rgb(250, 220, 123);
+    transition: 0.2s;
+    color: black;
+    font-weight: bold;
+}
+
+.remove-button:hover{
+    background-color: rgb(253, 120, 120);
+    transition: 0.2s;
+    color:white;
+    font-weight: bold;
+}

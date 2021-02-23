@@ -1,15 +1,5 @@
-.add-ingredient {
-    &-modal {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgb(253, 251, 247);
-        z-index: 1000;
-        height: 75%;
-        width: 60%;
-    }
-    
+.edit-ingredient{
+
     &-modal-overlay {
         position: fixed;
         top: 0;
@@ -19,19 +9,19 @@
         background: rgba(0,0,0,0.7);
         z-index: 999;
     }
-
-    &-form{
-        justify-self: stretch;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 100%;
-        justify-content: stretch;
-        border: 1px solid rgba(56, 85, 144, 0.350);
-        align-self: stretch;
+    
+    &-modal {
+        position: fixed;
+        top: 33.5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(253, 251, 247);
+        z-index: 1000;
+        height: 50%;
+        width: 50%;
     }
     
-    &-form-wrapper {
+    &-formBox {
         position: relative;
         width: 100%;
         height: 100%;
@@ -42,62 +32,96 @@
         padding: 40px; 
         transition: 0.5s;
     }
-    
+
+    &-form-title{
+        text-align: center;
+        padding: 1rem 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    &-card{
+        justify-self: stretch;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: stretch;
+        border: 1px solid rgba(56, 85, 144, 0.350);
+        align-self: stretch;
+    }
+
+    &-card-img-top{
+        padding: 0.1rem;
+        width: 35%;
+        height: 35%;
+        object-fit: scale-down;
+        top: calc(.25rem - 1px);
+        bottom: calc(.25rem - 1px);
+        align-self: center;
+        justify-self: stretch;
+        position: relative;
+    }
+
+    &-card-body{
+        display: flex;
+        padding: 0.5rem;
+        text-align: center;
+        flex-direction: row;
+    }
+
     &-button {
-        max-width: 100px;
+        position: relative;
+        height: 100%;
         cursor: pointer;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 1px;
         transition: 0.5s;
+        justify-self: center;
     }
-}
 
-.form-title{
-    text-align: center;
-    padding: 2rem 0
-}
+    &-form-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: rgb(253, 251, 247); 
+        transition: 0.5s;
+    }
 
-.wrapper{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: rgb(253, 251, 247); 
-    transition: 0.5s;
-}
+    &-form-row{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        padding: .5rem;
+        height: 3rem;
+    }
 
-.form-row{
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row;
-    padding: .5rem;
-    height: 3rem;
-}
-
-.form-row > label {
-    padding: .5em;
-    flex: 1;
-    font-size: 13px;
-    // text-align: right;
-}
-  
-.form-row > input {
-    flex: 6;
-    border-radius: 0.25em;
-    border: 1px solid gray
-}
-  
-.form-row > input,
-  .form-row > button {
-    padding: .5em;
-    border-radius: 0.25em;
-}
-
-.form-row > button {
-   background: gray;
-   color: white;
-   border: 0;
-}
+    &-form-row > label {
+        padding: .5em;
+        flex: 1;
+        font-size: 13px;
+        text-align: center;
+    }
+      
+    &-form-row > input {
+        flex: 6;
+        border-radius: 0.25em;
+        border: 1px solid gray
+    }
+      
+    &-form-row > input,
+    &-form-row > button {
+        padding: .5em;
+        border-radius: 0.25em;
+    }
+    
+    &-form-row > button {
+       background: gray;
+       color: white;
+       border: 0;
+    }
+};
  
 @media screen and (min-width: 768px) {
    	.form-row > input {
