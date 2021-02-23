@@ -6,10 +6,11 @@ import ReactDom from 'react-dom'
 const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser, addKitchen } ) => {
 
     const [newKitchenData, setNewKitchenData] = useState(null)
+    const [isDataFetched, setIsDataFetched] = useState(false)
 
     if (!open) return null;
 
-    if (localStorage) {
+    if (localStorage && !isDataFetched) {
         const token = localStorage.getItem("token")
         fetch(`http://localhost:3000/kitchenuser`, {
             headers: {
@@ -19,6 +20,7 @@ const AddKitchenModal = ( {open, onClose, setKitchenUser, kitchenUser, addKitche
         .then(r => r.json())
         .then( data => {
             setKitchenUser(data)
+            setIsDataFetched(true)
         })
     }
 

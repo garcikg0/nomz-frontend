@@ -15,8 +15,12 @@ const HomeMenu = ({ userKitchens, setUserKitchens, kitchenRendered, setKitchenRe
 
     // Adding a Kitchen
     const addKitchen = (newKitchen) => {
-        let newArr = [...userKitchens, newKitchen]
-        setUserKitchens(newArr)
+        if(userKitchens === null){
+            setUserKitchens([newKitchen])
+        } else {
+            let newArr = [...userKitchens, newKitchen]
+            setUserKitchens(newArr)
+        }
     }
     
     // Deleting a Kitchen

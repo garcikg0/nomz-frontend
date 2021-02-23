@@ -44,7 +44,23 @@ const App = () => {
         }
       })
     }
-  }, [kitchenRendered, ingredientsOfKitchenRendered]);
+  }, []);
+
+  useEffect(() => { //componentDidMount User record with it's respective Kitchens, Ingredients, and Recipes 
+  if (localStorage.token) {
+    fetch(`http://localhost:3000/autologin`, {
+      headers: {
+        "Authorization" : `Bearer ${localStorage.token}`
+      }
+    })
+    .then(r => r.json())
+    .then(data => { // data is User with Kitchens, and their Kitchens with Recipes and Ingredients
+      if (!data.error){
+        handleLogin(data)
+      }
+    })
+  }
+}, [kitchenRendered, ingredientsOfKitchenRendered]);
 
   const handleSignup = e => { //Creating new User with SignUp Modal
     e.preventDefault()
