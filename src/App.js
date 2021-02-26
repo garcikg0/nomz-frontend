@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, withRouter, useHistory } from 'react-router-do
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import HomeMenu from './components/HomeMenu/HomeMenu';
-import RecipeSearch from './components/RecipeSearch/RecipeSearch';
+import SearchResult from './components/SearchResultPage/SearchResultPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import KitchenPage from './components/KitchenPage/KitchenPage';
 
@@ -153,7 +153,7 @@ const App = () => {
       </Route>
       <Route path="/recipesearch" exact>
         { currentUser ? 
-        <RecipeSearch /> :
+        <SearchResult /> :
         <Redirect to='/' />
         }
       </Route>
