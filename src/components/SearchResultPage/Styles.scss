@@ -29,7 +29,7 @@
         padding: 0 1.6rem;
         border-radius: .7rem;
         appearance: none;
-        transition: all .3s ease-in-out;
+        transition: all .3s ease-in;
         transition-property: width, border-radius;
         z-index: 1;
         position: relative;
@@ -45,7 +45,7 @@
         right: 0;
         width: 6rem;
         font-weight: bold;
-        background: #57bd84;
+        background: rgba(56, 143, 78, 0.4);
         border-radius: 0 .7rem .7rem 0;
         height: 100%;
         color: #2f2f2f;
@@ -53,11 +53,19 @@
         cursor: pointer;
     }
 
+    &-button:hover {
+        background-color: rgba(56, 143, 78, 0.7);
+        transition: 0.3s ease-in-out all;
+        color: white;
+        font-weight: bold;
+    }
+
     &-input:not(:placeholder-shown){
         border-radius: 0.7rem 0 0 0.7rem;
         width: calc(100% - 6rem);
             + button {
                 display: block;
+                transition: 0.3s ease-in-out all;
             }
     }
 
