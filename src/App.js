@@ -46,7 +46,7 @@ const App = () => {
     }
   }, []);
 
-  useEffect(() => { //componentDidMount User record with it's respective Kitchens, Ingredients, and Recipes 
+  useEffect(() => { //componentDidUpdate User record with it's respective Kitchens, Ingredients, and Recipes 
   if (localStorage.token) {
     fetch(`http://localhost:3000/autologin`, {
       headers: {
