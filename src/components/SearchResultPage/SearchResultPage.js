@@ -34,9 +34,20 @@ const SearchResultPage = () => {
             from: from,
             to: to,
             user_id: 1,
-            search_term: searchTerm
+            search_term: searchTerm,
+            results: []
         }
-        console.log(params)
+        fetch(`http://localhost:3000/recipesearch`, {
+            method: "POST",
+            methods: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(params)
+        })
+        .then (r => r.json())
+        .then ((response) => {
+            console.log(response)
+        })
     }
 
     return(
