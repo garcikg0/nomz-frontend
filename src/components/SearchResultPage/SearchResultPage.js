@@ -50,6 +50,8 @@ const SearchResultPage = () => {
         })
     }
 
+    //error is coming up
+
     return(
         <div className="search-result-container">
             <div className="search-bar-container">
