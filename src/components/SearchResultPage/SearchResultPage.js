@@ -22,7 +22,6 @@ const SearchResultPage = () => {
 
     const handleChange = e => {
         const value = e.target.value;
-        let temp = 
         setSearchTerm(createSearchTerm(value))
         createSearchTermKey(searchTerm)
     }
@@ -37,16 +36,19 @@ const SearchResultPage = () => {
             search_term: searchTerm,
             results: []
         }
+        console.log(params)
         fetch(`http://localhost:3000/recipesearch`, {
             method: "POST",
-            methods: {
-                "content-type": "application/json"
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(params)
         })
-        .then (r => r.json())
-        .then ((response) => {
-            console.log(response)
+        .then(r => r.json())
+        .then((response) => {
+            let res = response
+            console.log(res)
         })
     }
 
