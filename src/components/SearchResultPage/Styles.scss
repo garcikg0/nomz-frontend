@@ -4,6 +4,96 @@
         height: 100vh;
         z-index: 1;
     }
+
+    &-accordion {
+        &-container {
+            border: 0;
+            padding: 0 10rem;
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        &-item {
+            margin-top: 5px;
+            height: 10rem;
+            width: 100%;
+            border: 1px solid lightgray;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            grid-template-areas: 
+                "image . . status"
+                "image . . status"
+                "image title title title"
+                "image title title title"
+                "image title title title"
+                "image source source source"
+                "image source source source"
+                "image ingredbtn instructbtn savebtn"
+                "image ingredbtn instructbtn savebtn"
+                "image ingredbtn instructbtn savebtn";
+            align-content: stretch;
+        }
+
+        &-image {
+            grid-area: image;
+            padding: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            object-fit: scale-down;
+            height: 100%;
+            width: 100%;
+        }
+
+        &-status {
+            grid-area: status;
+            padding: 0.2rem;
+            justify-content: center;
+            object-fit: scale-down;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-flow: column wrap;
+            align-content: center;
+            align-items: stretch;
+        }
+
+        &-status-icon {
+            height: 100%;
+            object-fit: scale-down;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-status-text {
+            justify-self: stretch;
+            align-self: center;
+            padding-left: 0.5rem;
+            color: rgb(50, 138, 50);
+        }
+
+        &-title {
+            grid-area: title;
+            padding: 0.5rem;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            font-size:large;
+            justify-items: center;
+        }
+
+        // &-source { ** TO CONTINUE **
+
+        // }
+    }
+}
+
+.fa-check-circle {
+    color: rgb(120, 189, 120);
 }
 
 .search-bar {
@@ -11,7 +101,7 @@
         width: 100%;
         padding: 1rem 10rem;
         display: flex;
-        position: absolute;
+        position: relative;
         align-items: center;
         justify-content: center;
     }

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Styles.scss';
 
 const SearchResultPage = () => {
-    const [tempSearchTerm, setTempSearchTerm] = useState(null)
     const [searchTerm, setSearchTerm] = useState(null)
     const [from, setFrom] = useState(0)
     const [to, setTo] = useState(100)
@@ -40,8 +39,7 @@ const SearchResultPage = () => {
         fetch(`http://localhost:3000/recipesearch`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(params)
         })
@@ -51,8 +49,6 @@ const SearchResultPage = () => {
             console.log(res)
         })
     }
-
-    //error is coming up
 
     return(
         <div className="search-result-container">
@@ -66,6 +62,33 @@ const SearchResultPage = () => {
                     />
                     <button className="search-bar-button">Go</button>
                 </form>
+            </div>
+            <div className="search-result-accordion-container">
+                <div className="search-result-accordion-item">
+                    <img className="search-result-accordion-image" src="https://www.edamam.com/web-img/dee/dee4fefbf3d4d11e68134ed503d5532f.jpg" alt="otherimage"/>
+                    <span className="search-result-accordion-status">
+                        <i class="fas fa-check-circle"></i>
+                        <p className="search-result-accordion-status-text">Available</p>
+                    </span>
+                    <span className="search-result-accordion-title">
+                        Honey Baked Chicken Recipe
+                    </span>
+                </div>
+                <div className="search-result-accordion-item">
+                    
+                </div>
+                <div className="search-result-accordion-item">
+                    
+                </div>
+                <div className="search-result-accordion-item">
+                    
+                </div>
+                <div className="search-result-accordion-item">
+                    
+                </div>
+                <div className="search-result-accordion-item">
+                    
+                </div>
             </div>
           </div>
     )
