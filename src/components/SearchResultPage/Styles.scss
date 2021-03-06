@@ -21,18 +21,17 @@
             margin-top: 5px;
             height: 10rem;
             width: 100%;
+            padding: 0.5rem;
             border: 1px solid lightgray;
+            border-radius: 1rem;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(10, 1fr);
+            grid-template-rows: repeat(7, 1fr);
             grid-template-areas: 
-                "image . . status"
-                "image . . status"
-                "image title title title"
-                "image title title title"
-                "image title title title"
-                "image source source source"
-                "image source source source"
+                "image title title status"
+                "image title title status"
+                "image source source ."
+                "image source source ."
                 "image ingredbtn instructbtn savebtn"
                 "image ingredbtn instructbtn savebtn"
                 "image ingredbtn instructbtn savebtn";
@@ -64,9 +63,6 @@
 
         &-status-icon {
             height: 100%;
-            object-fit: scale-down;
-            align-items: center;
-            justify-content: center;
         }
 
         &-status-text {
@@ -74,6 +70,8 @@
             align-self: center;
             padding-left: 0.5rem;
             color: rgb(50, 138, 50);
+            display: inline-flex;
+            text-align: center;
         }
 
         &-title {
@@ -82,18 +80,25 @@
             height: 100%;
             width: 100%;
             text-align: center;
-            font-size:large;
+            font-size: larger;
             justify-items: center;
         }
 
-        // &-source { ** TO CONTINUE **
-
-        // }
+        &-source {
+            grid-area: source;
+            padding: 0.5rem;
+            text-align: center;
+            justify-items: center;
+            color: darkslategray;
+            height: 100%;
+            width: 100%;
+        }
     }
 }
 
 .fa-check-circle {
     color: rgb(120, 189, 120);
+    object-fit: scale-down;
 }
 
 .search-bar {
