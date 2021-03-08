@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import './Styles.scss';
 
 const SearchResultPage = () => {
@@ -64,20 +65,7 @@ const SearchResultPage = () => {
                 </form>
             </div>
             <div className="search-result-accordion-container">
-                <div className="search-result-accordion-item">
-                    <img className="search-result-accordion-image" src="https://www.edamam.com/web-img/dee/dee4fefbf3d4d11e68134ed503d5532f.jpg" alt="otherimage"/>
-                    <span className="search-result-accordion-status">
-                        <i class="fas fa-check-circle">
-                            <h4 className="search-result-accordion-status-text">Available</h4>
-                        </i>
-                    </span>
-                    <span className="search-result-accordion-title">
-                        Honey Baked Chicken Recipe
-                    </span>
-                    <span className="search-result-accordion-source">
-                        From Serious Eats
-                    </span>
-                </div>
+                <SearchResultCard />
                 <div className="search-result-accordion-item">
                     
                 </div>

@@ -86,12 +86,58 @@
 
         &-source {
             grid-area: source;
-            padding: 0.5rem;
+            padding: 0.5rem;;
             text-align: center;
             justify-items: center;
             color: darkslategray;
             height: 100%;
             width: 100%;
+        }
+
+        &-ingred-btn{
+            grid-area: ingredbtn;
+            padding: 1px;
+            width: 80%;
+            align-items: center;
+            outline: none;
+            // border: none;
+            height: 85%;
+        }
+
+        &-instruct-btn{
+            grid-area: instructbtn;
+            width: 80%;
+            align-items: center;
+            outline: none;
+            // border: none;
+            height: 85%;
+        }
+
+        &-save-btn{
+            grid-area: savebtn;
+            width: 80%;
+            align-items: center;
+            outline: none;
+            // border: none;
+            height: 85%;
+        }
+
+        &-ingred-content {
+            padding: 0.5rem;
+            opacity: 0;
+            transition: all .5s;
+            height: 0;
+            margin: 0;
+            margin-top: -10px;
+            border: 1px solid lightgray;
+            border-top: 0;
+        }
+
+        &-ingred-content.active {
+            height: auto;
+            width: 100%;
+            opacity: 1;
+            padding: 0.5rem;
         }
     }
 }

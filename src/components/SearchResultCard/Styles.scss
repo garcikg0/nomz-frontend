@@ -1,0 +1,125 @@
+.accordion {
+    &-item {
+        margin-top: 5px;
+        height: 10rem;
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid lightgray;
+        border-radius: 1rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        grid-template-areas: 
+            "image title title status"
+            "image title title status"
+            "image source source ."
+            "image source source ."
+            "image ingredbtn instructbtn savebtn"
+            "image ingredbtn instructbtn savebtn"
+            "image ingredbtn instructbtn savebtn";
+        align-content: stretch;
+    }
+
+    &-image {
+        grid-area: image;
+        padding: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        object-fit: scale-down;
+        height: 100%;
+        width: 100%;
+    }
+
+    &-status {
+        grid-area: status;
+        padding: 0.2rem;
+        justify-content: center;
+        object-fit: scale-down;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        align-content: center;
+        align-items: stretch;
+    }
+
+    &-status-icon {
+        height: 100%;
+    }
+
+    &-status-text {
+        justify-self: stretch;
+        align-self: center;
+        padding-left: 0.5rem;
+        color: rgb(50, 138, 50);
+        display: inline-flex;
+        text-align: center;
+    }
+
+    &-title {
+        grid-area: title;
+        padding: 0.5rem;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        font-size: larger;
+        justify-items: center;
+    }
+
+    &-source {
+        grid-area: source;
+        padding: 0.5rem;;
+        text-align: center;
+        justify-items: center;
+        color: darkslategray;
+        height: 100%;
+        width: 100%;
+    }
+
+    &-ingred-btn{
+        grid-area: ingredbtn;
+        padding: 1px;
+        width: 80%;
+        align-items: center;
+        outline: none;
+        // border: none;
+        height: 85%;
+    }
+
+    &-instruct-btn{
+        grid-area: instructbtn;
+        width: 80%;
+        align-items: center;
+        outline: none;
+        // border: none;
+        height: 85%;
+    }
+
+    &-save-btn{
+        grid-area: savebtn;
+        width: 80%;
+        align-items: center;
+        outline: none;
+        // border: none;
+        height: 85%;
+    }
+
+    &-ingred-content {
+        padding: 0 0.5rem;
+        opacity: 0;
+        transition: all .5s;
+        height: 0;
+        margin: 0;
+        margin-top: -10px;
+        border: 1px solid lightgray;
+        border-top: 0;
+    }
+
+    &-ingred-content.active {
+        height: auto;
+        width: 100%;
+        opacity: 1;
+        padding: 0.5rem;
+    }
+    
+}
