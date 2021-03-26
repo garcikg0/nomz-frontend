@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Styles.scss';
 
-const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {
+const KitchenNavbar = ( {kitchenRendered, userKitchens, setKitchenRendered, setIngredientsOfKitchenRendered} ) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 

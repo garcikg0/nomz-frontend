@@ -62,7 +62,7 @@ const App = () => {
   }
 }, [kitchenRendered, ingredientsOfKitchenRendered]);
 
-  const handleSignup = e => { //Creating new User with SignUp Modal
+  const handleSignup = e => { //Creating new User with SignUp Modal and auto login 
     e.preventDefault()
     fetch("http://localhost:3000/users", {
         method: "POST",
@@ -79,7 +79,7 @@ const App = () => {
     })  
   };
 
-  const handleLoginSubmit = e => { //User logging in if no token
+  const handleLoginSubmit = e => { //User logging in setting token
     e.preventDefault();
     fetch("http://localhost:3000/login", {
         method: "POST",

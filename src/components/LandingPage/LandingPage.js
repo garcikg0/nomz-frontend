@@ -63,7 +63,7 @@ const LandingPage = ( {handleSignup, handleLoginSubmit, isLoginOpen, setIsLoginO
                 <div className="card-title">Your Recipe Library</div>
                   <hr></hr>
                   <div className="card-text">
-                    <p>Your favorite recipes - regardless of web address - stored in one place</p>
+                    <p>Your favorite recipes stored in one place</p>
                     <br></br>
                     <p>Spend less time seeing if you have all the ingredients needed for a recipe</p>
                     <br></br>
