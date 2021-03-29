@@ -97,8 +97,8 @@ const App = () => {
   };
 
   const handleLogin = user => { //login helper to set states
-    setIsLoginOpen(false)
     setUserKitchens(user.kitchens)
+    setIsLoginOpen(false)
     setCurrentUser(user)
   };
 
@@ -120,7 +120,6 @@ const App = () => {
     currentUser={currentUser} 
     handleLogout={handleLogout}
     userKitchens={userKitchens}
-    kitchenRendered={kitchenRendered}
     setKitchenRendered={setKitchenRendered}
     setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
     />

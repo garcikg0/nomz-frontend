@@ -28,7 +28,7 @@ const LoginModal = ( {open, onClose, loginData, setLoginData, handleLoginSubmit}
                         <input className="login-button" type="submit" value="Login"></input>
                     </form>
                 </div>
-                <button className="login-button" onClick={onClose}>Close Modal</button>
+                <button className="login-button" onClick={onClose}>Close</button>
             </div> 
         </div>
         </>,
