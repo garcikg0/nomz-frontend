@@ -36,7 +36,6 @@ const SearchResultPage = () => {
             search_term: searchTerm,
             results: []
         }
-        console.log(params)
         fetch(`http://localhost:3000/recipesearch`, {
             method: "POST",
             headers: {
@@ -47,6 +46,7 @@ const SearchResultPage = () => {
         .then(r => r.json())
         .then((response) => {
             let res = response
+            // debugger
             console.log(res)
         })
     }
