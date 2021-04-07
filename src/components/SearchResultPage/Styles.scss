@@ -12,7 +12,7 @@
             width: 100%;
             display: flex;
             flex-flow: row wrap;
-            justify-content: space-between;
+            align-content: flex-start;
             align-items: center;
             height: 100%;
         }
@@ -214,4 +214,27 @@
     //     outline: none;
     //     box-shadow: 2px 3px 20px 1px rgba(0, 0, 0, 0.3);
     // }
+}
+
+.pagination {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagination a {
+    margin-top: 1rem;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+  
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
 }

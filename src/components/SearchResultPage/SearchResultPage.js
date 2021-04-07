@@ -66,23 +66,19 @@ const SearchResultPage = () => {
             </div>
             <div className="search-result-accordion-container">
                 <SearchResultCard />
-                <div className="search-result-accordion-item">
-                    
+                <SearchResultCard />
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a class="active" href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">&raquo;</a>
                 </div>
-                <div className="search-result-accordion-item">
-                    
-                </div>
-                <div className="search-result-accordion-item">
-                    
-                </div>
-                <div className="search-result-accordion-item">
-                    
-                </div>
-                <div className="search-result-accordion-item">
-                    
-                </div>
+                
             </div>
-          </div>
+        </div>
     )
 };
 
