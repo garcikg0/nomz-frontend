@@ -7,6 +7,7 @@ const SearchResultPage = () => {
     const [from, setFrom] = useState(0)
     const [to, setTo] = useState(100)
     const [searchTermKey, setSearchTermKey] = useState(null)
+    const [searchResults, setSearchResults] = useState([])
 
     const createSearchTerm = (str) => {
         let removeExtraSpace = str.toLowerCase().trim().split(/ +/).join(' ');
@@ -26,8 +27,21 @@ const SearchResultPage = () => {
         createSearchTermKey(searchTerm)
     }
 
+    let renderResults = searchResults.map((resultObj) => {
+        return(
+            <SearchResultCard
+                key={resultObj.id}
+                recipe={resultObj}
+            />
+        )
+    }
+)
+
     const handleSubmit = (evt) => {
         evt.preventDefault()
+        setSearchResults([])
+        setFrom(0)
+        setTo(100)
         let params = {
             search_term_key: searchTermKey,
             from: from,
@@ -44,12 +58,12 @@ const SearchResultPage = () => {
             body: JSON.stringify(params)
         })
         .then(r => r.json())
-        .then((response) => {
-            let res = response
-            // debugger
-            console.log(res)
+        .then(data => {
+            let resResults = data.results
+            setSearchResults(resResults)
         })
     }
+
 
     return(
         <div className="search-result-container">
@@ -65,8 +79,7 @@ const SearchResultPage = () => {
                 </form>
             </div>
             <div className="search-result-accordion-container">
-                <SearchResultCard />
-                <SearchResultCard />
+                {renderResults}
                 <div class="pagination">
                     <a href="#">&laquo;</a>
                     <a class="active" href="#">1</a>

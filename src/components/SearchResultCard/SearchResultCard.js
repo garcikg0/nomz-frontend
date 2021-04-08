@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import './Styles.scss';
 
-const SearchResultCard = () => {
+const SearchResultCard = (recipe) => {
+    const [resultData, setResultData] = useState({
+        title: recipe.recipe.name,
+        image: recipe.recipe.image,
+        source: recipe.recipe.source
+    })
+    
     const [showIngred, setShowIngred] = useState(false);
+
 
     const activeStatus = showIngred ? 'active' : '';
 
@@ -14,17 +21,17 @@ const SearchResultCard = () => {
     return (
         <>
         <div className="accordion-item">
-            <img className="search-result-accordion-image" src="https://www.edamam.com/web-img/dee/dee4fefbf3d4d11e68134ed503d5532f.jpg" alt="otherimage"/>
+            <img className="search-result-accordion-image" src={resultData.image} alt="otherimage"/>
             <span className="accordion-status">
                 <i class="fas fa-check-circle">
                     <h4 className="accordion-status-text">Available</h4>
                 </i>
             </span>
             <span className="accordion-title">
-                Honey Baked Chicken Recipe
+                {resultData.title}
             </span>
             <span className="accordion-source">
-                From Serious Eats
+                From {resultData.source}
             </span>
             <button className="accordion-ingred-btn" onClick={handleIngredClick}>Ingredients</button>
             <button className="accordion-instruct-btn">Instructions</button>
