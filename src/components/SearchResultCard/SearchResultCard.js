@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Styles.scss';
 
-const SearchResultCard = (recipe) => {
+const SearchResultCard = ( {recipe} ) => {
     const [resultData, setResultData] = useState({
-        title: recipe.recipe.name,
-        image: recipe.recipe.image,
-        source: recipe.recipe.source
+        title: recipe.name,
+        image: recipe.image,
+        source: recipe.source
     })
     
     const [showIngred, setShowIngred] = useState(false);

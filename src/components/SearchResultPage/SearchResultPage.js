@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SearchResultCard from '../SearchResultCard/SearchResultCard'
+import SearchResultPagination from '../SearchResultPagination/SearchResultPagination';
 import './Styles.scss';
 
 const SearchResultPage = () => {
@@ -8,6 +9,8 @@ const SearchResultPage = () => {
     const [to, setTo] = useState(100)
     const [searchTermKey, setSearchTermKey] = useState(null)
     const [searchResults, setSearchResults] = useState([])
+    const [searchResultId, setSearchResultId] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1)
 
     const createSearchTerm = (str) => {
         let removeExtraSpace = str.toLowerCase().trim().split(/ +/).join(' ');
@@ -33,9 +36,9 @@ const SearchResultPage = () => {
                 key={resultObj.id}
                 recipe={resultObj}
             />
-        )
-    }
-)
+            )
+        }
+    )
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
@@ -59,8 +62,8 @@ const SearchResultPage = () => {
         })
         .then(r => r.json())
         .then(data => {
-            let resResults = data.results
-            setSearchResults(resResults)
+            setSearchResultId(data.id)
+            setSearchResults(data.results)
         })
     }
 
@@ -80,16 +83,10 @@ const SearchResultPage = () => {
             </div>
             <div className="search-result-accordion-container">
                 {renderResults}
-                <div class="pagination">
-                    <a href="#">&laquo;</a>
-                    <a class="active" href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">&raquo;</a>
-                </div>
-                
+                <SearchResultPagination 
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                />
             </div>
         </div>
     )
