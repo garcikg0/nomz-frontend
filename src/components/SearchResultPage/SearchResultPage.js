@@ -11,6 +11,7 @@ const SearchResultPage = () => {
     const [searchResults, setSearchResults] = useState([])
     const [searchResultId, setSearchResultId] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
+    const [pagFrom, setPagFrom] = useState(0)
 
     const createSearchTerm = (str) => {
         let removeExtraSpace = str.toLowerCase().trim().split(/ +/).join(' ');
@@ -29,16 +30,6 @@ const SearchResultPage = () => {
         setSearchTerm(createSearchTerm(value))
         createSearchTermKey(searchTerm)
     }
-
-    let renderResults = searchResults.map((resultObj) => {
-        return(
-            <SearchResultCard
-                key={resultObj.id}
-                recipe={resultObj}
-            />
-            )
-        }
-    )
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
@@ -67,6 +58,39 @@ const SearchResultPage = () => {
         })
     }
 
+    const handleMoreResults = page =>{
+        // console.log(page)
+        let tempPagFrom = (page - 1) * 20
+        setPagFrom(tempPagFrom)
+        let params = {
+            id: searchResultId,
+            user_id: 1,
+            pagFrom: tempPagFrom
+        }
+        fetch(`http://localhost:3000/sendresults`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+        })
+        .then(r => r.json())
+        .then(data => {
+            setSearchResultId(data.id)
+            setSearchResults([])
+            setSearchResults(data.results)
+        })
+    }
+
+    let renderResults = searchResults.map((resultObj) => {
+        return(
+            <SearchResultCard
+                key={resultObj.id}
+                recipe={resultObj}
+            />
+            )
+        }
+    )
 
     return(
         <div className="search-result-container">
@@ -86,6 +110,7 @@ const SearchResultPage = () => {
                 <SearchResultPagination 
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                handleMoreResults={handleMoreResults}
                 />
             </div>
         </div>

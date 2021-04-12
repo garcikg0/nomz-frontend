@@ -16,7 +16,7 @@ const range = (from, to, step = 1) => {
     return range;
 }
 
-const SearchResultPagination = ({ currentPage, setCurrentPage }) => {
+const SearchResultPagination = ({ currentPage, setCurrentPage , handleMoreResults}) => {
     const [pageNeighbors, setPageNeighbors] = useState(1)
     const [totalPages, setTotalPages] = useState(10)
 
@@ -65,6 +65,7 @@ const SearchResultPagination = ({ currentPage, setCurrentPage }) => {
     let handleClick = page => evt => {
         evt.preventDefault();
         gotoPage(page);
+        handleMoreResults(page)
     }
 
     let handleMoveLeft = evt => {

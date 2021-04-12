@@ -31,7 +31,7 @@ const SearchResultCard = ( {recipe} ) => {
                 {resultData.title}
             </span>
             <span className="accordion-source">
-                From {resultData.source}
+                {resultData.source}
             </span>
             <button className="accordion-ingred-btn" onClick={handleIngredClick}>Ingredients</button>
             <button className="accordion-instruct-btn">Instructions</button>
