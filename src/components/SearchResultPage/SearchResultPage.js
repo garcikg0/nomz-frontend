@@ -12,6 +12,20 @@ const SearchResultPage = () => {
     const [searchResultId, setSearchResultId] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
     const [pagFrom, setPagFrom] = useState(0)
+    const [searchTermUser, setSearchTermUser] = useState(null)
+
+    if (localStorage && !searchTermUser) {
+        const token = localStorage.getItem("token")
+        fetch(`http://localhost:3000/kitchenuser`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(r => r.json())
+        .then( data => {
+            setSearchTermUser(data)
+        })
+    }
 
     const createSearchTerm = (str) => {
         let removeExtraSpace = str.toLowerCase().trim().split(/ +/).join(' ');
@@ -35,12 +49,14 @@ const SearchResultPage = () => {
         evt.preventDefault()
         setSearchResults([])
         setFrom(0)
+        setPagFrom(0)
         setTo(100)
         let params = {
             search_term_key: searchTermKey,
+            pagFrom: 0,
             from: from,
             to: to,
-            user_id: 1,
+            user_id: searchTermUser,
             search_term: searchTerm,
             results: []
         }
@@ -59,12 +75,38 @@ const SearchResultPage = () => {
     }
 
     const handleMoreResults = page =>{
-        // console.log(page)
         let tempPagFrom = (page - 1) * 20
+    // if tempPagFrom > 99, then send updated to and from similar to handleSubmit.    
+        if (tempPagFrom > 99) {
+            setPagFrom(tempPagFrom)
+            let params = {
+                search_term_key: searchTermKey,
+                pagFrom: tempPagFrom,
+                from: from + 100,
+                to: to + 100,
+                user_id: searchTermUser,
+                search_term: searchTerm,
+                results: []
+            }
+            fetch(`http://localhost:3000/recipesearch`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+            })
+            .then(r => r.json())
+            .then(data => {
+                setSearchResultId(data.id)
+                setSearchResults([])
+                setSearchResults(data.results)
+            })
+        }
+    // else continue 
         setPagFrom(tempPagFrom)
         let params = {
             id: searchResultId,
-            user_id: 1,
+            user_id: searchTermUser,
             pagFrom: tempPagFrom
         }
         fetch(`http://localhost:3000/sendresults`, {

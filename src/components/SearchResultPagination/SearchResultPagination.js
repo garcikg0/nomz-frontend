@@ -18,7 +18,7 @@ const range = (from, to, step = 1) => {
 
 const SearchResultPagination = ({ currentPage, setCurrentPage , handleMoreResults}) => {
     const [pageNeighbors, setPageNeighbors] = useState(1)
-    const [totalPages, setTotalPages] = useState(10)
+    const [totalPages, setTotalPages] = useState(5)
 
     const fetchPageNumbers = () => {
         const totalNumbers = (pageNeighbors * 2) + 2;
@@ -84,7 +84,7 @@ const SearchResultPagination = ({ currentPage, setCurrentPage , handleMoreResult
                 { pages.map((page, index) => {
                     if (page === LEFT_PAGE) return (
                         <li key={index} className="page-item">
-                            <a className="page-link" href="#" onClick={handleMoveLeft}>
+                            <a className="page-link" onClick={handleMoveLeft}>
                                 <span>&laquo;</span>
                                 <span className="sr-only">Previous</span>
                             </a>
@@ -93,7 +93,7 @@ const SearchResultPagination = ({ currentPage, setCurrentPage , handleMoreResult
 
                     if (page === RIGHT_PAGE) return (
                         <li key={index} className="page-item">
-                            <a className="page-link" href="#" onClick={handleMoveRight}>
+                            <a className="page-link" onClick={handleMoveRight}>
                                 <span>&raquo;</span>
                                 <span className="sr-only">Next</span>
                             </a>
@@ -102,7 +102,7 @@ const SearchResultPagination = ({ currentPage, setCurrentPage , handleMoreResult
 
                     return (
                         <li key={index} className={`page-item${ currentPage === page ? ' active' : ''}`}>
-                            <a className="page-link" href="#" onClick={ handleClick(page)}>{ page }</a>
+                            <a className="page-link" onClick={ handleClick(page)}>{ page }</a>
                         </li>
                     );
 
