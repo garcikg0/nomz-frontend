@@ -3,7 +3,7 @@ import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import SearchResultPagination from '../SearchResultPagination/SearchResultPagination';
 import './Styles.scss';
 
-const SearchResultPage = () => {
+const SearchResultPage = ( {kitchenRendered} ) => {
     const [searchTerm, setSearchTerm] = useState(null)
     const [from, setFrom] = useState(0)
     const [to, setTo] = useState(100)
@@ -129,6 +129,7 @@ const SearchResultPage = () => {
             <SearchResultCard
                 key={resultObj.id}
                 recipe={resultObj}
+                kitchenIngreds={kitchenRendered.ingredients}
             />
             )
         }

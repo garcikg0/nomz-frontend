@@ -152,7 +152,9 @@ const App = () => {
       </Route>
       <Route path="/recipesearch" exact>
         { currentUser ? 
-        <SearchResultPage /> :
+        <SearchResultPage 
+        kitchenRendered={kitchenRendered}
+        /> :
         <Redirect to='/' />
         }
       </Route>
