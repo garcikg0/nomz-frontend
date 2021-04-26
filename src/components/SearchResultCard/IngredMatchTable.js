@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Styles.scss';
 
 const IngredMatchTable = ( {result, kitchenIngreds} ) => {
     const [resultIngred, setResultIngred] = useState({
         text: result.text,
-        foodCategory: result.foodCategory,
-        ingredMatch: [],
-        ingredBlock: []
-    })
+        foodCategory: result.foodCategory
+    });
+    const [ingredMatch, setIngredMatch] = useState([]);
+    const [ingredBlock, setIngredBlock] = useState([]);
 
     const buildPatternTable = (word) => {
         const patternTable = [0];
@@ -56,12 +56,39 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         return -1;
     }
 
-    // let ingredMatch = () => {
-    //     let matchArr = []
-    //     for(let i = 0; i < kitchenIngreds.length; i++){ 
-
+    const printState = e => {
+        e.preventDefault()
+        console.log(ingredMatch)
+    }
+    
+    // const ingredMatchFunction = e => {
+    //     // e.preventDefault()
+    //     const matches = new Map();
+    //     for(let i = 0; i < kitchenIngreds.length; i++) {
+    //         let word = kitchenIngreds[i].name.toLowerCase()
+    //         let string = resultIngred.text.toLowerCase()
+    //         // debugger
+    //         if (stringSearchKMP(string, word) > 0){
+    //             matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
+    //         }
     //     }
+    //     console.log(matches)
     // }
+    
+    useEffect(() => {
+        if(!ingredMatch && !ingredBlock){
+            const matches = new Map();
+            for(let i = 0; i < kitchenIngreds.length; i++) {
+                let word = kitchenIngreds[i].name.toLowerCase()
+                let string = resultIngred.text.toLowerCase()
+                // debugger
+                if (stringSearchKMP(string, word) > 0){
+                    matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
+                }
+            }
+        setIngredMatch(matches)
+        }
+    }, [])
 
     return (
         <>
@@ -69,7 +96,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
             <td class="recipeingredient" colspan="2" rowspan="2">{result.text}</td>
             <td class="kitcheningredient" colspan="2">Test Kitchen Ingredient</td>
             <td class="actions">
-                <a class="edit-item" title="Edit">Edit</a>
+                <button class="edit-item" title="Edit" onClick={printState}>Test</button>
                 <a class="remove-item" title="Remove">Remove</a>
             </td>
         </tr>

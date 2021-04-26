@@ -20,6 +20,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
     const handleIngredClick = e => {
         e.preventDefault()
         setShowIngred(!showIngred)
+        console.log(kitchenIngreds)
     }
 
     // const ingredMatch = () => {
@@ -44,7 +45,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
             <IngredMatchTable 
                 key={resultIngredObj.id}
                 result={resultIngredObj}
-                kitchenIngred={kitchenIngreds}
+                kitchenIngreds={kitchenIngreds}
             />
         )
     })
