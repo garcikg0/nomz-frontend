@@ -6,8 +6,9 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         text: result.text,
         foodCategory: result.foodCategory
     });
-    const [ingredMatch, setIngredMatch] = useState([]);
-    const [ingredBlock, setIngredBlock] = useState([]);
+    const [prelimIngredMatch, setPrelimIngredMatch] = useState([]);
+    const [ingredMatch, setIngredMatch] = useState(null);
+    const [ingredBlock, setIngredBlock] = useState(null);
 
     const buildPatternTable = (word) => {
         const patternTable = [0];
@@ -55,11 +56,6 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         }
         return -1;
     }
-
-    const printState = e => {
-        e.preventDefault()
-        console.log(ingredMatch)
-    }
     
     // const ingredMatchFunction = e => {
     //     // e.preventDefault()
@@ -86,43 +82,55 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
                     matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
                 }
             }
-        setIngredMatch(matches)
+        setPrelimIngredMatch(matches)
         }
     }, [])
 
-    return (
-        <>
-        <tr>
-            <td class="recipeingredient" colspan="2" rowspan="2">{result.text}</td>
-            <td class="kitcheningredient" colspan="2">Test Kitchen Ingredient</td>
+    const printState = e => {
+        e.preventDefault()
+        debugger
+        console.log(prelimIngredMatch)
+        
+    }
+
+    const renderKitchenIngreds = prelimIngredMatch.forEach((ingredObj) => {
+        return(
+            <>
+            <td class="kitcheningredient" colspan="2">{ingredObj}</td>
             <td class="actions">
                 <button class="edit-item" title="Edit" onClick={printState}>Test</button>
                 <a class="remove-item" title="Remove">Remove</a>
             </td>
-        </tr>
+            </>
+        )
+    })
+
+    const renderNoMatch = (result) => {
+        return(
+            <>
+            <tr>
+                <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
+                <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
+                <td class="actions">
+                    <button class="edit-item" title="Edit" onClick={printState}>Test</button>
+                    <a class="remove-item" title="Remove">Remove</a>
+                </td>
+            </tr>
+            </>
+        )
+    }
+
+    return (
         <tr>
-            <td class="kitcheningredient" colspan="2">Tetst Kitchen Ingredient</td>
-                <td class="actions">
-                    <a class="edit-item" title="Edit">Edit</a>
-                    <a class="remove-item" title="Remove">Remove</a>
-                </td>
-            </tr>
-            <tr>
-                {/* <td class="recipeingredient" colspan="2" rowspan="2">Test Recipe Ingredient</td>
-                <td class="kitcheningredient" colspan="2">Test Kitchen Ingredient</td>
-                <td class="actions">
-                    <a class="edit-item" title="Edit">Edit</a>
-                    <a class="remove-item" title="Remove">Remove</a>
-                </td>
-            </tr>
-            <tr>
-            <td class="kitcheningredient" colspan="2">Tetst Kitchen Ingredient</td>
-                <td class="actions">
-                    <a class="edit-item" title="Edit">Edit</a>
-                    <a class="remove-item" title="Remove">Remove</a>
-                </td> */}
-        </tr>
-        </>
+            <td class="recipeingredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
+            
+        {prelimIngredMatch.size > 0 ?  
+            
+            {renderKitchenIngreds}
+            :
+            {renderNoMatch(resultIngred)}
+            }
+        <tr>
     )
 }
 
