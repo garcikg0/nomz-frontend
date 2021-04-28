@@ -56,22 +56,9 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       }
     return -1;
   }
-   
-  // const ingredMatchFunction = e => {
-  //     // e.preventDefault()
-  //     const matches = new Map();
-  //     for(let i = 0; i < kitchenIngreds.length; i++) {
-  //         let word = kitchenIngreds[i].name.toLowerCase()
-  //         let string = resultIngred.text.toLowerCase()
-  //         // debugger
-  //         if (stringSearchKMP(string, word) > 0){
-  //             matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
-  //         }
-  //     }
-  //     console.log(matches)
-  // }
   
   useEffect(() => {
+    debugger
       if(!ingredMatch && !ingredBlock){
           const matches = new Map();
           for(let i = 0; i < kitchenIngreds.length; i++) {
@@ -83,53 +70,39 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
               }
           }
       setPrelimIngredMatch(matches)
+      debugger
       }
   }, [])
 
   const printState = e => {
-      e.preventDefault()
-      // debugger
-      console.log(prelimIngredMatch)
-      
-  }
-
-  const renderKitchenIngreds = prelimIngredMatch.map((ingredObj) => {
+    e.preventDefault()
     // debugger
-      return(
-          <>
-          <td class="recipeingredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
-          <td class="kitcheningredient" colspan="2">{ingredObj}</td>
-          <td class="actions">
-              <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-              <a class="remove-item" title="Remove">Remove</a>
-          </td>
-          </>
-      )
-  })
-
-  const renderNoMatch = (result) => {
-      return(
-          <>
-          <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
-          <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
-          <td class="actions">
-              <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-              <a class="remove-item" title="Remove">Remove</a>
-          </td>
-          </>
-      )
+    console.log(prelimIngredMatch)
   }
-
-  return (
+  
+  if (prelimIngredMatch.size < 1) {
+    return (
       <tr>
-        {renderNoMatch(result)}
-        {/* {prelimIngredMatch ? 
-          {renderKitchenIngreds}
-          : 
-          renderNoMatch(resultIngred)
-        } */}
+        <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
+        <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
+        <td class="actions">
+          <button class="edit-item" title="Edit" onClick={printState}>Test</button>
+          <a class="remove-item" title="Remove">Remove</a>
+        </td>
       </tr>
-  )
+    );
+  } else {
+      return(
+        <>
+        <td class="recipeIngredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
+        <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
+        <td class="actions">
+          <button class="edit-item" title="Edit" onClick={printState}>Test</button>
+          <a class="remove-item" title="Remove">Remove</a>
+        </td>
+        </>
+      )
+    }
 
 }
 
