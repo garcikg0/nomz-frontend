@@ -91,15 +91,27 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         </td>
       </tr>
     );
-  } else {
+  } else if (prelimIngredMatch.size > 1) {
+    let renderIngred = prelimIngredMatch.map((ingredObj) => {
       return(
         <>
-        <td class="recipeIngredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
-        <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
+        <td class="recipeingredient" colspan="2">{ingredObj}</td>
         <td class="actions">
           <button class="edit-item" title="Edit" onClick={printState}>Test</button>
           <a class="remove-item" title="Remove">Remove</a>
-        </td>
+        </td>  
+        </>
+      )
+    })
+      return(
+        <>
+        <td class="recipeIngredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
+        {renderIngred}
+        {/* <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
+        <td class="actions">
+          <button class="edit-item" title="Edit" onClick={printState}>Test</button>
+          <a class="remove-item" title="Remove">Remove</a>
+        </td> */}
         </>
       )
     }
