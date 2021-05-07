@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
 const IngredMatchTable = ( {result, kitchenIngreds} ) => {
@@ -58,7 +59,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   }
   
   useEffect(() => {
-    debugger
+    // debugger
       if(!ingredMatch && !ingredBlock){
           const matches = new Map();
           for(let i = 0; i < kitchenIngreds.length; i++) {
@@ -70,7 +71,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
               }
           }
       setPrelimIngredMatch(matches)
-      debugger
+      // debugger
       }
   }, [])
 
@@ -79,20 +80,10 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
     // debugger
     console.log(prelimIngredMatch)
   }
-  
-  if (prelimIngredMatch.size < 1) {
-    return (
-      <tr>
-        <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
-        <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
-        <td class="actions">
-          <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-          <a class="remove-item" title="Remove">Remove</a>
-        </td>
-      </tr>
-    );
-  } else if (prelimIngredMatch.size > 1) {
-    let renderIngred = prelimIngredMatch.map((ingredObj) => {
+
+  const renderIngred = ( prelim ) => {
+    if (prelim.size > 1) {
+    let render = prelim.map((ingredObj) => {
       return(
         <>
         <td class="recipeingredient" colspan="2">{ingredObj}</td>
@@ -103,19 +94,37 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         </>
       )
     })
-      return(
-        <>
-        <td class="recipeIngredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
-        {renderIngred}
-        {/* <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
+    return render  
+  }
+  }
+  
+  if (prelimIngredMatch.size <= 0) {
+    return (
+      <tr>
+        <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
+        <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
         <td class="actions">
           <button class="edit-item" title="Edit" onClick={printState}>Test</button>
           <a class="remove-item" title="Remove">Remove</a>
-        </td> */}
+        </td>
+      </tr>
+    );
+  } else {
+      return(
+        <>
+        <td class="recipeIngredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
+        <IngredMatchCell
+        prelimIngredMatch={prelimIngredMatch}
+        />
         </>
+        // {renderIngred(prelimIngredMatch)}
+        // <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
+        // <td class="actions">
+        //   <button class="edit-item" title="Edit" onClick={printState}>Test</button>
+        //   <a class="remove-item" title="Remove">Remove</a>
+        // </td>
       )
     }
-
 }
 
 export default IngredMatchTable;
