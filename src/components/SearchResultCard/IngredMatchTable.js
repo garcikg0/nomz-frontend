@@ -10,6 +10,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   const [prelimIngredMatch, setPrelimIngredMatch] = useState([]);
   const [ingredMatch, setIngredMatch] = useState(null);
   const [ingredBlock, setIngredBlock] = useState(null);
+  const [matchRowspan, setMatchRowspan] = useState(null);
 
   const buildPatternTable = (word) => {
       const patternTable = [0];
@@ -71,6 +72,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
               }
           }
       setPrelimIngredMatch(matches)
+      setMatchRowspan(matches.size + 1)
       // debugger
       }
   }, [])
@@ -112,10 +114,12 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   } else {
       return(
         <>
-        <td class="recipeIngredient" colspan="2" rowspan="4">{result.text}</td>
+        
+        <td class="recipeIngredient" colspan="2" rowSpan={matchRowspan}>{result.text}</td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
         />
+  
         </>
         // {renderIngred(prelimIngredMatch)}
         // <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
