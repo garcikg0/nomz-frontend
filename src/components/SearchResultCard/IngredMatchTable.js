@@ -112,7 +112,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   } else {
       return(
         <>
-        <td class="recipeIngredient" colspan="2" rowspan={prelimIngredMatch.size}>{result.text}</td>
+        <td class="recipeIngredient" colspan="2" rowspan="4">{result.text}</td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
         />
