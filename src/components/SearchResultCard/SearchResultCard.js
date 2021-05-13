@@ -23,23 +23,6 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
         console.log(kitchenIngreds)
     }
 
-    // const ingredMatch = () => {
-    //     let kitchenIngredArr = kitchenIngreds.map((ingredObj) => {
-    //         return ingredObj.name.toLowerCase()
-    //     })
-    //     let resultIngredArr = resultData.ingredientLines.map(str => str.toLowerCase())
-    //     console.log(kitchenIngredArr)
-    //     console.log(resultIngredArr)
-    //     let kitchenIngredSet = new Set(kitchenIngredArr)
-    //     let resultIngredSet = new Set(resultIngredArr)
-    //     let ingredMatchSet = intersection(kitchenIngredSet, resultIngredSet)
-    //     console.log(ingredMatchSet)
-    //     const ingredMatchArr = (A,B) => {
-    //         return B.filter(b=> A.some(a=> new RegExp(b,'i').test(a)))
-    //     }
-    //     console.log(stringSearchKMP(kitchenIngredArr, resultIngredArr))
-    // }
-
     let renderIngredTable = resultData.ingredients.map((resultIngredObj) => {
         return(
             <IngredMatchTable 

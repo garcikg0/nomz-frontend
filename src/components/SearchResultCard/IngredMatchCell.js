@@ -16,7 +16,7 @@ const IngredMatchCell = ( {prelimIngredMatch} ) => {
     const printState = e => {
         e.preventDefault()
         // debugger
-        console.log(prelimIngredMatches)
+        console.log(prelimIngredMatch)
       }
     
     let renderPrelimIngredMatch = prelimIngredMatches.map((ingredObj) => {

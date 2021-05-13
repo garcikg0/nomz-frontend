@@ -49,7 +49,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
           }
           wordIndex++;
           stringIndex++;
-        } else if (wordIndex > 0) {
+        } else if (wordIndex > -1) {
           wordIndex = patternTable[wordIndex - 1];
         } else {
           wordIndex = 0;
@@ -67,7 +67,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
               let word = kitchenIngreds[i].name.toLowerCase()
               let string = resultIngred.text.toLowerCase()
               // debugger
-              if (stringSearchKMP(string, word) > 0){
+              if (stringSearchKMP(string, word) > -1){
                   matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
               }
           }
@@ -83,22 +83,22 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
     console.log(prelimIngredMatch)
   }
 
-  const renderIngred = ( prelim ) => {
-    if (prelim.size > 1) {
-    let render = prelim.map((ingredObj) => {
-      return(
-        <>
-        <td class="recipeingredient" colspan="2">{ingredObj}</td>
-        <td class="actions">
-          <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-          <a class="remove-item" title="Remove">Remove</a>
-        </td>  
-        </>
-      )
-    })
-    return render  
-  }
-  }
+  // const renderIngred = ( prelim ) => {
+  //   if (prelim.size > 0) {
+  //   let render = prelim.map((ingredObj) => {
+  //     return(
+  //       <>
+  //       <td class="recipeingredient" colspan="2">{ingredObj}</td>
+  //       <td class="actions">
+  //         <button class="edit-item" title="Edit" onClick={printState}>Test</button>
+  //         <a class="remove-item" title="Remove">Remove</a>
+  //       </td>  
+  //       </>
+  //     )
+  //   })
+  //   return render  
+  // }
+  // }
   
   if (prelimIngredMatch.size <= 0) {
     return (
