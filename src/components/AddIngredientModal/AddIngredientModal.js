@@ -64,6 +64,7 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
                                 <label>Status:</label>
                                 <div class="select">
                                         <select id="standard-select" name="status" onChange={handleChange}>
+                                            <option value=" "> </option>
                                             <option value="Available">Available</option>
                                             <option value="Low">Low</option>
                                             <option value="Out">Out</option>
@@ -75,6 +76,7 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
                                 <label>Stored in the</label>
                                 <div class="select" >
                                         <select id="standard-select" name="storage" onChange={handleChange}>
+                                            <option value=" "> </option>
                                             <option value="Fridge">Fridge</option>
                                             <option value="Freezer">Freezer</option>
                                             <option value="Pantry">Pantry</option>

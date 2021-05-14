@@ -82,23 +82,6 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
     // debugger
     console.log(prelimIngredMatch)
   }
-
-  // const renderIngred = ( prelim ) => {
-  //   if (prelim.size > 0) {
-  //   let render = prelim.map((ingredObj) => {
-  //     return(
-  //       <>
-  //       <td class="recipeingredient" colspan="2">{ingredObj}</td>
-  //       <td class="actions">
-  //         <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-  //         <a class="remove-item" title="Remove">Remove</a>
-  //       </td>  
-  //       </>
-  //     )
-  //   })
-  //   return render  
-  // }
-  // }
   
   if (prelimIngredMatch.size <= 0) {
     return (
@@ -119,14 +102,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
         />
-  
         </>
-        // {renderIngred(prelimIngredMatch)}
-        // <td class="recipeingredient" colspan="2">{prelimIngredMatch}</td>
-        // <td class="actions">
-        //   <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-        //   <a class="remove-item" title="Remove">Remove</a>
-        // </td>
       )
     }
 }
