@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AddIngredientModal from '../AddIngredientModal/AddIngredientModal';
 import IngredientCard from '../IngredientCard/IngredientCard';
-import KitchenNavbar from '../KithenNavbar/KitchenNavbar';
+import KitchenNavbar from '../KitchenNavbar/KitchenNavbar';
 import './Styles.scss';
 
 const KitchenPage = ( {userKitchens, kitchenRendered, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {

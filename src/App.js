@@ -154,7 +154,10 @@ const App = () => {
         { currentUser ? 
         <SearchResultPage 
         kitchenRendered={kitchenRendered}
+        userKitchens={userKitchens}
+        setKitchenRendered={setKitchenRendered}
         ingredientsOfKitchenRendered={ingredientsOfKitchenRendered}
+        setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
         /> :
         <Redirect to='/' />
         }

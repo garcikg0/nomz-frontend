@@ -27,6 +27,7 @@ ul.pagination {
       font-weight: 900;
       font-size: 1rem;
       text-decoration: none;
+      cursor: pointer;
   
       &:hover {
         background-color: $light-background;

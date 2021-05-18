@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import SearchResultPagination from '../SearchResultPagination/SearchResultPagination';
+import KitchenNavbar from '../KitchenNavbar/KitchenNavbar'
 import './Styles.scss';
 
-const SearchResultPage = ( {kitchenRendered, ingredientsOfKitchenRendered} ) => {
+const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {
     const [searchTerm, setSearchTerm] = useState(null)
     const [from, setFrom] = useState(0)
     const [to, setTo] = useState(100)
@@ -137,6 +138,12 @@ const SearchResultPage = ( {kitchenRendered, ingredientsOfKitchenRendered} ) => 
 
     return(
         <div className="search-result-container">
+            <KitchenNavbar 
+            userKitchens={userKitchens}
+            kitchenRendered={kitchenRendered}
+            setKitchenRendered={setKitchenRendered}
+            setIngredientsOfKitchenRendered={setIngredientsOfKitchenRendered}
+            />
             <div className="search-bar-container">
                 <form className="search-bar-form" onSubmit={handleSubmit}>
                     <input className="search-bar-input"
