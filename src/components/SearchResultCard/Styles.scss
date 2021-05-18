@@ -141,11 +141,10 @@ table.display{
 table.display th,
 table.display td{
   border: 1px solid #B3BFAA;
-  padding: .5em 1em;
+  padding: .5em .5em;
 }
 
 table.display th{ background: #D5E0CC; }
-table.display td{ background: #fff; }
 
 table.responsive-table{
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
@@ -203,4 +202,26 @@ table.responsive-table{
         border: none;
         background: none;
     }
+}
+
+.match-item {
+  margin: 3px;
+  color: rgb(143, 250, 143);
+  cursor: pointer;
+}
+
+.block-item {
+  margin: 3px;
+  color:rgb(238, 143, 143);
+  cursor: pointer;
+}
+
+.add-item {
+  color: rgb(123, 194, 123);
+  cursor: pointer;
+}
+
+.actions{
+  text-align: center;
+  padding: 0rem;
 }

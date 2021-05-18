@@ -75,7 +75,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       setMatchRowspan(matches.size + 1)
       // debugger
       }
-  }, [])
+  }, [kitchenIngreds])
 
   const printState = e => {
     e.preventDefault()
@@ -89,16 +89,17 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
         <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
         <td class="actions">
-          <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-          <a class="remove-item" title="Remove">Remove</a>
+          <a class="add-item" title="Remove">
+            <i class="fas fa-plus-circle"></i>
+          </a>
         </td>
       </tr>
     );
   } else {
       return(
         <>
-        
-        <td class="recipeIngredient" colspan="2" rowSpan={matchRowspan}>{result.text}</td>
+        <td class="recipeIngredient" colspan="2" rowSpan={matchRowspan}>{result.text}
+        </td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
         />

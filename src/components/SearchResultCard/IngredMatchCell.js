@@ -25,8 +25,12 @@ const IngredMatchCell = ( {prelimIngredMatch} ) => {
             <tr>
                 <td class="recipeingredient" colspan="2">{ingredObj[1]}</td>
                 <td class="actions">
-                    <button class="edit-item" title="Edit" onClick={printState}>Test</button>
-                    <a class="remove-item" title="Remove" onClick={printState}>Remove</a>
+                    <a class="match-item" title="Match" onClick={printState}>
+                        <i class="far fa-check-circle"></i>
+                    </a>
+                    <a class="block-item" title="Block">
+                        <i class="fas fa-ban"></i>
+                    </a>
                 </td>
             </tr>
             </>
