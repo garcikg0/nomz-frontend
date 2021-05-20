@@ -9,7 +9,6 @@ const EditKitchenModal = ( {open, onClose, kitchenData, setKitchenData, editedKi
 
     const handleEditSubmit = (evt) => {
         evt.preventDefault()
-        console.log(kitchenData.id)
         fetch(`http://localhost:3000/kitchens/${kitchenData.id}`, {
             method: "PATCH",
             headers: {

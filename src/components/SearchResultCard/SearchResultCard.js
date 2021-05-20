@@ -20,7 +20,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
     const handleIngredClick = e => {
         e.preventDefault()
         setShowIngred(!showIngred)
-        console.log(kitchenIngreds)
+        console.log(resultData)
     }
 
     let renderIngredTable = resultData.ingredients.map((resultIngredObj) => {
@@ -49,7 +49,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
                 {resultData.source}
             </span>
             <button className="accordion-ingred-btn" onClick={handleIngredClick}>Ingredients</button>
-            <button className="accordion-instruct-btn" onClick={() => window.open(resultData.url, "_blank") }>Instructions & More Info</button>
+            <button className="accordion-instruct-btn" onClick={() => window.open(resultData.url, "_blank") }>Instructions and More Info</button>
             <button className="accordion-save-btn" >Save</button>
         </div>
         <div className={`accordion-ingred-content ${activeStatus}`}>
