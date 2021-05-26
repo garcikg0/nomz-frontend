@@ -77,24 +77,62 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       }
   }, [kitchenIngreds])
 
-  const printState = e => {
+  const ingredMatchClick = (ingredObj, e) => {
     e.preventDefault()
-    // debugger
-    console.log(prelimIngredMatch)
+    let id = ingredObj[0]
+    fetch(`http://localhost:3000/ingredients/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+    .then(r => r.json())
+    .then((ingredObj) => {
+      console.log(ingredObj)
+      setIngredMatch(ingredObj)
+    })
+    }
+    // let id = ingredObj[0] - 1
+    // let match = kitchenIngreds[id]
+    // setIngredMatch(match)
+    // console.log(ingredObj)
+    // console.log(id)
+    // console.log(kitchenIngreds[id])
+    // console.log(kitchenIngreds)
+  
+
+  const handleAddClick = e => {
+    e.preventDefault()
+    console.log(ingredMatch)
   }
   
-  if (prelimIngredMatch.size <= 0) {
+  if (prelimIngredMatch.size <= 0 && !ingredMatch) {
     return (
       <tr>
         <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
         <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
         <td class="actions">
-          <a class="add-item" title="Remove">
+          <a class="add-item" title="Add">
             <i class="fas fa-plus-circle"></i>
           </a>
         </td>
       </tr>
     );
+  } else if (ingredMatch) {
+    return(
+      <tr>
+        <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
+        <td class="kitcheningredient" colspan="2">{ingredMatch.name}</td>
+        <td class="actions">
+          <a class="add-item" title="Add" onClick={handleAddClick}>
+            <i class="fas fa-check-circle"></i>
+          </a>
+          <a class="undo" title="undo">
+            <i class="fas fa-undo"></i>
+          </a>
+        </td>
+      </tr>
+    )
   } else {
       return(
         <>
@@ -102,6 +140,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         </td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
+        ingredMatchClick={ingredMatchClick}
         />
         </>
       )

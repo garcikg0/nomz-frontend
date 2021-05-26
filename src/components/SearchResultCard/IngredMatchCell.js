@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Styles.scss';
 
-const IngredMatchCell = ( {prelimIngredMatch} ) => {
+const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick} ) => {
     const [prelimIngredMatches, setPrelimIngredMatches] = useState([])
-    // const [prelimIngredMatches, setPrelimIngredMatches] = useState(prelimIngredMatch)
 
     useEffect(() => {
         if(prelimIngredMatches.length < 1){
@@ -25,7 +24,8 @@ const IngredMatchCell = ( {prelimIngredMatch} ) => {
             <tr>
                 <td class="recipeingredient" colspan="2">{ingredObj[1]}</td>
                 <td class="actions">
-                    <a class="match-item" title="Match" onClick={printState}>
+                    <a class="match-item" title="Match" 
+                    onClick={(e) => ingredMatchClick(ingredObj, e)}>
                         <i class="far fa-check-circle"></i>
                     </a>
                     <a class="block-item" title="Block">
@@ -45,4 +45,3 @@ const IngredMatchCell = ( {prelimIngredMatch} ) => {
 }
 
 export default IngredMatchCell;
-
