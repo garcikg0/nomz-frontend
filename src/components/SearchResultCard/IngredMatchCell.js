@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Styles.scss';
 
-const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick} ) => {
+const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick, ingredBlockClick} ) => {
     const [prelimIngredMatches, setPrelimIngredMatches] = useState([])
 
     useEffect(() => {
@@ -11,12 +11,6 @@ const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick} ) => {
             setPrelimIngredMatches(arr)
         }
     }, [prelimIngredMatches])
-
-    const printState = e => {
-        e.preventDefault()
-        // debugger
-        console.log(prelimIngredMatch)
-      }
     
     let renderPrelimIngredMatch = prelimIngredMatches.map((ingredObj) => {
         return(
@@ -28,7 +22,7 @@ const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick} ) => {
                     onClick={(e) => ingredMatchClick(ingredObj, e)}>
                         <i class="far fa-check-circle"></i>
                     </a>
-                    <a class="block-item" title="Block">
+                    <a class="block-item" title="Block" onClick={ingredBlockClick}>
                         <i class="fas fa-ban"></i>
                     </a>
                 </td>

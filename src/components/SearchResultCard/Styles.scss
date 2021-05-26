@@ -219,6 +219,18 @@ table.responsive-table{
 .add-item {
   color: rgb(123, 194, 123);
   cursor: pointer;
+  margin: 3px;
+}
+
+.matched-item {
+  color: rgb(123, 194, 123);
+  margin: 3px;
+}
+
+.undo {
+  color: rgb(136, 175, 167);
+  cursor: pointer;
+  margin: 3px;
 }
 
 .actions{

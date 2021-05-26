@@ -77,7 +77,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       }
   }, [kitchenIngreds])
 
-  const ingredMatchClick = (ingredObj, e) => {
+  const handleIngredMatchClick = (ingredObj, e) => {
     e.preventDefault()
     let id = ingredObj[0]
     fetch(`http://localhost:3000/ingredients/${id}`, {
@@ -92,18 +92,15 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       setIngredMatch(ingredObj)
     })
     }
-    // let id = ingredObj[0] - 1
-    // let match = kitchenIngreds[id]
-    // setIngredMatch(match)
-    // console.log(ingredObj)
-    // console.log(id)
-    // console.log(kitchenIngreds[id])
-    // console.log(kitchenIngreds)
-  
 
-  const handleAddClick = e => {
+  const handleAddToGroceryList = e => {
     e.preventDefault()
     console.log(ingredMatch)
+  }
+
+  const handleIngredBlockClick = e => {
+    e.preventDefault()
+    console.log(prelimIngredMatch)
   }
   
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {
@@ -124,8 +121,8 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
         <td class="kitcheningredient" colspan="2">{ingredMatch.name}</td>
         <td class="actions">
-          <a class="add-item" title="Add" onClick={handleAddClick}>
-            <i class="fas fa-check-circle"></i>
+          <a class="matched-item" title="Match" onClick={handleIngredMatchClick}>
+            <i class="fas fa-check"></i>
           </a>
           <a class="undo" title="undo">
             <i class="fas fa-undo"></i>
@@ -140,7 +137,8 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         </td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
-        ingredMatchClick={ingredMatchClick}
+        ingredMatchClick={handleIngredMatchClick}
+        ingredBlockClick={handleIngredBlockClick}
         />
         </>
       )
