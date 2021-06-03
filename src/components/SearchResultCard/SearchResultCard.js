@@ -20,7 +20,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
     const handleIngredClick = e => {
         e.preventDefault()
         setShowIngred(!showIngred)
-        console.log(resultData)
+        // console.log(resultData)
     }
 
     let renderIngredTable = resultData.ingredients.map((resultIngredObj) => {

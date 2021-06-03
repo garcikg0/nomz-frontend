@@ -43,7 +43,8 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       const patternTable = buildPatternTable(word);
     
       while (stringIndex < string.length) {
-        if (string[stringIndex] === word[wordIndex]) { //Found a Match
+      // if match is found
+        if (string[stringIndex] === word[wordIndex]) { 
           if (wordIndex === word.length - 1) {
             return (stringIndex - word.length) + 1;
           }
@@ -60,22 +61,19 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   }
   
   useEffect(() => {
-    // debugger
       if(!ingredMatch && !ingredBlock){
           const matches = new Map();
           for(let i = 0; i < kitchenIngreds.length; i++) {
               let word = kitchenIngreds[i].name.toLowerCase()
               let string = resultIngred.text.toLowerCase()
-              // debugger
               if (stringSearchKMP(string, word) > -1){
                   matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
               }
           }
       setPrelimIngredMatch(matches)
       setMatchRowspan(matches.size + 1)
-      // debugger
-      }
-  }, [kitchenIngreds])
+      }  
+  }, [kitchenIngreds, ingredBlock])
 
   const handleIngredMatchClick = (ingredObj, e) => {
     e.preventDefault()
@@ -91,19 +89,28 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       console.log(ingredObj)
       setIngredMatch(ingredObj)
     })
-    }
+  }
 
   const handleAddToGroceryList = e => {
     e.preventDefault()
     console.log(ingredMatch)
   }
 
-  const handleIngredBlockClick = e => {
+  const handleIngredBlockClick = (ingredObj, e) => {
     e.preventDefault()
+    let id = ingredObj[0]
+    let ingredBlockMap = new Map();
+    ingredBlockMap.set(id, ingredObj[1])
+    setIngredBlock(ingredBlockMap)
+    prelimIngredMatch.delete(id)
     console.log(prelimIngredMatch)
+    console.log(ingredBlock)
+    let newMatchRowSpan = matchRowspan - 1
+    setMatchRowspan(newMatchRowSpan)
+    // debugger
   }
   
-  if (prelimIngredMatch.size <= 0 && !ingredMatch) {
+  if (prelimIngredMatch.size <= 0 && !ingredMatch && !ingredBlock) {
     return (
       <tr>
         <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
@@ -137,6 +144,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
         </td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}
+        ingredBlock={ingredBlock}
         ingredMatchClick={handleIngredMatchClick}
         ingredBlockClick={handleIngredBlockClick}
         />
