@@ -11,7 +11,7 @@ const LandingPage = ( {handleSignup, handleLoginSubmit, isLoginOpen, setIsLoginO
         <div className="homeContainer">
         <div className="jumbotron">
           <div className="jumbotron-video">
-            <video class="videoTag"autoPlay loop muted >
+            <video className="videoTag"autoPlay loop muted >
               <source src={bvideo} type="video/mp4"/>
             </video>
           </div>

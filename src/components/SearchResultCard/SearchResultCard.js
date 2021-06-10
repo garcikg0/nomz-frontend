@@ -23,10 +23,10 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
         // console.log(resultData)
     }
 
-    let renderIngredTable = resultData.ingredients.map((resultIngredObj) => {
+    let renderIngredTable = resultData.ingredients.map((resultIngredObj, i) => {
         return(
             <IngredMatchTable 
-                key={resultIngredObj.id}
+                key={i}
                 result={resultIngredObj}
                 kitchenIngreds={kitchenIngreds}
             />
@@ -38,7 +38,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
         <div className="accordion-item">
             <img className="search-result-accordion-image" src={resultData.image} alt="otherimage"/>
             <span className="accordion-status">
-                <i class="fas fa-check-circle">
+                <i className="fas fa-check-circle">
                     <h4 className="accordion-status-text">Available</h4>
                 </i>
             </span>
@@ -53,11 +53,11 @@ const SearchResultCard = ( {recipe, kitchenIngreds} ) => {
             <button className="accordion-save-btn" >Save</button>
         </div>
         <div className={`accordion-ingred-content ${activeStatus}`}>
-            <table class="layout display responsive-table">
+            <table className="layout display responsive-table">
                 <thead>
                     <tr>
-                        <th colspan="2">Recipe Ingredients</th>
-                        <th colspan="3">Kitchen Ingredients</th>
+                        <th colSpan="2">Recipe Ingredients</th>
+                        <th colSpan="3">Kitchen Ingredients</th>
                     </tr>
                 </thead>
                 <tbody>   

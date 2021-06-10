@@ -32,31 +32,31 @@ const Navbar = ( { setIsLoginOpen, setIsSignupOpen, currentUser, handleLogout, k
                     <>
                     <li>
                         <Link to='/kitchen'>
-                            <button class="nav-links" to='#kitchen'
+                            <button className="nav-links" to='#kitchen'
                             onClick={handleKitchenClick}>My Kitchen</button>
                         </Link>
                     </li>
                     <li>
                         <Link to='recipesearch'>
-                            <button class="nav-links" to='#recipesearch'>Recipe Search</button>
+                            <button className="nav-links" to='#recipesearch'>Recipe Search</button>
                         </Link>
                     </li>
                     <li>
                         <Link to='recipelibrary'>
-                            <button class="nav-links" to='#recipelibrary'>My Recipe Library</button>
+                            <button className="nav-links" to='#recipelibrary'>My Recipe Library</button>
                         </Link>
                     </li>
                     <li>
-                        <button class="nav-links" onClick={handleLogout}>Logout</button>
+                        <button className="nav-links" onClick={handleLogout}>Logout</button>
                     </li>    
                 </>
                 ) : (
                     <>
                     <li>
-                        <button class="nav-links" onClick={ () => setIsLoginOpen(true) } >Login</button>
+                        <button className="nav-links" onClick={ () => setIsLoginOpen(true) } >Login</button>
                     </li>
                     <li>
-                        <button class="nav-links" onClick={ () => setIsSignupOpen(true) }>Sign Up</button>
+                        <button className="nav-links" onClick={ () => setIsSignupOpen(true) }>Sign Up</button>
                     </li>
                     </>
                 )}

@@ -70,6 +70,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
         .then(r => r.json())
         .then(data => {
+            console.log(data)
             setSearchResultId(data.id)
             setSearchResults(data.results)
         })
@@ -125,10 +126,10 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
     }
 
-    let renderResults = searchResults.map((resultObj) => {
+    let renderResults = searchResults.map((resultObj, i) => {
         return(
             <SearchResultCard
-                key={resultObj.id}
+                key={i}
                 recipe={resultObj}
                 kitchenIngreds={ingredientsOfKitchenRendered}
             />
@@ -149,7 +150,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                     <input className="search-bar-input"
                     type="search"
                     placeholder="Search..."
-                    autofocus required
+                    autoFocus required
                     onChange={handleChange}
                     />
                     <button className="search-bar-button">Go</button>

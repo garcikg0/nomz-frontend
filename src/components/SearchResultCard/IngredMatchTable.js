@@ -5,12 +5,23 @@ import './Styles.scss';
 const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
-    foodCategory: result.foodCategory
+    foodCategory: result.foodCategory,
+    ingredMatch: null,
+    ingredBlock: null
   });
   const [prelimIngredMatch, setPrelimIngredMatch] = useState([]);
   const [ingredMatch, setIngredMatch] = useState(null);
   const [ingredBlock, setIngredBlock] = useState(null);
   const [matchRowspan, setMatchRowspan] = useState(null);
+
+  if (result.ingredMatch && result.ingredBlock){
+    setResultIngred({
+      text: result.text,
+      foodCategory: result.foodCategory,
+      ingredMatch: result.ingredMatch,
+      ingredBlock: result.ingredBlock
+    })
+  }
 
   const buildPatternTable = (word) => {
       const patternTable = [0];
@@ -107,17 +118,17 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
     console.log(ingredBlock)
     let newMatchRowSpan = matchRowspan - 1
     setMatchRowspan(newMatchRowSpan)
-    // debugger
+    console.log(prelimIngredMatch.size)
   }
   
   if (prelimIngredMatch.size <= 0 && !ingredMatch && !ingredBlock) {
     return (
       <tr>
-        <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
-        <td class="kitcheningredient" colspan="2">No Matches Found in Your Kitchen</td>
-        <td class="actions">
-          <a class="add-item" title="Add">
-            <i class="fas fa-plus-circle"></i>
+        <td className="recipeingredient" colSpan="2" rowSpan="1">{result.text}</td>
+        <td className="kitcheningredient" colSpan="2">No Matches Found in Your Kitchen</td>
+        <td className="actions">
+          <a className="add-item" title="Add">
+            <i className="fas fa-plus-circle"></i>
           </a>
         </td>
       </tr>
@@ -125,14 +136,14 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   } else if (ingredMatch) {
     return(
       <tr>
-        <td class="recipeingredient" colspan="2" rowspan="1">{result.text}</td>
-        <td class="kitcheningredient" colspan="2">{ingredMatch.name}</td>
-        <td class="actions">
-          <a class="matched-item" title="Match" onClick={handleIngredMatchClick}>
-            <i class="fas fa-check"></i>
+        <td className="recipeingredient" colSpan="2" rowSpan="1">{result.text}</td>
+        <td className="kitcheningredient" colSpan="2">{ingredMatch.name}</td>
+        <td className="actions">
+          <a className="matched-item" title="Match" onClick={handleIngredMatchClick}>
+            <i className="fas fa-check"></i>
           </a>
-          <a class="undo" title="undo">
-            <i class="fas fa-undo"></i>
+          <a className="undo" title="undo">
+            <i className="fas fa-undo"></i>
           </a>
         </td>
       </tr>
@@ -140,7 +151,7 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
   } else {
       return(
         <>
-        <td class="recipeIngredient" colspan="2" rowSpan={matchRowspan}>{result.text}
+        <td className="recipeIngredient" colSpan="2" rowSpan={matchRowspan}>{result.text}
         </td>
         <IngredMatchCell
         prelimIngredMatch={prelimIngredMatch}

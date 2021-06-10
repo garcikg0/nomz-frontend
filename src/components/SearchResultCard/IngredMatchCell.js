@@ -14,19 +14,19 @@ const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick, ingredBlockClick
         }
     }, [prelimIngredMatch, ingredBlock])
     
-    let renderPrelimIngredMatch = prelimIngredMatches.map((ingredObj) => {
+    let renderPrelimIngredMatch = prelimIngredMatches.map((ingredObj, i) => {
         return(
             <>
-            <tr>
-                <td class="recipeingredient" colspan="2">{ingredObj[1]}</td>
-                <td class="actions">
-                    <a class="match-item" title="Match" 
+            <tr key={i}>
+                <td className="recipeingredient" colSpan="2">{ingredObj[1]}</td>
+                <td className="actions">
+                    <a className="match-item" title="Match" 
                     onClick={(e) => ingredMatchClick(ingredObj, e)}>
-                        <i class="far fa-check-circle"></i>
+                        <i className="far fa-check-circle"></i>
                     </a>
-                    <a class="block-item" title="Block" 
+                    <a className="block-item" title="Block" 
                     onClick={(e) => ingredBlockClick(ingredObj, e)}>
-                        <i class="fas fa-ban"></i>
+                        <i className="fas fa-ban"></i>
                     </a>
                 </td>
             </tr>
