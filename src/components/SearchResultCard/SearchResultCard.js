@@ -27,6 +27,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, r
             <IngredMatchTable 
                 key={i}
                 resultArrIndex={resultArrIndex}
+                ingredArrIndex={i}
                 result={resultIngredObj}
                 kitchenIngreds={kitchenIngreds}
                 updateBackendSearchResult={updateBackendSearchResult}

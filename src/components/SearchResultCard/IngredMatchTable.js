@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBackendSearchResult} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBackendSearchResult, ingredArrIndex} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -90,7 +90,6 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
   const handleIngredMatchClick = (ingredObj, e, i) => {
     e.preventDefault()
     let id = ingredObj[0]
-    let ingredArrIndex = i
     fetch(`http://localhost:3000/ingredients/${id}`, {
       method: "GET",
       headers: {
