@@ -21,7 +21,7 @@ const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick, ingredBlockClick
                 <td className="recipeingredient" colSpan="2">{ingredObj[1]}</td>
                 <td className="actions">
                     <a className="match-item" title="Match" 
-                    onClick={(e) => ingredMatchClick(ingredObj, e)}>
+                    onClick={(e) => ingredMatchClick(ingredObj, e, i)}>
                         <i className="far fa-check-circle"></i>
                     </a>
                     <a className="block-item" title="Block" 

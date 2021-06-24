@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBackendSearchResult} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
-    ingredMatch: null,
-    ingredBlock: null
+    ingredMatch: result.ingredMatch,
+    ingredBlock: result.ingredBlock
   });
   const [prelimIngredMatch, setPrelimIngredMatch] = useState([]);
-  const [ingredMatch, setIngredMatch] = useState(null);
-  const [ingredBlock, setIngredBlock] = useState(null);
+  const [ingredMatch, setIngredMatch] = useState(resultIngred.ingredMatch);
+  // const [ingredMatch, setIngredMatch] = useState(null);
+  const [ingredBlock, setIngredBlock] = useState(resultIngred.ingredBlock);
   const [matchRowspan, setMatchRowspan] = useState(null);
 
-  if (result.ingredMatch && result.ingredBlock){
-    setResultIngred({
-      text: result.text,
-      foodCategory: result.foodCategory,
-      ingredMatch: result.ingredMatch,
-      ingredBlock: result.ingredBlock
-    })
-  }
+  // if (result.ingredMatch && result.ingredBlock){
+  //   setIngredMatch(result.ingredMatch)
+  //   setIngredBlock(result.ingredBlock)
+  // } else if (result.ingredMatch) {
+  //   setIngredMatch(result.ingredMatch)
+  // } else if (result.ingredBlock) {
+  //   setIngredBlock(result.ingredBlock)
+  // }
 
   const buildPatternTable = (word) => {
       const patternTable = [0];
@@ -86,9 +87,10 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
       }  
   }, [kitchenIngreds, ingredBlock])
 
-  const handleIngredMatchClick = (ingredObj, e) => {
+  const handleIngredMatchClick = (ingredObj, e, i) => {
     e.preventDefault()
     let id = ingredObj[0]
+    let ingredArrIndex = i
     fetch(`http://localhost:3000/ingredients/${id}`, {
       method: "GET",
       headers: {
@@ -99,6 +101,8 @@ const IngredMatchTable = ( {result, kitchenIngreds} ) => {
     .then((ingredObj) => {
       console.log(ingredObj)
       setIngredMatch(ingredObj)
+      // console.log(resultIngredKey)
+      updateBackendSearchResult(resultArrIndex, ingredArrIndex, ingredObj)
     })
   }
 

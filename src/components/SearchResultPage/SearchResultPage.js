@@ -126,12 +126,38 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
     }
 
+    const updateBackendSearchResult = (resultArrIndex, ingredArrIndex, ingredMatchObj) => {
+        // debugger
+        let search_params = {
+            id: searchResultId,
+            user_id: searchTermUser,
+            resultArrIndex: resultArrIndex,
+            ingredArrIndex: ingredArrIndex,
+            ingredMatchObj: ingredMatchObj,
+            results: searchResults
+        }
+        fetch(`http://localhost:3000/updateresults`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(search_params)
+        })
+        .then(r => r.json())
+        .then(data => {
+            console.log(data)
+        })
+
+    }
+
     let renderResults = searchResults.map((resultObj, i) => {
         return(
             <SearchResultCard
                 key={i}
+                resultArrIndex={i}
                 recipe={resultObj}
                 kitchenIngreds={ingredientsOfKitchenRendered}
+                updateBackendSearchResult={updateBackendSearchResult}
             />
             )
         }
