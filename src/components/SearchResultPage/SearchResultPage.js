@@ -127,13 +127,13 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
     }
 
     const updateBackendSearchResult = (resultArrIndex, ingredArrIndex, ingredMatchObj) => {
-        // debugger
-        let search_params = {
+        let params = {
             id: searchResultId,
             user_id: searchTermUser,
             resultArrIndex: resultArrIndex,
             ingredArrIndex: ingredArrIndex,
             ingredMatchObj: ingredMatchObj,
+            pagFrom: pagFrom,
             results: searchResults
         }
         fetch(`http://localhost:3000/updateresults`, {
@@ -141,11 +141,11 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(search_params)
+            body: JSON.stringify(params)
         })
         .then(r => r.json())
         .then(data => {
-            console.log(data)
+            setSearchResults(data.results)
         })
 
     }
