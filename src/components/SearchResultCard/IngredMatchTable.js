@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBackendSearchResult, ingredArrIndex, kitchenRenderedId} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -97,42 +97,41 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
     setPrelimIngredMatch(matches)
     setMatchRowspan(matches.size + 1)
     }  
-}, [kitchenIngreds, kitchenRenderedId, ingredMatch])
+  }, [kitchenIngreds, kitchenRenderedId, ingredMatch, ingredBlock])
 
-const handleIngredMatchClick = (ingredObj, e, i) => {
-  e.preventDefault()
-  let id = ingredObj[0]
-  fetch(`http://localhost:3000/ingredients/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type" : "application/json"
-    }
-  })
-  .then(r => r.json())
-  .then((ingredObj) => {
-    updateBackendSearchResult(resultArrIndex, ingredArrIndex, ingredObj)
-    setIngredMatch(ingredObj)
-  })
-}
-
-  const handleAddToGroceryList = e => {
+  const handleIngredMatchClick = (ingredObj, e) => {
     e.preventDefault()
-    console.log(ingredMatch)
-    console.log(prelimIngredMatch.size)
+    let id = ingredObj[0]
+    fetch(`http://localhost:3000/ingredients/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+    .then(r => r.json())
+    .then((ingredObj) => {
+      updateBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredObj)
+      setIngredMatch(ingredObj)
+    })
   }
 
   const handleIngredBlockClick = (ingredObj, e) => {
     e.preventDefault()
     let id = ingredObj[0]
-    let ingredBlockMap = new Map();
-    ingredBlockMap.set(id, ingredObj[1])
-    setIngredBlock(ingredBlockMap)
-    prelimIngredMatch.delete(id)
-    console.log(prelimIngredMatch)
-    console.log(ingredBlock)
     let newMatchRowSpan = matchRowspan - 1
-    setMatchRowspan(newMatchRowSpan)
-    console.log(prelimIngredMatch.size)
+    fetch(`http://localhost:3000/ingredients/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+    .then(r => r.json())
+    .then((ingredObj) => {
+      updateBackendIngredBlock(resultArrIndex, ingredArrIndex, ingredObj)
+      setIngredBlock(ingredObj)
+      prelimIngredMatch.delete(id)
+      setMatchRowspan(newMatchRowSpan)
+    })
   }
 
   const handleUndoButton = e => {
@@ -140,7 +139,13 @@ const handleIngredMatchClick = (ingredObj, e, i) => {
     console.log(ingredMatch.kitchen_id)
     console.log(kitchenRenderedId)
   }
-  
+
+  const handleAddToGroceryList = e => {
+    e.preventDefault()
+    console.log(ingredMatch)
+    console.log(prelimIngredMatch.size)
+  }
+
   if (prelimIngredMatch.size <= 0 && !ingredMatch && !ingredBlock) {
     return (
       <tr>

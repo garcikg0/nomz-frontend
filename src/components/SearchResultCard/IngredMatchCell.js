@@ -4,6 +4,7 @@ import './Styles.scss';
 const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick, ingredBlockClick, ingredBlock} ) => {
     const [prelimIngredMatches, setPrelimIngredMatches] = useState([])
 
+    // convert prelimIngredMatch prop (Map DS) to Array DS allowing render through map iteration
     useEffect(() => {
         if (prelimIngredMatches.length < 1) {
             let arr = Array.from(prelimIngredMatch)
@@ -21,7 +22,7 @@ const IngredMatchCell = ( {prelimIngredMatch, ingredMatchClick, ingredBlockClick
                 <td className="recipeingredient" colSpan="2">{ingredObj[1]}</td>
                 <td className="actions">
                     <a className="match-item" title="Match" 
-                    onClick={(e) => ingredMatchClick(ingredObj, e, i)}>
+                    onClick={(e) => ingredMatchClick(ingredObj, e)}>
                         <i className="far fa-check-circle"></i>
                     </a>
                     <a className="block-item" title="Block" 

@@ -125,7 +125,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
     }
 
-    const updateBackendSearchResult = (resultArrIndex, ingredArrIndex, ingredMatchObj) => {
+    const updateBackendIngredMatch = (resultArrIndex, ingredArrIndex, ingredMatchObj) => {
         let params = {
             id: searchResultId,
             user_id: searchTermUser,
@@ -135,7 +135,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
             pagFrom: pagFrom,
             results: searchResults
         }
-        fetch(`http://localhost:3000/updateresults`, {
+        fetch(`http://localhost:3000/ingredmatchupdate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -144,10 +144,31 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
         .then(r => r.json())
         .then(data => {
-            // setSearchResults([])
             setSearchResults(data.results)
         })
+    }
 
+    const updateBackendIngredBlock = (resultArrIndex, ingredArrIndex, ingredBlockObj) => {
+        let params = {
+            id: searchResultId,
+            user_id: searchTermUser,
+            resultArrIndex: resultArrIndex,
+            ingredArrIndex: ingredArrIndex,
+            ingredBlockObj: ingredBlockObj,
+            pagFrom: pagFrom,
+            results: searchResults
+        }
+        fetch(`http://localhost:3000/ingredblockupdate`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+        })
+        .then(r => r.json())
+        .then(data => {
+            setSearchResults(data.results)
+        })
     }
 
     let renderResults = searchResults.map((resultObj, i) => {
@@ -157,8 +178,9 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 resultArrIndex={i}
                 recipe={resultObj}
                 kitchenIngreds={ingredientsOfKitchenRendered}
-                updateBackendSearchResult={updateBackendSearchResult}
                 kitchenRenderedId={kitchenRendered.id}
+                updateBackendIngredMatch={updateBackendIngredMatch}
+                updateBackendIngredBlock={updateBackendIngredBlock}
             />
             )
         }
