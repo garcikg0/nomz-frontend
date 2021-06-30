@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IngredMatchTable from './IngredMatchTable'
 import './Styles.scss';
 
-const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, resultArrIndex} ) => {
+const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, resultArrIndex, kitchenRenderedId} ) => {
     const [resultData, setResultData] = useState({
         title: recipe.name,
         image: recipe.image,
@@ -11,7 +11,6 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, r
         ingredientLines: recipe.ingredientLines,
         ingredients: recipe.ingredients
     })
-    
     const [showIngred, setShowIngred] = useState(false);
 
     const activeStatus = showIngred ? 'active' : '';
@@ -19,8 +18,18 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, r
     const handleIngredClick = e => {
         e.preventDefault()
         setShowIngred(!showIngred)
-        // console.log(resultData)
     }
+
+    useEffect(() => {
+        setResultData({
+            title: recipe.name,
+            image: recipe.image,
+            source: recipe.source,
+            url: recipe.url,
+            ingredientLines: recipe.ingredientLines,
+            ingredients: recipe.ingredients
+        })
+    }, [recipe])
 
     let renderIngredTable = resultData.ingredients.map((resultIngredObj, i) => {
         return(
@@ -30,6 +39,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, r
                 ingredArrIndex={i}
                 result={resultIngredObj}
                 kitchenIngreds={kitchenIngreds}
+                kitchenRenderedId={kitchenRenderedId}
                 updateBackendSearchResult={updateBackendSearchResult}
             />
         )
@@ -58,7 +68,7 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendSearchResult, r
             <table className="layout display responsive-table">
                 <thead>
                     <tr>
-                        <th colSpan="2">Recipe Ingredients</th>
+                        <th colSpan="2" >Recipe Ingredients</th>
                         <th colSpan="3">Kitchen Ingredients</th>
                     </tr>
                 </thead>

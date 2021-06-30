@@ -70,7 +70,6 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
         .then(r => r.json())
         .then(data => {
-            console.log(data)
             setSearchResultId(data.id)
             setSearchResults(data.results)
         })
@@ -145,6 +144,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
         .then(r => r.json())
         .then(data => {
+            // setSearchResults([])
             setSearchResults(data.results)
         })
 
@@ -158,6 +158,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 recipe={resultObj}
                 kitchenIngreds={ingredientsOfKitchenRendered}
                 updateBackendSearchResult={updateBackendSearchResult}
+                kitchenRenderedId={kitchenRendered.id}
             />
             )
         }

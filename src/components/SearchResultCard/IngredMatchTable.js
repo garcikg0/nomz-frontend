@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBackendSearchResult, ingredArrIndex} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBackendSearchResult, ingredArrIndex, kitchenRenderedId} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -10,19 +10,9 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
     ingredBlock: result.ingredBlock
   });
   const [prelimIngredMatch, setPrelimIngredMatch] = useState([]);
-  const [ingredMatch, setIngredMatch] = useState(resultIngred.ingredMatch);
-  // const [ingredMatch, setIngredMatch] = useState(null);
-  const [ingredBlock, setIngredBlock] = useState(resultIngred.ingredBlock);
+  const [ingredMatch, setIngredMatch] = useState(null);
+  const [ingredBlock, setIngredBlock] = useState(null);
   const [matchRowspan, setMatchRowspan] = useState(null);
-
-  // if (result.ingredMatch && result.ingredBlock){
-  //   setIngredMatch(result.ingredMatch)
-  //   setIngredBlock(result.ingredBlock)
-  // } else if (result.ingredMatch) {
-  //   setIngredMatch(result.ingredMatch)
-  // } else if (result.ingredBlock) {
-  //   setIngredBlock(result.ingredBlock)
-  // }
 
   const buildPatternTable = (word) => {
       const patternTable = [0];
@@ -71,43 +61,64 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
       }
     return -1;
   }
-  
-  useEffect(() => {
-      if(!ingredMatch && !ingredBlock){
-          const matches = new Map();
-          for(let i = 0; i < kitchenIngreds.length; i++) {
-              let word = kitchenIngreds[i].name.toLowerCase()
-              let string = resultIngred.text.toLowerCase()
-              if (stringSearchKMP(string, word) > -1){
-                  matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
-              }
-          }
-      setPrelimIngredMatch(matches)
-      setMatchRowspan(matches.size + 1)
-      }  
-  }, [kitchenIngreds, ingredBlock])
 
-  const handleIngredMatchClick = (ingredObj, e, i) => {
-    e.preventDefault()
-    let id = ingredObj[0]
-    fetch(`http://localhost:3000/ingredients/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type" : "application/json"
+  // update ingredMatch when result prop changes to reflect ingredMatch object that has the same kitchen_id as kitchenRendered
+  useEffect(() => {
+    if(result.ingredMatch && ingredMatch){
+      for(let i = 0; i < result.ingredMatch.length; i++){
+        if(result.ingredMatch[i].kitchen_id !== kitchenRenderedId){
+          setIngredMatch(null)
+          setPrelimIngredMatch([])
+        }
       }
-    })
-    .then(r => r.json())
-    .then((ingredObj) => {
-      console.log(ingredObj)
-      setIngredMatch(ingredObj)
-      // console.log(resultIngredKey)
-      updateBackendSearchResult(resultArrIndex, ingredArrIndex, ingredObj)
-    })
-  }
+    } else if (result.ingredMatch && !ingredMatch){
+      for(let i = 0; i < result.ingredMatch.length; i++){
+        if(result.ingredMatch[i].kitchen_id === kitchenRenderedId){
+          setIngredMatch(result.ingredMatch[i])
+          setPrelimIngredMatch([])
+        }
+      }
+    } else if (!result.ingredMatch && ingredMatch){
+      setIngredMatch(null)
+    }
+  }, [kitchenRenderedId, result])
+
+  // create prelimIngredMatch if no ingredMatch or ingredBlock. Update when kitchenRenderedId, kitchenIngreds, or ingredMatch changes
+  useEffect(() => {
+    if(!ingredMatch && !ingredBlock){
+        const matches = new Map();
+        for(let i = 0; i < kitchenIngreds.length; i++) {
+            let word = kitchenIngreds[i].name.toLowerCase()
+            let string = resultIngred.text.toLowerCase()
+            if (stringSearchKMP(string, word) > -1){
+                matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
+            }
+        }
+    setPrelimIngredMatch(matches)
+    setMatchRowspan(matches.size + 1)
+    }  
+}, [kitchenIngreds, kitchenRenderedId, ingredMatch])
+
+const handleIngredMatchClick = (ingredObj, e, i) => {
+  e.preventDefault()
+  let id = ingredObj[0]
+  fetch(`http://localhost:3000/ingredients/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type" : "application/json"
+    }
+  })
+  .then(r => r.json())
+  .then((ingredObj) => {
+    updateBackendSearchResult(resultArrIndex, ingredArrIndex, ingredObj)
+    setIngredMatch(ingredObj)
+  })
+}
 
   const handleAddToGroceryList = e => {
     e.preventDefault()
     console.log(ingredMatch)
+    console.log(prelimIngredMatch.size)
   }
 
   const handleIngredBlockClick = (ingredObj, e) => {
@@ -123,6 +134,12 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
     setMatchRowspan(newMatchRowSpan)
     console.log(prelimIngredMatch.size)
   }
+
+  const handleUndoButton = e => {
+    e.preventDefault()
+    console.log(ingredMatch.kitchen_id)
+    console.log(kitchenRenderedId)
+  }
   
   if (prelimIngredMatch.size <= 0 && !ingredMatch && !ingredBlock) {
     return (
@@ -130,22 +147,22 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
         <td className="recipeingredient" colSpan="2" rowSpan="1">{result.text}</td>
         <td className="kitcheningredient" colSpan="2">No Matches Found in Your Kitchen</td>
         <td className="actions">
-          <a className="add-item" title="Add">
+          <a className="add-item" title="Add" onClick={handleAddToGroceryList}>
             <i className="fas fa-plus-circle"></i>
           </a>
         </td>
       </tr>
-    );
+    )
   } else if (ingredMatch) {
     return(
       <tr>
         <td className="recipeingredient" colSpan="2" rowSpan="1">{result.text}</td>
         <td className="kitcheningredient" colSpan="2">{ingredMatch.name}</td>
         <td className="actions">
-          <a className="matched-item" title="Match" onClick={handleIngredMatchClick}>
+          <a className="matched-item" title="Match">
             <i className="fas fa-check"></i>
           </a>
-          <a className="undo" title="undo">
+          <a className="undo" title="undo" onClick={handleUndoButton}>
             <i className="fas fa-undo"></i>
           </a>
         </td>
@@ -157,6 +174,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, updateBacken
         <td className="recipeIngredient" colSpan="2" rowSpan={matchRowspan}>{result.text}
         </td>
         <IngredMatchCell
+        key={ingredArrIndex}
         prelimIngredMatch={prelimIngredMatch}
         ingredBlock={ingredBlock}
         ingredMatchClick={handleIngredMatchClick}
