@@ -81,26 +81,26 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     } else if (!result.ingredMatch && ingredMatch){
       setIngredMatch(null)
     } 
-    // else if (result.ingredBlock && !ingredBlock){
-    //   for(let i = 0; i < result.ingredBlock.length; i++){
-    //     if(prelimIngredMatch.get(result.ingredBlock[i].id)){
-    //       prelimIngredMatch.delete(result.ingredBlock[i].id)
-    //       setIngredBlock([...ingredBlock, result.ingredblock[i]])
-    //     }
-    //   }
-    // }
   }, [kitchenRenderedId, result])
 
   // create prelimIngredMatch if no ingredMatch or ingredBlock. Update when kitchenRenderedId, kitchenIngreds, or ingredMatch changes
   useEffect(() => {
     if(!ingredMatch && !ingredBlock){
         const matches = new Map();
-        for(let i = 0; i < kitchenIngreds.length; i++) {
-            let word = kitchenIngreds[i].name.toLowerCase()
-            let string = resultIngred.text.toLowerCase()
-            if (stringSearchKMP(string, word) > -1){
-                matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
+        for(let i = 0; i < kitchenIngreds.length; i++) {      
+          let word = kitchenIngreds[i].name.toLowerCase()
+          let string = resultIngred.text.toLowerCase()
+          if (stringSearchKMP(string, word) > -1){
+            matches.set(kitchenIngreds[i].id, kitchenIngreds[i].name)
+          }
+        }
+        if(result.ingredBlock){
+          for(let i = 0; i < result.ingredBlock.length; i++){
+            let id = result.ingredBlock[i].id
+            if (matches.get(id)){
+              matches.delete(id)
             }
+          }          
         }
     setPrelimIngredMatch(matches)
     setMatchRowspan(matches.size + 1)
@@ -135,7 +135,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     })
     .then(r => r.json())
     .then((ingredObj) => {
-      // updateBackendIngredBlock(resultArrIndex, ingredArrIndex, ingredObj)
+      updateBackendIngredBlock(resultArrIndex, ingredArrIndex, ingredObj)
       setIngredBlock(ingredObj)
       prelimIngredMatch.delete(id)
       setMatchRowspan(newMatchRowSpan)
@@ -155,7 +155,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
   }
 
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {
-    return (
+    return ( 
       <tr>
         <td className="recipeingredient" colSpan="2" rowSpan="1">{result.text}</td>
         <td className="kitcheningredient" colSpan="2">No Matches Found in Your Kitchen</td>
@@ -199,40 +199,3 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
 }
 
 export default IngredMatchTable;
-
-// else if (result.ingredBlock && ingredBlock.length > 0){
-//   for(let i = 0; i < result.ingredBlock.length; i++){
-//     if(result.ingredBlock[i].kitchen_id !== kitchenRenderedId){
-//       setIngredBlock([])
-//       setMatchRowspan(matchRowspan)
-//     }
-//   }
-// } else if (result.ingredBlock && ingredBlock.length < 1){
-//   for(let i = 0; i < result.ingredBlock.length; i++){
-//     if(result.ingredBlock[i].kitchen_id === kitchenRenderedId){
-//       setIngredBlock(...ingredBlock, result.ingredBlock[i])
-//     }
-//   }
-// } else if (!result.ingredBlock && ingredBlock.length > 0){
-//   setIngredBlock([])
-// }
-
-  // ORIGINAL INGREDBLOCK EVENT HANDLER
-  // const handleIngredBlockClick = (ingredObj, e) => {
-  //   e.preventDefault()
-  //   let id = ingredObj[0]
-  //   let newMatchRowSpan = matchRowspan - 1
-  //   fetch(`http://localhost:3000/ingredients/${id}`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type" : "application/json"
-  //     }
-  //   })
-  //   .then(r => r.json())
-  //   .then((ingredObj) => {
-  //     updateBackendIngredBlock(resultArrIndex, ingredArrIndex, ingredObj)
-  //     setIngredBlock(ingredObj)
-  //     prelimIngredMatch.delete(id)
-  //     setMatchRowspan(newMatchRowSpan)
-  //   })
-  // }
