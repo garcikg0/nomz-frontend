@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -144,8 +144,10 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
 
   const handleUndoButton = e => {
     e.preventDefault()
-    console.log(ingredMatch.kitchen_id)
-    console.log(kitchenRenderedId)
+    undoBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredMatch)
+    setIngredMatch(null)
+    // console.log(ingredMatch.kitchen_id)
+    // console.log(kitchenRenderedId)
   }
 
   const handleAddToGroceryList = e => {

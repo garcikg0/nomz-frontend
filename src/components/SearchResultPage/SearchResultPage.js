@@ -171,6 +171,29 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
     }
 
+    const undoBackendIngredMatch = (resultArrIndex, ingredArrIndex, ingredMatchObj) => {
+        let params = {
+            id: searchResultId,
+            user_id: searchTermUser,
+            resultArrIndex: resultArrIndex,
+            ingredArrIndex: ingredArrIndex,
+            ingredMatchObj: ingredMatchObj,
+            pagFrom: pagFrom,
+            results: searchResults
+        }
+        fetch(`http://localhost:3000/ingredmatchundo`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+        })
+        .then(r => r.json())
+        .then(data => {
+            setSearchResults(data.results)
+        })
+    }
+
     let renderResults = searchResults.map((resultObj, i) => {
         return(
             <SearchResultCard
@@ -181,6 +204,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 kitchenRenderedId={kitchenRendered.id}
                 updateBackendIngredMatch={updateBackendIngredMatch}
                 updateBackendIngredBlock={updateBackendIngredBlock}
+                undoBackendIngredMatch={undoBackendIngredMatch}
             />
             )
         }
