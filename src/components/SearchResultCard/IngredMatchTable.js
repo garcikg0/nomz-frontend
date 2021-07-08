@@ -146,8 +146,6 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     e.preventDefault()
     undoBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredMatch)
     setIngredMatch(null)
-    // console.log(ingredMatch.kitchen_id)
-    // console.log(kitchenRenderedId)
   }
 
   const handleAddToGroceryList = e => {
