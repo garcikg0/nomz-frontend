@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -148,11 +148,14 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     setIngredMatch(null)
   }
 
-  const handleAddToGroceryList = e => {
+  const handleAddGroceryListButton = (ingred, e) => {
+    console.log(ingred)
     e.preventDefault()
-    console.log(ingredMatch)
-    console.log(prelimIngredMatch.size)
-  }
+    setAddIngredientData(ingred)
+    setIsAddIngredientOpen(true)
+    debugger
+    
+}
 
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {
     return ( 
@@ -160,7 +163,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
         <td className="recipeingredient" colSpan="2" rowSpan="1">{result.text}</td>
         <td className="kitcheningredient" colSpan="2">No Matches Found in Your Kitchen</td>
         <td className="actions">
-          <a className="add-item" title="Add" onClick={handleAddToGroceryList}>
+          <a className="add-item" title="Add" onClick={(e) => handleAddGroceryListButton(resultIngred, e)}>
             <i className="fas fa-plus-circle"></i>
           </a>
         </td>

@@ -1,9 +1,9 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 import './Styles.scss';
 import ReactDom from 'react-dom'
 
 
-const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } ) => {
+const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient, ingredData } ) => {
 
     const [newIngredientData, setNewIngredientData] = useState({
         name: "",
@@ -13,6 +13,21 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
         notes: "",
         kitchen_id: ""
     })
+
+    useEffect(() => {
+        debugger
+        if(ingredData){
+            setNewIngredientData({
+                name: ingredData.text,
+                storage: "",
+                icon: "",
+                status: "Out",
+                notes: "",
+                kitchen_id: kitchenRendered.id
+            })
+        } debugger
+    }, [ingredData])
+
 
     if (!open) return null;
 
@@ -58,12 +73,12 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient } )
                             </li>
                             <li className="form-row">
                                 <label>Name of Ingredient:</label>
-                                <input type="text" name="name" onChange={handleChange}></input>
+                                <input type="text" name="name" value={newIngredientData.name} onChange={handleChange}></input>
                             </li>
                             <li className="form-row">
                                 <label>Status:</label>
                                 <div class="select">
-                                        <select id="standard-select" name="status" onChange={handleChange}>
+                                        <select id="standard-select" name="status" value={newIngredientData.status} onChange={handleChange}>
                                             <option value=" "> </option>
                                             <option value="Available">Available</option>
                                             <option value="Low">Low</option>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import SearchResultPagination from '../SearchResultPagination/SearchResultPagination';
 import KitchenNavbar from '../KitchenNavbar/KitchenNavbar'
+import AddIngredientModal from '../AddIngredientModal/AddIngredientModal';
 import './Styles.scss';
 
 const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {
@@ -14,6 +15,9 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
     const [currentPage, setCurrentPage] = useState(1)
     const [pagFrom, setPagFrom] = useState(0)
     const [searchTermUser, setSearchTermUser] = useState(null)
+
+    const [isAddIngredientOpen, setIsAddIngredientOpen] = useState(false);
+    const [addIngredientData, setAddIngredientData] = useState(null);
 
     if (localStorage && !searchTermUser) {
         const token = localStorage.getItem("token")
@@ -77,7 +81,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
 
     const handleMoreResults = page =>{
         let tempPagFrom = (page - 1) * 20
-    // if tempPagFrom > 99, then send updated to and from similar to handleSubmit.    
+        // if tempPagFrom > 99, then send updated to and from similar to handleSubmit.    
         if (tempPagFrom > 99) {
             setPagFrom(tempPagFrom)
             let params = {
@@ -103,7 +107,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 setSearchResults(data.results)
             })
         }
-    // else continue 
+        // else continue 
         setPagFrom(tempPagFrom)
         let params = {
             id: searchResultId,
@@ -194,6 +198,12 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         })
     }
 
+    // Adding an Ingredient
+    const addIngredient = (newIngredient) => {
+        let newArr = [...ingredientsOfKitchenRendered, newIngredient]
+        setIngredientsOfKitchenRendered(newArr)
+    }
+
     let renderResults = searchResults.map((resultObj, i) => {
         return(
             <SearchResultCard
@@ -205,12 +215,16 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 updateBackendIngredMatch={updateBackendIngredMatch}
                 updateBackendIngredBlock={updateBackendIngredBlock}
                 undoBackendIngredMatch={undoBackendIngredMatch}
+                addIngredient={addIngredient}
+                setAddIngredientData={setAddIngredientData}
+                setIsAddIngredientOpen={setIsAddIngredientOpen}
             />
             )
         }
     )
 
     return(
+        <>
         <div className="search-result-container">
             <KitchenNavbar 
             userKitchens={userKitchens}
@@ -238,6 +252,14 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 />
             </div>
         </div>
+        <AddIngredientModal 
+        open={isAddIngredientOpen}
+        onClose={()=> {setIsAddIngredientOpen(false)}}
+        kitchenRendered={kitchenRendered}
+        addIngredient={addIngredient}
+        ingredData={addIngredientData}
+        />
+        </>
     )
 };
 
