@@ -3,7 +3,7 @@ import './Styles.scss';
 import ReactDom from 'react-dom'
 
 
-const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient, ingredData } ) => {
+const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient, ingredData, updateBackendIngredMatch } ) => {
 
     const [newIngredientData, setNewIngredientData] = useState({
         name: "",
@@ -13,21 +13,23 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient, in
         notes: "",
         kitchen_id: ""
     })
+    const [resultArrIndex, setResultArrIndex] = useState(null)
+    const [ingredArrIndex, setIngredArrIndex] = useState(null)
 
     useEffect(() => {
-        debugger
         if(ingredData){
             setNewIngredientData({
-                name: ingredData.text,
+                name: ingredData.name,
                 storage: "",
                 icon: "",
                 status: "Out",
                 notes: "",
                 kitchen_id: kitchenRendered.id
             })
-        } debugger
+            setResultArrIndex(ingredData.resultArrIndex)
+            setIngredArrIndex(ingredData.ingredArrIndex)
+        } 
     }, [ingredData])
-
 
     if (!open) return null;
 
@@ -43,7 +45,9 @@ const AddIngredientModal = ( { open, onClose, kitchenRendered, addIngredient, in
         })
         .then(r => r.json())
         .then(newIngredient => {
+            let ingredMatchObj = newIngredient
             addIngredient(newIngredient)
+            updateBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredMatchObj)
         })
         onClose()
     }

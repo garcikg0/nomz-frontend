@@ -149,12 +149,14 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
   }
 
   const handleAddGroceryListButton = (ingred, e) => {
-    console.log(ingred)
+    console.log(kitchenIngreds)
     e.preventDefault()
-    setAddIngredientData(ingred)
+    setAddIngredientData({
+      name: ingred.text,
+      resultArrIndex: resultArrIndex,
+      ingredArrIndex: ingredArrIndex,
+    })
     setIsAddIngredientOpen(true)
-    debugger
-    
 }
 
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {

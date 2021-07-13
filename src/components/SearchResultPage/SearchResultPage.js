@@ -258,6 +258,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         kitchenRendered={kitchenRendered}
         addIngredient={addIngredient}
         ingredData={addIngredientData}
+        updateBackendIngredMatch={updateBackendIngredMatch}
         />
         </>
     )
