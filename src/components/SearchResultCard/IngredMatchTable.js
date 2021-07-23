@@ -62,7 +62,26 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     return -1;
   }
 
-  // update ingredMatch when result prop changes to reflect ingredMatch object that has the same kitchen_id as kitchenRendered
+  // update backend SearchResult record & result.ingredMatch prop & ingredMatch hook when ingredient in kitchenIngreds prop changes ex. an ingredient's status changed from Available to Low
+  // useEffect(() => {
+  //   if(resultIngred.ingredMatch && ingredMatch){
+  //     let ingredMatchId = null;
+  //     let ingredMatchObj = null;
+  //     for(let i = 0; i < resultIngred.ingredMatch.length; i++){
+  //       ingredMatchId = resultIngred.ingredMatch[i].id
+  //     }
+  //     for(let i = 0; i < kitchenIngreds.length; i++){
+  //       if(kitchenIngreds[i].id === ingredMatchId){
+  //         ingredMatchObj = kitchenIngreds[i]
+  //       }
+  //     }
+  //     debugger
+  //     updateBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredMatchObj)
+  //     setIngredMatch(ingredMatchObj)
+  //   }
+  // }, [])
+
+  // update ingredMatch hook when result prop & kitchenRenderedID prop changes to reflect ingredMatch object that has the same kitchen_id as kitchenRendered
   useEffect(() => {
     if(result.ingredMatch && ingredMatch){
       for(let i = 0; i < result.ingredMatch.length; i++){
@@ -83,7 +102,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     } 
   }, [kitchenRenderedId, result])
 
-  // create prelimIngredMatch if no ingredMatch or ingredBlock. Update when kitchenRenderedId, kitchenIngreds, or ingredMatch changes
+  // create prelimIngredMatch hook if no ingredMatch or ingredBlock. Update when kitchenRenderedId, kitchenIngreds, ingredMatch, or ingredBlock changes
   useEffect(() => {
     if(!ingredMatch && !ingredBlock){
         const matches = new Map();
@@ -149,7 +168,6 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
   }
 
   const handleAddGroceryListButton = (ingred, e) => {
-    console.log(kitchenIngreds)
     e.preventDefault()
     setAddIngredientData({
       name: ingred.text,

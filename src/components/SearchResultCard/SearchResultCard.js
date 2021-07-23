@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchTable from './IngredMatchTable'
 import './Styles.scss';
 
-const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendIngredMatch, resultArrIndex, kitchenRenderedId, updateBackendIngredBlock, undoBackendIngredMatch, addIngredientData, setAddIngredientData, setIsAddIngredientOpen} ) => {
+const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendIngredMatch, resultArrIndex, kitchenRenderedId, updateBackendIngredBlock, undoBackendIngredMatch, setAddIngredientData, setIsAddIngredientOpen} ) => {
     const [resultData, setResultData] = useState({
         title: recipe.name,
         image: recipe.image,
