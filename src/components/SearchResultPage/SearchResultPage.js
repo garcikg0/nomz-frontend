@@ -139,7 +139,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
             pagFrom: pagFrom,
             results: searchResults
         }
-        fetch(`http://localhost:3000/ingredmatchupdate`, {
+        fetch(`http://localhost:3000/ingredupdate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -162,7 +162,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
             pagFrom: pagFrom,
             results: searchResults
         }
-        fetch(`http://localhost:3000/ingredblockupdate`, {
+        fetch(`http://localhost:3000/ingredupdate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -181,11 +181,11 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
             user_id: searchTermUser,
             resultArrIndex: resultArrIndex,
             ingredArrIndex: ingredArrIndex,
-            ingredMatchObj: ingredMatchObj,
+            ingredMatchUndoObj: ingredMatchObj,
             pagFrom: pagFrom,
             results: searchResults
         }
-        fetch(`http://localhost:3000/ingredmatchundo`, {
+        fetch(`http://localhost:3000/ingredupdate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
