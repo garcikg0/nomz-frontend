@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData, setIsSearchIngredientOpen} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -177,6 +177,11 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
     setIsAddIngredientOpen(true)
 }
 
+  const handleSearchIngredientButton = e => {
+    e.preventDefault()
+    setIsSearchIngredientOpen(true)
+  }
+
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {
     return ( 
       <tr>
@@ -185,6 +190,9 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
         <td className="actions">
           <a className="add-item" title="Add" onClick={(e) => handleAddGroceryListButton(resultIngred, e)}>
             <i className="fas fa-plus-circle"></i>
+          </a>
+          <a className="add-item" title="Add" onClick={handleSearchIngredientButton}>
+            <i className="fas fa-search-plus"></i>
           </a>
         </td>
       </tr>

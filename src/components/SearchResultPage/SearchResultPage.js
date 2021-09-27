@@ -3,6 +3,7 @@ import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import SearchResultPagination from '../SearchResultPagination/SearchResultPagination';
 import KitchenNavbar from '../KitchenNavbar/KitchenNavbar'
 import AddIngredientModal from '../AddIngredientModal/AddIngredientModal';
+import SearchIngredientModal from '../SearchIngredientModal/SearchIngredientModal';
 import './Styles.scss';
 
 const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, ingredientsOfKitchenRendered, setIngredientsOfKitchenRendered} ) => {
@@ -18,6 +19,9 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
 
     const [isAddIngredientOpen, setIsAddIngredientOpen] = useState(false);
     const [addIngredientData, setAddIngredientData] = useState(null);
+
+    const [isSearchIngredientOpen, setIsSearchIngredientOpen] = useState(false);
+
 
     if (localStorage && !searchTermUser) {
         const token = localStorage.getItem("token")
@@ -218,6 +222,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 addIngredient={addIngredient}
                 setAddIngredientData={setAddIngredientData}
                 setIsAddIngredientOpen={setIsAddIngredientOpen}
+                setIsSearchIngredientOpen={setIsSearchIngredientOpen}
             />
             )
         }
@@ -255,6 +260,14 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         <AddIngredientModal 
         open={isAddIngredientOpen}
         onClose={()=> {setIsAddIngredientOpen(false)}}
+        kitchenRendered={kitchenRendered}
+        addIngredient={addIngredient}
+        ingredData={addIngredientData}
+        updateBackendIngredMatch={updateBackendIngredMatch}
+        />
+        <SearchIngredientModal 
+        open={isSearchIngredientOpen}
+        onClose={()=> {setIsSearchIngredientOpen(false)}}
         kitchenRendered={kitchenRendered}
         addIngredient={addIngredient}
         ingredData={addIngredientData}
