@@ -269,9 +269,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         open={isSearchIngredientOpen}
         onClose={()=> {setIsSearchIngredientOpen(false)}}
         kitchenRendered={kitchenRendered}
-        addIngredient={addIngredient}
-        ingredData={addIngredientData}
-        updateBackendIngredMatch={updateBackendIngredMatch}
+        ingredientsOfKitchenRendered={ingredientsOfKitchenRendered}
         />
         </>
     )

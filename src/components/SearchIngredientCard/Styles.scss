@@ -1,0 +1,68 @@
+.ingredient{
+
+    &-card{
+        justify-self: stretch;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        background-clip: border-box;
+        justify-content: stretch;
+        border: 1px solid rgba(56, 85, 144, 0.350);
+        align-self: stretch;
+    }
+
+    &-card-img-top{
+        padding: 0.1rem;
+        width: 35%;
+        height: 35%;
+        object-fit: scale-down;
+        top: calc(.25rem - 1px);
+        bottom: calc(.25rem - 1px);
+        align-self: center;
+        justify-self: stretch;
+        position: relative;
+    }
+
+    &-card-body{
+        display: grid;
+        grid-template-rows: repeat(6, auto);
+        grid-gap: 0.5rem;
+        padding: 0.5rem;
+        align-self: stretch;
+        justify-self: stretch;
+    }
+};
+
+h5{
+    font-size: 1rem;
+    justify-self: stretch;
+    align-self: center;
+}
+
+p{
+    font-size: 0.8rem;
+    justify-self: stretch;
+    align-self: center;
+}
+
+.edit-button:hover{
+    background-color: rgb(160, 228, 255);
+    transition: 0.2s;
+    color: black;
+    font-weight: bold;
+}
+
+.low-button:hover{
+    background-color: rgb(250, 220, 123);
+    transition: 0.2s;
+    color: black;
+    font-weight: bold;
+}
+
+.remove-button:hover{
+    background-color: rgb(253, 120, 120);
+    transition: 0.2s;
+    color:white;
+    font-weight: bold;
+}
