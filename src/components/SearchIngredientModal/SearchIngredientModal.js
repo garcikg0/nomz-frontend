@@ -84,7 +84,7 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
                         {renderIngredients}
                     </div>
                 </div>
-                <button className="login-button" onClick={onClose}>Close</button>
+                <button className="close-button" onClick={onClose}>Close</button>
             </div> 
         </div>
         </>,
