@@ -16,13 +16,27 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
     })
     const [resultArrIndex, setResultArrIndex] = useState(null)
     const [ingredArrIndex, setIngredArrIndex] = useState(null)
+    const [searchTerm, setSearchTerm] = useState(null)
+    const [ingredArr, setIngredArr] = useState([])
+
+    useEffect(() => {
+        if (ingredientsOfKitchenRendered){
+            setIngredArr(ingredientsOfKitchenRendered)
+        }
+    }, [])
 
     if (!open) return null;
 
     const handleChange = e => {
         const value = e.target.value;
+        setSearchTerm(value)
 
     }
+
+    // const filteredIngredientArr = ingredArr.filter((ingredObj) => {
+    //     return ingredObj.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // })
+
 
     // const handleSubmit = (evt) => {
     //     evt.preventDefault()

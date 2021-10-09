@@ -191,7 +191,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
           <a className="add-item" title="Add" onClick={(e) => handleAddGroceryListButton(resultIngred, e)}>
             <i className="fas fa-plus-circle"></i>
           </a>
-          <a className="add-item" title="Add" onClick={handleSearchIngredientButton}>
+          <a className="add-item" title="Search" onClick={handleSearchIngredientButton}>
             <i className="fas fa-search-plus"></i>
           </a>
         </td>
