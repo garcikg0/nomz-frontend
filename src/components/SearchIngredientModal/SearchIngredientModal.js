@@ -20,22 +20,83 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
     const [ingredArr, setIngredArr] = useState([])
 
     useEffect(() => {
-        if (ingredientsOfKitchenRendered){
-            setIngredArr(ingredientsOfKitchenRendered)
+        if (searchTerm){
+            setIngredArr(filteredIngredientArr)
+        } else {
+            setIngredArr([])
         }
-    }, [])
+    }, [searchTerm])
 
     if (!open) return null;
 
     const handleChange = e => {
         const value = e.target.value;
         setSearchTerm(value)
-
     }
 
-    // const filteredIngredientArr = ingredArr.filter((ingredObj) => {
-    //     return ingredObj.name.toLowerCase().includes(searchTerm.toLowerCase())
-    // })
+    let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {
+        return(
+            <SearchIngredientCard 
+            key={ingredient.id}
+            ingredient={ingredient}
+            kitchen_id={kitchenRendered.id}
+            />
+        )
+    })
+
+    let filteredIngredientArr = ingredientsOfKitchenRendered.filter((ingredObj) => {
+        console.log(searchTerm)
+        if(searchTerm){
+            return ingredObj.name.toLowerCase().includes(searchTerm.toLowerCase())
+        }
+    })
+
+    let renderFilteredIngredients = ingredArr.map((ingredient) => {
+        return(
+            <SearchIngredientCard
+            key={ingredient.id}
+            ingredient={ingredient}
+            kitchen_id={kitchenRendered.id}
+            />
+        )
+    })
+
+
+
+    return ReactDom.createPortal(
+        <>
+        <div className="search-ingredient-modal-overlay">
+            <div className="search-ingredient-modal">
+                <div className="ingredient-search-bar-container">
+                    <form className="ingredient-search-bar-form" >
+                        <input className="ingredient-search-bar-input"
+                                type="search"
+                                placeholder="Search..."
+                                autoFocus required
+                                onChange={handleChange}
+                        />
+                        <button className="ingredient-search-bar-button">Go</button>
+                    </form>
+                </div>
+                <div className="search-ingredient-card-deck-container">
+                    <div className="search-ingredient-card-deck">
+                        {ingredArr.length > 0 ? renderFilteredIngredients : renderIngredients}
+                    </div>
+                </div>
+                <button className="close-button" onClick={onClose}>Close</button>
+            </div> 
+        </div>
+        </>,
+        document.getElementById('portal')
+    )
+};
+
+export default SearchIngredientModal;
+
+
+
+
+
 
 
     // const handleSubmit = (evt) => {
@@ -67,43 +128,3 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
     //         kitchen_id: kitchenRendered.id
     //     })
     // };
-
-    let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {
-        return(
-            <SearchIngredientCard 
-            key={ingredient.id}
-            ingredient={ingredient}
-            kitchen_id={kitchenRendered.id}
-            />
-        )
-    })
-
-    return ReactDom.createPortal(
-        <>
-        <div className="search-ingredient-modal-overlay">
-            <div className="search-ingredient-modal">
-                <div className="ingredient-search-bar-container">
-                    <form className="ingredient-search-bar-form" >
-                        <input className="ingredient-search-bar-input"
-                                type="search"
-                                placeholder="Search..."
-                                autoFocus required
-                                onChange={handleChange}
-                        />
-                        <button className="ingredient-search-bar-button">Go</button>
-                    </form>
-                </div>
-                <div className="search-ingredient-card-deck-container">
-                    <div className="search-ingredient-card-deck">
-                        {renderIngredients}
-                    </div>
-                </div>
-                <button className="close-button" onClick={onClose}>Close</button>
-            </div> 
-        </div>
-        </>,
-        document.getElementById('portal')
-    )
-};
-
-export default SearchIngredientModal;
