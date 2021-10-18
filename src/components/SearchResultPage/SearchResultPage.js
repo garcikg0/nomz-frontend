@@ -21,6 +21,10 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
     const [addIngredientData, setAddIngredientData] = useState(null);
 
     const [isSearchIngredientOpen, setIsSearchIngredientOpen] = useState(false);
+    const [searchIngredData, setSearchIngredData] = useState({
+        resultArrIndex: null,
+        ingredArrIndex: null
+    })
 
 
     if (localStorage && !searchTermUser) {
@@ -223,6 +227,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 setAddIngredientData={setAddIngredientData}
                 setIsAddIngredientOpen={setIsAddIngredientOpen}
                 setIsSearchIngredientOpen={setIsSearchIngredientOpen}
+                setSearchIngredData={setSearchIngredData}
             />
             )
         }
@@ -270,6 +275,8 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
         onClose={()=> {setIsSearchIngredientOpen(false)}}
         kitchenRendered={kitchenRendered}
         ingredientsOfKitchenRendered={ingredientsOfKitchenRendered}
+        updateBackendIngredMatch={updateBackendIngredMatch}
+        searchIngredData={searchIngredData}
         />
         </>
     )

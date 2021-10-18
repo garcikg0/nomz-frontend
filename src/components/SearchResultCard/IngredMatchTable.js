@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData, setIsSearchIngredientOpen} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData, setIsSearchIngredientOpen, setSearchIngredData} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -180,6 +180,11 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
   const handleSearchIngredientButton = e => {
     e.preventDefault()
     setIsSearchIngredientOpen(true)
+    let searchIngredData = {
+      resultArrIndex: resultArrIndex,
+      ingredArrIndex: ingredArrIndex
+    }
+    setSearchIngredData(searchIngredData)
   }
 
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {

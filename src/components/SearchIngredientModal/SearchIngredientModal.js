@@ -4,16 +4,9 @@ import ReactDom from 'react-dom';
 import SearchIngredientCard from '../SearchIngredientCard/SearchIngredientCard';
 
 
-const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, kitchenRendered } ) => {
+const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, kitchenRendered, updateBackendIngredMatch, searchIngredData } ) => {
 
-    const [newIngredientData, setNewIngredientData] = useState({
-        name: "",
-        storage: "",
-        icon: "",
-        status: "",
-        notes: "",
-        kitchen_id: ""
-    })
+    const [selectedIngredObj, setSelectedIngredObj] = useState(null)
     const [resultArrIndex, setResultArrIndex] = useState(null)
     const [ingredArrIndex, setIngredArrIndex] = useState(null)
     const [searchTerm, setSearchTerm] = useState(null)
@@ -26,6 +19,14 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
             setIngredArr([])
         }
     }, [searchTerm])
+
+    useEffect(() => {
+        // update resultArrIndex & ingredArrIndex as it changes in SearchResultPage parent component 
+        if (open){
+            setResultArrIndex(searchIngredData.resultArrIndex)
+            setIngredArrIndex(searchIngredData.ingredArrIndex)
+        }
+    }, [searchIngredData])
 
     if (!open) return null;
 
@@ -71,7 +72,7 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
                     <form className="ingredient-search-bar-form" >
                         <input className="ingredient-search-bar-input"
                                 type="search"
-                                placeholder="Search..."
+                                placeholder="Type to Search or Browse Below..."
                                 autoFocus required
                                 onChange={handleChange}
                         />
