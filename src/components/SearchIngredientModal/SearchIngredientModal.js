@@ -35,18 +35,25 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
         setSearchTerm(value)
     }
 
+    const handleSearchIngredCardClick = (ingredObj, e) => {
+        e.preventDefault()
+        console.log(resultArrIndex)
+        console.log(ingredArrIndex)
+        console.log(ingredObj)
+    }
+
     let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {
         return(
             <SearchIngredientCard 
             key={ingredient.id}
             ingredient={ingredient}
             kitchen_id={kitchenRendered.id}
+            handleSearchIngredCardClick={handleSearchIngredCardClick}
             />
         )
     })
 
     let filteredIngredientArr = ingredientsOfKitchenRendered.filter((ingredObj) => {
-        console.log(searchTerm)
         if(searchTerm){
             return ingredObj.name.toLowerCase().includes(searchTerm.toLowerCase())
         }
@@ -58,11 +65,10 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
             key={ingredient.id}
             ingredient={ingredient}
             kitchen_id={kitchenRendered.id}
+            handleSearchIngredCardClick={handleSearchIngredCardClick}
             />
         )
     })
-
-
 
     return ReactDom.createPortal(
         <>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Styles.scss';
 
-const SearchIngredientCard = ({ ingredient, kitchen_id}) => {
+const SearchIngredientCard = ({ ingredient, kitchen_id, handleSearchIngredCardClick}) => {
     
     const [ingredientData, setIngredientData] = useState({
         id: ingredient.id,
@@ -15,7 +15,7 @@ const SearchIngredientCard = ({ ingredient, kitchen_id}) => {
 
     return(
         <>
-        <div className='ingredient-card'>
+        <div className='ingredient-card' onClick={(e) => handleSearchIngredCardClick(ingredientData, e)}>
                  <img className='ingredient-card-img-top' src={ingredientData.icon} alt="example"/>
             <div className='ingredient-card-body'>
                 <h5>{ingredientData.name}</h5>
