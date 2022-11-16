@@ -40,6 +40,8 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
         console.log(resultArrIndex)
         console.log(ingredArrIndex)
         console.log(ingredObj)
+        console.log(ingredObj.id)
+        updateBackendIngredMatch(ingredObj, e)
     }
 
     let renderIngredients = ingredientsOfKitchenRendered.map((ingredient) => {

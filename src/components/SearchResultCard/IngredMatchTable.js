@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IngredMatchCell from './IngredMatchCell';
 import './Styles.scss';
 
-const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData, setIsSearchIngredientOpen, setSearchIngredData} ) => {
+const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrIndex, kitchenRenderedId, updateBackendIngredMatch, updateBackendIngredBlock, undoBackendIngredMatch, setIsAddIngredientOpen, setAddIngredientData, isSearchIngredientOpen, setIsSearchIngredientOpen, setSearchIngredData} ) => {
   const [resultIngred, setResultIngred] = useState({
     text: result.text,
     foodCategory: result.foodCategory,
@@ -128,7 +128,13 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
 
   const handleIngredMatchClick = (ingredObj, e) => {
     e.preventDefault()
-    let id = ingredObj[0]
+    let id
+    if(!ingredObj[0]) {
+      id = ingredObj.id;
+    } else if (ingredObj[0]) {
+      id = ingredObj[0]
+    }
+    // let id = ingredObj[0]
     fetch(`http://localhost:3000/ingredients/${id}`, {
       method: "GET",
       headers: {
@@ -140,6 +146,10 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
       updateBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredObj)
       setIngredMatch(ingredObj)
     })
+
+    // if(isSearchIngredientOpen) {
+    //   setIsSearchIngredientOpen(false)
+    // }
   }
 
   const handleIngredBlockClick = (ingredObj, e) => {
@@ -185,6 +195,7 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
       ingredArrIndex: ingredArrIndex
     }
     setSearchIngredData(searchIngredData)
+    console.log(resultIngred);
   }
 
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {

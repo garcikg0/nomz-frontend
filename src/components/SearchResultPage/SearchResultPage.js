@@ -226,6 +226,7 @@ const SearchResultPage = ( {kitchenRendered, userKitchens, setKitchenRendered, i
                 addIngredient={addIngredient}
                 setAddIngredientData={setAddIngredientData}
                 setIsAddIngredientOpen={setIsAddIngredientOpen}
+                isSearchIngredientOpen={isSearchIngredientOpen}
                 setIsSearchIngredientOpen={setIsSearchIngredientOpen}
                 setSearchIngredData={setSearchIngredData}
             />
