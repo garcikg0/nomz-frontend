@@ -146,10 +146,6 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
       updateBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredObj)
       setIngredMatch(ingredObj)
     })
-
-    // if(isSearchIngredientOpen) {
-    //   setIsSearchIngredientOpen(false)
-    // }
   }
 
   const handleIngredBlockClick = (ingredObj, e) => {

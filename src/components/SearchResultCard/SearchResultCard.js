@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import IngredMatchTable from './IngredMatchTable'
+import AvailabilityStatus from './AvailabilityStatus';
 import './Styles.scss';
 
 const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendIngredMatch, resultArrIndex, kitchenRenderedId, updateBackendIngredBlock, undoBackendIngredMatch, setAddIngredientData, setIsAddIngredientOpen, isSearchIngredientOpen ,setIsSearchIngredientOpen, setSearchIngredData} ) => {
@@ -14,6 +15,8 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendIngredMatch, re
     const [showIngred, setShowIngred] = useState(false);
 
     const activeStatus = showIngred ? 'active' : '';
+
+    const [ingredMatchCount, setIngredMatchCount] = useState(0)
 
     const handleIngredClick = e => {
         e.preventDefault()
@@ -57,9 +60,11 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendIngredMatch, re
         <div className="accordion-item">
             <img className="search-result-accordion-image" src={resultData.image} alt="otherimage"/>
             <span className="accordion-status">
-                <i className="fas fa-check-circle">
-                    <h4 className="accordion-status-text">Available</h4>
-                </i>
+                <AvailabilityStatus 
+                resultCount={resultData.ingredients.length}
+                ingredMatchCount={ingredMatchCount}
+                setIngredMatchCount={setIngredMatchCount}
+                />
             </span>
             <span className="accordion-title">
                 {resultData.title}
