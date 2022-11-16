@@ -37,10 +37,6 @@ const SearchIngredientModal = ( { open, onClose, ingredientsOfKitchenRendered, k
 
     const handleSearchIngredCardClick = (ingredObj, e) => {
         e.preventDefault()
-        console.log(resultArrIndex)
-        console.log(ingredArrIndex)
-        console.log(ingredObj)
-        console.log(ingredObj.id)
         updateBackendIngredMatch(resultArrIndex, ingredArrIndex, ingredObj)
         onClose()
     }
