@@ -58,7 +58,12 @@ const SearchResultCard = ( {recipe, kitchenIngreds, updateBackendIngredMatch, re
     return (
         <>
         <div className="accordion-item">
-            <img className="search-result-accordion-image" src={resultData.image} alt="otherimage"/>
+            <img className="search-result-accordion-image" src={resultData.image} alt="no-img"
+            onError={e => {
+                e.target.src="https://thenounproject.com/api/private/icons/3674270/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0&token=gAAAAABje_Swn7_rWzZ1u3vqQ-fMpRAFjwG7xYIWN_w0gFvwLqp9Sh2vjfJ3VsHRkhXI8dW0-9kkO1fuvUzXN3SuZlkK6z0BLQ%3D%3D"
+                e.onError = null
+            }}
+            />
             <span className="accordion-status">
                 <AvailabilityStatus 
                 resultCount={resultData.ingredients.length}

@@ -191,7 +191,6 @@ const IngredMatchTable = ( {result, kitchenIngreds, resultArrIndex, ingredArrInd
       ingredArrIndex: ingredArrIndex
     }
     setSearchIngredData(searchIngredData)
-    console.log(resultIngred);
   }
 
   if (prelimIngredMatch.size <= 0 && !ingredMatch) {
